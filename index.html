@@ -1,40 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dardan Ibri – Coach, Unternehmer & Speaker</title>
-  <meta name="description" content="Offizielle Website von Dardan Ibri – Coaching, Business & Speaking.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dardan Ibri – Entwickler für Menschen & Business</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; color:#111; }
-    header { padding:72px 20px; text-align:center; }
-    header h1 { margin:0 0 8px; font-size:42px; }
-    header p { margin:0 auto 18px; font-size:20px; max-width:720px; color:#333; }
-    a.btn { display:inline-block; padding:12px 18px; border:1px solid #111; border-radius:10px; text-decoration:none; color:#111; }
-    main { max-width:1000px; margin:0 auto; padding:20px; }
-    h2 { margin-top:40px; }
-    footer { text-align:center; padding:24px; color:#666; border-top:1px solid #eee; }
+    /* ====== BASE ====== */
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      color: #1e1e1e;
+      background-color: #ffffff;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      color: #1e3a8a; /* Königsblau */
+      margin-bottom: 0.5em;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #facc15 0%, #ffffff 50%, #1e3a8a 100%);
+      color: #1e1e1e;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero h1 {
+      font-size: 2.8em;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      max-width: 500px;
+    }
+
+    .hero img {
+      flex: 1;
+      border-radius: 20px;
+      max-width: 400px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ====== ÜBER MICH ====== */
+    .about p {
+      font-size: 1.05em;
+      color: #333;
+    }
+
+    /* ====== HEUTE ====== */
+    .today {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .today-block {
+      background: #f9fafb;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    /* ====== CAROUSEL ====== */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.8s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .carousel img {
+      border-radius: 16px;
+      object-fit: cover;
+      width: 100%;
+      height: 550px;
+    }
+
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-buttons button {
+      background: rgba(30, 58, 138, 0.8);
+      border: none;
+      color: white;
+      font-size: 1.8em;
+      padding: 10px 18px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-buttons button:hover {
+      background: rgba(250, 204, 21, 0.9);
+      color: #1e3a8a;
+    }
+
+    /* ====== LOGOS ====== */
+    .logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .logos img {
+      height: 60px;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+
+    .logos img:hover {
+      filter: none;
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #1e3a8a;
+      color: #fff;
+      font-size: 0.9em;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero img {
+        max-width: 320px;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Dardan Ibri</h1>
-    <p>Coach, Unternehmer & Speaker – klare Kommunikation, Energie & Umsetzung.</p>
-    <a class="btn" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
-  </header>
 
-  <main>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Dardan Ibri</h1>
+      <p>Entwickler für Menschen & Business<br>
+      Logik schafft Struktur – Emotion bewegt – Erfolg entsteht.</p>
+    </div>
+    <img src="assets/images/dardan-hero.jpg" alt="Dardan Ibri Portrait">
+  </section>
+
+  <!-- ===== ÜBER MICH ===== -->
+  <section class="about">
     <h2>Über mich</h2>
-    <p>Hier kommt später dein Text über dich und deine Arbeit hin.</p>
+    <p>Ich habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt. 
+    Mit 27 Jahren entschied ich mich, einen neuen Weg einzuschlagen – den der Persönlichkeitsentwicklung. 
+    Über die Finanzbranche und NLP-Kurse fand ich meine Leidenschaft: Menschen und Unternehmen weiterzuentwickeln.</p>
+  </section>
 
-    <h2>Angebot</h2>
-    <p>Coaching, Leadership, Kommunikation – Seminare & Persönlichkeitsentwicklung.</p>
+  <!-- ===== HEUTE ===== -->
+  <section class="today">
+    <div class="today-block">
+      <h2>Heute – im Unternehmen</h2>
+      <p>Heute setze ich meine Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen ein, 
+      um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. 
+      Dabei verbinde ich strategisches Denken mit emotionaler Intelligenz, 
+      um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
+      <p><strong>Unternehmen:</strong> MG Coaching (Personal- und Business-Coaching) & Evergrow (Vertrieb & Wachstum)</p>
+      <div class="logos">
+        <img src="assets/logos/mg.png" alt="MG Coaching Logo">
+        <img src="assets/logos/evergrow.png" alt="Evergrow Logo">
+      </div>
+    </div>
 
-    <h2>Kontakt</h2>
-    <p>E-Mail: <a href="mailto:info@dardanibri.com">info@dardanibri.com</a></p>
-  </main>
+    <div class="today-block">
+      <h2>Als Referent & Impulsgeber</h2>
+      <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse 
+      gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter.</p>
+      <p><strong>Warum funktioniert das in allen Bereichen der Wirtschaft?</strong><br>
+      Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das WARUM dahinter: 
+      den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
 
-  <footer>© <span id="y"></span> Dardan Ibri</footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+      <p><strong>Zusammenarbeit u. a. mit:</strong></p>
+      <div class="logos">
+        <img src="assets/logos/ssm.png" alt="SSM Partner Logo">
+        <img src="assets/logos/allianz.png" alt="Allianz Logo">
+        <img src="assets/logos/properti.png" alt="Properti Logo">
+        <img src="assets/logos/icm.png" alt="ICM Bau Logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAROUSEL ===== -->
+  <section>
+    <h2>Einblicke aus meinen Referaten</h2>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="assets/images/ref1.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref2.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref3.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref4.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref5.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref6.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref7.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref8.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref9.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref10.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref11.jpg" alt=""></div>
+        <div class="carousel-slide"><img src="assets/images/ref12.jpg" alt=""></div>
+      </div>
+      <div class="carousel-buttons">
+        <button id="prevBtn">‹</button>
+        <button id="nextBtn">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    © 2025 Dardan Ibri – Alle Rechte vorbehalten.
+  </footer>
+
+  <script>
+    // ===== CAROUSEL SCRIPT =====
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    let index = 0;
+
+    function showSlide(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => showSlide(index + 1));
+    document.getElementById('prevBtn').addEventListener('click', () => showSlide(index - 1));
+
+    // Auto-slide alle 5 Sekunden
+    setInterval(() => showSlide(index + 1), 5000);
+  </script>
+
 </body>
 </html>
