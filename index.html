@@ -1,422 +1,410 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dardan Ibri – Entwickler für Menschen & Business</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dardan Ibri – Entwickler für Menschen & Business</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Lato:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --blue:#1F4E79;      /* Königsblau */
-  --blue-2:#173B5E;    /* dunkleres Blau für Karten */
-  --yellow:#F6C90E;    /* Sonnengelb */
-  --white:#ffffff;
-  --muted:rgba(255,255,255,.86);
-  --border:rgba(255,255,255,.10);
-  --shadow:0 14px 28px rgba(0,0,0,.35);
-  --r:22px;
-  --gap:20px;
-  --max:1180px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--blue);color:var(--white);font-family:Poppins,system-ui,Segoe UI,Arial,sans-serif;line-height:1.75}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
-h1,h2,h3{font-family:Lato,system-ui,Segoe UI,Arial,sans-serif;color:var(--white);margin:0 0 .6rem}
-h1{font-size:clamp(38px,5vw,58px);line-height:1.1}
-h2{font-size:clamp(26px,3vw,36px);line-height:1.2}
-h3{font-size:clamp(20px,2.2vw,26px);line-height:1.25}
-p{margin:.4rem 0 1rem;color:var(--muted);font-size:clamp(16px,1.4vw,18px)}
-strong{color:var(--white)}
+  <style>
+    :root{
+      --blue-bg:#244C6C;        /* angenehmere, weichere Fläche */
+      --blue-card:#1C3E59;      /* Kachel-Dunkelblau */
+      --blue-soft:#2C5E7F;
+      --gold:#F6C90E;           /* Sonnengelb / Gold */
+      --gold-strong:#FFD21E;    /* etwas kräftiger für Glows */
+      --white:#FFFFFF;
+      --muted:#CFE2F1;
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --shadow-card: 0 10px 30px rgba(0,0,0,.22);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.18);
+      --glow: 0 0 0px rgba(255,210,30,0), 0 0 24px rgba(255,210,30,.25), 0 0 48px rgba(255,210,30,.15);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--blue-bg);color:var(--white);font-family:Lato, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;scroll-behavior:smooth}
+    h1,h2,h3{font-family:Poppins, sans-serif;margin:0 0 .6rem}
+    h2.section-title{color:var(--gold);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.4rem);letter-spacing:.2px;margin-bottom:1.2rem}
+    p{line-height:1.65;font-size:clamp(1.02rem,1.1vw,1.12rem);margin:.35rem 0 1rem}
+    a{color:var(--muted);text-decoration:none}
+    .container{width:min(1200px,94%);margin:0 auto}
+    .spc{padding:64px 0}
+    .spc-large{padding:88px 0}
+    .stack{display:flex;flex-direction:column;gap:26px}
+    .row{display:grid;gap:22px}
+    @media (min-width:900px){.row-2{grid-template-columns:1fr 1fr}}
+    @media (min-width:1000px){.row-3{grid-template-columns:repeat(3,1fr)}}
 
-a.btn{display:inline-block;background:var(--yellow);color:#0e1116;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:600;border:1px solid rgba(0,0,0,.08)}
-a.btn:hover{filter:brightness(1.05)}
+    /* HERO */
+    .hero{padding:40px 0 20px}
+    .hero-wrap{display:grid;gap:36px;align-items:center}
+    @media (min-width:980px){.hero-wrap{grid-template-columns:1.05fr .95fr}}
+    .badge{display:inline-block;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.15);padding:6px 12px;border-radius:999px;font-size:.9rem;color:#E7F0F7}
+    .title{font-size:clamp(2rem,4.2vw,3.25rem);line-height:1.15;font-weight:700;margin:.6rem 0 1rem}
+    .subtitle{font-family:Poppins, sans-serif;color:#EAF4FF;opacity:.92}
+    .cta{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+    .btn{
+      background:var(--gold);
+      color:#112;
+      padding:12px 18px;border:none;border-radius:12px;
+      font-family:Poppins, sans-serif;font-weight:600;cursor:pointer;
+      box-shadow:var(--glow);
+      transition:transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 0 0 rgba(0,0,0,0),0 0 36px rgba(255,210,30,.35)}
+    .portrait{
+      position:relative;background:var(--blue-card);
+      border-radius:var(--radius-xl);padding:18px;box-shadow:var(--shadow-card);
+      clip-path: polygon(0 8%, 6% 0, 100% 0, 100% 92%, 94% 100%, 0 100%); /* modern shape */
+    }
+    .portrait img{
+      display:block;width:100%;height:560px;object-fit:cover;
+      object-position:50% 18%; /* Kopf bleibt sichtbar */
+      border-radius:18px;
+    }
 
-/* Sections */
-section{padding:58px 0;border-top:1px solid var(--border)}
-.lead{max-width:840px}
+    /* CARD GENERIC */
+    .card{
+      background:var(--blue-card);
+      border-radius:var(--radius-xl);
+      padding:26px 26px;
+      box-shadow:var(--shadow-soft);
+    }
+    .card h3{font-family:Poppins, sans-serif;font-weight:700;margin-bottom:.45rem;font-size:clamp(1.25rem,1.9vw,1.6rem)}
+    .highlight{color:var(--gold)}
 
-/* HERO */
-header.hero{padding:76px 0 40px}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
-.subtitle{color:var(--yellow);font-weight:600;margin:.25rem 0 1rem;font-size:clamp(18px,1.8vw,22px)}
-.slogan{color:var(--yellow);font-weight:600;margin:.3rem 0 1.2rem;font-size:clamp(18px,1.8vw,22px)}
-.hero-photo{justify-self:end;width:min(440px,92%);aspect-ratio:3/4;overflow:hidden;border-radius:28px;
-  clip-path:polygon(8% 0,100% 0,100% 84%,92% 100%,0 100%,0 16%);box-shadow:0 30px 60px rgba(0,0,0,.35)}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transform:scale(1.02)}
+    /* Vision & Mission */
+    .card.mission{background:var(--gold); color:#13223A; box-shadow:var(--glow)}
+    .card.mission h3{color:#13223A}
+    .card.mission p{color:#13223A}
 
-/* Vision & Mission */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
-.card{background:var(--blue-2);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
-.card p{color:var(--muted)}
-.card--mission{transition:box-shadow .25s ease,border-color .25s ease,transform .25s ease}
-.card--mission:hover{border-color:var(--yellow);box-shadow:0 18px 42px rgba(246,201,14,.28),0 0 0 3px rgba(246,201,14,.12);transform:translateY(-2px)}
+    /* Werte */
+    .values{display:grid;gap:20px}
+    @media (min-width:1000px){.values{grid-template-columns:repeat(3,1fr)}}
+    .value{
+      display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;
+      padding:26px 26px 22px;border-radius:var(--radius-xl);background:var(--blue-card);
+      transition:transform .18s ease, box-shadow .2s ease;
+    }
+    .value:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(0,0,0,.28)}
+    .value.yellow{background:var(--gold);color:#13223A;box-shadow:var(--glow)}
+    .value.yellow h4{color:#13223A}
+    .value h4{font-family:Poppins, sans-serif;margin:.1rem 0 .35rem;font-size:clamp(1.25rem,1.8vw,1.55rem)}
+    .value p{margin:0;color:#E6F0F8}
+    .value.yellow p{color:#203045}
+    .icon-wrap{
+      width:54px;height:54px;border-radius:999px;background:radial-gradient(ellipse at 40% 35%, #FFE37A, var(--gold));
+      display:grid;place-items:center;box-shadow:0 6px 14px rgba(0,0,0,.25), 0 0 18px rgba(255,210,30,.35);
+      flex-shrink:0;
+    }
+    .icon-wrap svg{width:28px;height:28px;stroke:#fff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-/* Werte */
-.values{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:14px}
-.value{position:relative;border-radius:var(--r);padding:20px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease}
-.value:hover{transform:translateY(-2px)}
-.value .icon{width:34px;height:34px;flex:0 0 auto}
-.value[data-variant="blue"]{background:var(--blue-2);color:var(--muted)}
-.value[data-variant="blue"] .icon{color:var(--yellow)}
-.value[data-variant="blue"]:hover{background:var(--yellow);color:#0e1116}
-.value[data-variant="blue"]:hover h3{color:#0e1116}
-.value[data-variant="yellow"]{background:var(--yellow);color:#0e1116}
-.value[data-variant="yellow"] h3{color:#0e1116}
-.value[data-variant="yellow"] .icon{color:#0e1116}
-.value[data-variant="yellow"]:hover{background:var(--blue-2);color:var(--muted)}
-.value[data-variant="yellow"]:hover h3{color:var(--white)}
-.value h3{margin:0;color:var(--white)}
+    /* Logos */
+    .logos{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+    .logos img{height:54px;filter:brightness(1) contrast(1.1);}
+    .logos .small{height:46px}
+    .logos.center{justify-content:flex-start}
+    .partners{display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:900px){.partners{grid-template-columns:repeat(4,1fr)}}
+    .partner{background:rgba(0,0,0,.15);border-radius:18px;display:grid;place-items:center;padding:18px}
+    .partner img{max-width:180px;max-height:64px;filter:grayscale(100%) brightness(1.15) contrast(1.2);opacity:.95}
+    .partner:hover img{filter:grayscale(0%) brightness(1) contrast(1);opacity:1;transition:filter .22s ease}
 
-/* HEUTE / Layout */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
-/* Logos – alle gleich gross */
-.logos{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin-top:12px}
-.logos img{height:72px;filter:grayscale(1) contrast(.95);opacity:.95;transition:filter .25s ease, opacity .25s ease, transform .25s ease}
-.logos img:hover{filter:none;opacity:1;transform:translateY(-1px)}
+    /* KPIs */
+    .kpis{display:grid;gap:18px}
+    @media(min-width:900px){.kpis{grid-template-columns:repeat(4,1fr)}}
+    .kpi{
+      background:var(--blue-card);
+      padding:22px;border-radius:22px;text-align:center;box-shadow:var(--shadow-soft), var(--glow);
+      position:relative;overflow:hidden;
+    }
+    .kpi .num{font-family:Poppins, sans-serif;font-weight:700;color:var(--gold);font-size:clamp(1.6rem,2.6vw,2rem)}
+    .kpi p{margin:.25rem 0 0;color:#E6F0F8}
+    .kpi::after{
+      content:"";position:absolute;inset:-60% -60% auto auto;width:140px;height:140px;border-radius:50%;
+      background:radial-gradient(circle, rgba(255,210,30,.33), rgba(255,210,30,0));
+      animation:glow 4.8s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+    @keyframes glow{to{transform:translate(-12px,10px) scale(1.1)}}
 
-/* Frage-Hervorhebung */
-.question{color:var(--yellow);font-weight:600;margin:.6rem 0 12px;font-size:clamp(20px,2.2vw,26px)}
+    /* Slogan */
+    .slogan{font-family:Poppins, sans-serif;font-weight:700;line-height:1.25;
+      font-size:clamp(1.6rem,3.6vw,2.3rem);
+    }
+    .slogan .gold{color:var(--gold)}
+    .slogan-wrap{padding:34px 0 18px}
 
-/* KPI – Paare */
-.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-top:18px}
-.kpi{background:var(--blue-2);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;box-shadow:var(--shadow);transition:transform .25s ease, box-shadow .25s ease}
-.kpi:hover{transform:translateY(-2px);box-shadow:0 20px 38px rgba(0,0,0,.4)}
-.kpi .knum{font-family:Lato;font-weight:600;font-size:clamp(24px,2.4vw,30px);color:var(--yellow)}
-.kpi .ktext{color:var(--muted)}
+    /* Carousel (Einblicke) */
+    .carousel-section{padding:18px 0 70px}
+    .carousel-outer{
+      background:rgba(0,0,0,.14);border:1px solid rgba(255,255,255,.05);border-radius:26px;padding:18px;
+      box-shadow:var(--shadow-soft)
+    }
+    .carousel{
+      display:grid;grid-auto-flow:column;grid-auto-columns:calc(100% - 8px);
+      gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth;
+    }
+    .carousel::-webkit-scrollbar{display:none}
+    @media(min-width:760px){.carousel{grid-auto-columns:calc(50% - 10px)}}
+    @media(min-width:1080px){.carousel{grid-auto-columns:calc(33.333% - 12px)}}
+    .slide{
+      scroll-snap-align:center;background:var(--blue-card);border-radius:24px;overflow:hidden;position:relative;
+      clip-path: polygon(0 8%, 6% 0, 100% 0, 100% 92%, 94% 100%, 0 100%);
+      box-shadow:var(--shadow-card);
+    }
+    .slide img{display:block;width:100%;height:360px;object-fit:cover}
+    .car-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    .nav-btn{
+      background:rgba(255,255,255,.1);backdrop-filter: blur(3px);
+      border:1px solid rgba(255,255,255,.18);color:#fff;width:40px;height:40px;border-radius:12px;cursor:pointer;
+    }
+    .nav-btn:hover{background:rgba(255,255,255,.18)}
 
-/* GALLERY / CAROUSEL */
-.carousel{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--border);padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}
-.rail{display:flex;gap:18px;will-change:transform}
-.slide{flex:0 0 calc((100% - (2*18px)) / 3);position:relative;border-radius:20px;overflow:hidden;background:#000;
-  clip-path:polygon(6% 0,100% 0,100% 88%,94% 100%,0 100%,0 12%);box-shadow:var(--shadow)}
-.slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;opacity:.98}
-.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.18));mix-blend-mode:multiply}
-.ctrl{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
-.ctrl button{pointer-events:auto;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);color:var(--white);width:44px;height:44px;border-radius:999px;display:grid;place-items:center;cursor:pointer}
-.ctrl button:hover{background:rgba(255,255,255,.2)}
+    /* reveal effects */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
 
-/* Slogan */
-.statement{padding:40px 0;border-top:1px solid var(--border)}
-.statement p{margin:0;font-size:clamp(18px,1.7vw,22px)}
-.statement strong{color:var(--yellow)}
-
-/* Reveal Animations */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease}
-.reveal.on{opacity:1;transform:none}
-
-/* Responsive */
-@media (max-width: 980px){
-  .hero-grid{grid-template-columns:1fr}
-  .hero-photo{justify-self:center;width:min(460px,100%)}
-  .grid-2,.two-col{grid-template-columns:1fr}
-  .values{grid-template-columns:1fr}
-  .kpi-row{grid-template-columns:1fr}
-  .slide{flex-basis:100%} /* mobil 1 sichtbar */
-  .logos img{height:56px}
-}
-</style>
+    footer{padding:40px 0 70px;color:#CFE2F1}
+  </style>
 </head>
 <body>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>Dardan Ibri</h1>
-      <div class="subtitle">Entwickler für Menschen &amp; Business</div>
-      <p class="slogan">Logik bringt Klarheit. <strong>Emotion</strong> bringt Energie. <strong>Beides</strong> schafft Wachstum.</p>
-      <a class="btn" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
-    </div>
-    <div class="hero-photo" aria-hidden="true">
-      <img src="assets/images/dardan-hero.jpg" alt="Dardan Ibri Portrait">
-    </div>
-  </div>
-</header>
-
-<!-- VISION & MISSION -->
-<section>
-  <div class="wrap grid-2">
-    <div class="card reveal">
-      <h2>Vision</h2>
-      <p>Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
-    </div>
-    <div class="card card--mission reveal">
-      <h2>Mission</h2>
-      <p>Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WERTE -->
-<section>
-  <div class="wrap">
-    <h2>Werte</h2>
-    <div class="values">
-      <!-- Klarheit – Kompass / Zielscheibe -->
-      <div class="value reveal" data-variant="blue">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="8.5"></circle>
-          <path d="M12 7.2l2.9 2.9L12 16.8l-2.9-2.9L12 7.2z"></path>
-          <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle>
-        </svg>
-        <div>
-          <h3>Klarheit</h3>
-          <p>Ohne Klarheit keine Richtung.</p>
+  <!-- ===== HERO ===== -->
+  <header class="hero container">
+    <div class="hero-wrap">
+      <div>
+        <span class="badge">Dardan Ibri</span>
+        <h1 class="title">Entwickler für Menschen&nbsp;&amp;&nbsp;Business</h1>
+        <p class="subtitle">Logische Struktur &amp; echte Emotion – für messbares Wachstum.</p>
+        <div class="cta">
+          <a class="btn" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
+          <a class="btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#EAF4FF;box-shadow:none" href="#einblicke">Einblicke ansehen</a>
         </div>
       </div>
 
-      <!-- Entwicklung – Sprössling -->
-      <div class="value reveal" data-variant="yellow">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 20v-6"></path>
-          <path d="M12 14c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"></path>
-          <path d="M12 14c0-3.5-2.5-6-6-6 0 3.5 2.5 6 6 6z"></path>
-        </svg>
-        <div>
-          <h3>Entwicklung</h3>
-          <p>Wachstum entsteht durch Neugier und Mut.</p>
-        </div>
-      </div>
-
-      <!-- Verantwortung – Handschlag -->
-      <div class="value reveal" data-variant="blue">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M8.5 12.5l2.5-2.5a3 3 0 014.2 0l.3.3"></path>
-          <path d="M3 12l4 4a3 3 0 004.2 0l3.3-3.3"></path>
-          <path d="M21 12l-3.2 3.2"></path>
-        </svg>
-        <div>
-          <h3>Verantwortung</h3>
-          <p>Erfolg ist das Resultat bewusster Entscheidungen.</p>
-        </div>
+      <div class="portrait reveal">
+        <img src="/assets/images/dardan-hero.jpg" alt="Dardan Ibri – Portrait">
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ÜBER MICH -->
-<section>
-  <div class="wrap">
-    <h2>Über mich</h2>
-    <p class="lead reveal">Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre <strong>Anlagen und Maschinen</strong> für internationale Industriekunden entwickelt – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.</p>
-    <p class="lead reveal">Mit <strong>27 Jahren</strong> entschied ich mich, meinen bekannten Weg zu verlassen: weg von der Entwicklung von Maschinen – hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im <strong>NLP (Practitioner &amp; Master)</strong> fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen.</p>
+  <main>
 
-    <!-- KPI-Paar 1 -->
-    <div class="kpi-row">
-      <div class="kpi reveal">
-        <div class="knum" data-count="6" data-suffix="+">0</div>
-        <div class="ktext">Jahre Erfahrung</div>
+    <!-- ===== VISION & MISSION ===== -->
+    <section class="container spc">
+      <h2 class="section-title">Vision &amp; Mission</h2>
+      <div class="row row-2">
+        <article class="card reveal">
+          <h3>Vision</h3>
+          <p>Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
+        </article>
+        <article class="card mission reveal">
+          <h3>Mission</h3>
+          <p>Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.</p>
+        </article>
       </div>
-      <div class="kpi reveal">
-        <div class="knum" data-count="98" data-suffix="%">0</div>
-        <div class="ktext">Durchschnittliche Zufriedenheit</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- HEUTE -->
-<section>
-  <div class="wrap two-col">
-    <div>
-      <h2>Heute – im Unternehmen</h2>
-      <p>Heute setze ich meine Erfahrung in <strong>Vertrieb, Referaten und gezielten Ausbildungen</strong> ein, um Unternehmen in ihrer <strong>Struktur-, Prozess- und Teamentwicklung</strong> aktiv mitzugestalten. Dabei verbinde ich <strong>strategisches Denken</strong> mit <strong>emotionaler Intelligenz</strong>, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
-      <p><em>Innerhalb der Unternehmen:</em> <strong>MG Coaching</strong> (Personal- &amp; Business-Coaching) und <strong>Evergrow</strong> (Vertrieb &amp; Wachstum).</p>
-      <div class="logos">
-        <img src="assets/logos/mg.png" alt="MG Coaching">
-        <img src="assets/logos/evergrow.png" alt="Evergrow">
-      </div>
-
-      <!-- KPI-Paar 2 -->
-      <div class="kpi-row">
-        <div class="kpi reveal">
-          <div class="knum" data-count="150" data-suffix="+">0</div>
-          <div class="ktext">Ausbildungstage</div>
+    <!-- ===== WERTE ===== -->
+    <section class="container spc" id="werte">
+      <h2 class="section-title">Werte</h2>
+      <div class="values">
+        <!-- Klarheit -->
+        <div class="value reveal">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Kompass -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="7"></circle>
+              <path d="M10 14l4-2 2-4-4 2-2 4z"></path>
+              <circle cx="12" cy="12" r="1.2" fill="#fff"></circle>
+            </svg>
+          </div>
+          <div>
+            <h4>Klarheit</h4>
+            <p>Ohne Klarheit keine Richtung.</p>
+          </div>
         </div>
-        <div class="kpi reveal">
-          <div class="knum" data-count="6" data-suffix="">0</div>
-          <div class="ktext">Branchen (Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität &amp; Vertrieb)</div>
+        <!-- Entwicklung (permanent gelb) -->
+        <div class="value yellow reveal">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Level-Up -->
+            <svg viewBox="0 0 24 24">
+              <polyline points="6,14 11,9 13.5,11.5 18,7"></polyline>
+              <polyline points="18,7 18,12 13,12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h4>Entwicklung</h4>
+            <p>Wachstum entsteht durch Neugier und Mut.</p>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div>
-      <h2>Als Referent &amp; Impulsgeber</h2>
-      <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über <strong>vier Jahren</strong> an Kunden und Partner aus verschiedensten Branchen weiter.</p>
-      <div class="question">Warum funktioniert das in allen Bereichen der Wirtschaft?</div>
-      <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – <strong>sondern um das WARUM dahinter:</strong> den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
-
-      <div class="logos">
-        <img src="assets/logos/ssm.png" alt="SSM Partner">
-        <img src="assets/logos/allianz.png" alt="Allianz">
-        <img src="assets/logos/properti.png" alt="Properti">
-        <img src="assets/logos/icm.png" alt="ICM Bau">
-      </div>
-
-      <!-- KPI-Paar 3 -->
-      <div class="kpi-row">
-        <div class="kpi reveal">
-          <div class="knum" data-count="500" data-suffix="+">0</div>
-          <div class="ktext">Teilnehmende</div>
-        </div>
-        <div class="kpi reveal">
-          <div class="knum" data-count="3500" data-suffix="+">0</div>
-          <div class="ktext">Investierte Stunden in Entwicklung</div>
+        <!-- Verantwortung -->
+        <div class="value reveal">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Commitment / Verbundene Haken (wie Hände) -->
+            <svg viewBox="0 0 24 24">
+              <path d="M7 13c1.5-1.5 3.5-1.5 5 0l.5.5"></path>
+              <path d="M17 11c-1.5 1.5-3.5 1.5-5 0l-.5-.5"></path>
+              <path d="M8.2 15.2l3.8 3.8 3.8-3.8"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Verantwortung</h4>
+            <p>Erfolg ist das Resultat bewusster Entscheidungen.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- GALERIE -->
-<section>
-  <div class="wrap">
-    <h2>Einblicke</h2>
-    <div class="carousel" id="carousel">
-      <div class="rail" id="rail">
-        <div class="slide"><img src="assets/images/ref1.jpg"  alt="Referat 1"></div>
-        <div class="slide"><img src="assets/images/ref2.jpg"  alt="Referat 2"></div>
-        <div class="slide"><img src="assets/images/ref3.jpg"  alt="Referat 3"></div>
-        <div class="slide"><img src="assets/images/ref4.jpg"  alt="Referat 4"></div>
-        <div class="slide"><img src="assets/images/ref5.jpg"  alt="Referat 5"></div>
-        <div class="slide"><img src="assets/images/ref6.jpg"  alt="Referat 6"></div>
-        <div class="slide"><img src="assets/images/ref7.jpg"  alt="Referat 7"></div>
-        <div class="slide"><img src="assets/images/ref8.jpg"  alt="Referat 8"></div>
-        <div class="slide"><img src="assets/images/ref9.jpg"  alt="Referat 9"></div>
-        <div class="slide"><img src="assets/images/ref10.jpg" alt="Referat 10"></div>
-        <div class="slide"><img src="assets/images/ref11.jpg" alt="Referat 11"></div>
-        <div class="slide"><img src="assets/images/ref12.jpg" alt="Referat 12"></div>
+    <!-- ===== ÜBER MICH ===== -->
+    <section class="container spc" id="ueber">
+      <h2 class="section-title">Über mich</h2>
+      <div class="card reveal">
+        <p>Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.</p>
+        <p>Mit <strong>27 Jahren</strong> entschied ich mich, meinen bekannten Weg zu verlassen. Weg von der Entwicklung von Maschinen – hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (NLP Practitioner &amp; Master) fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen.</p>
       </div>
-      <div class="ctrl">
-        <button id="prev" aria-label="Zurück">‹</button>
-        <button id="next" aria-label="Weiter">›</button>
+    </section>
+
+    <!-- ===== HEUTE – IM UNTERNEHMEN (untereinander) ===== -->
+    <section class="container spc-large" id="heute">
+      <h2 class="section-title">Heute – im Unternehmen</h2>
+      <article class="card reveal">
+        <p>Heute setze ich meine Erfahrung in <strong>Vertrieb, Referaten und gezielten Ausbildungen</strong> ein, um Unternehmen in ihrer <strong>Struktur-, Prozess- und Teamentwicklung</strong> aktiv mitzugestalten. Dabei verbinde ich <strong>strategisches Denken</strong> mit <strong>emotionaler Intelligenz</strong>, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
+        <p><em>Innerhalb der Unternehmen:</em> MG Coaching (Personal- &amp; Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
+        <div class="logos center" style="margin-top:10px">
+          <img src="/assets/logos/mg.png" alt="MG Coaching Logo" style="height:56px">
+          <img src="/assets/logos/evergrow.png" alt="Evergrow Logo" style="height:56px">
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== ALS REFERENT & IMPULSGEBER ===== -->
+    <section class="container spc" id="referent">
+      <h2 class="section-title">Als Referent &amp; Impulsgeber</h2>
+      <article class="card reveal">
+        <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über <strong>vier Jahren</strong> an Kunden und Partner aus verschiedensten Branchen weiter.</p>
+        <h3 style="color:var(--gold);margin-top:.2rem">Warum funktioniert das in allen Bereichen der Wirtschaft?</h3>
+        <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <strong>WARUM</strong> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+      </article>
+
+      <div class="stack" style="margin-top:16px">
+        <h3 class="section-title" style="margin:0">Zusammenarbeit u. a. mit</h3>
+        <div class="partners reveal">
+          <div class="partner"><img src="/assets/logos/ssm.png" alt="SSM Partner"></div>
+          <div class="partner"><img src="/assets/logos/allianz.png" alt="Allianz"></div>
+          <div class="partner"><img src="/assets/logos/properti.png" alt="Properti"></div>
+          <div class="partner"><img src="/assets/logos/icm.png" alt="ICM Bau"></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SLOGAN -->
-<section class="statement">
-  <div class="wrap">
-    <p><strong>Logik</strong> bringt Klarheit. <strong>Emotion</strong> bringt Energie. <strong>Beides</strong> schafft Wachstum.</p>
-  </div>
-</section>
+    <!-- ===== KPIs ===== -->
+    <section class="container spc" id="zahlen">
+      <h2 class="section-title">Kennzahlen &amp; Wirkung</h2>
+      <div class="kpis reveal">
+        <div class="kpi"><div class="num" data-count="150">150+</div><p>Ausbildungstage</p></div>
+        <div class="kpi"><div class="num" data-count="6">6</div><p>Branchen (Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität, Vertrieb)</p></div>
+        <div class="kpi"><div class="num" data-count="500">500+</div><p>Teilnehmende</p></div>
+        <div class="kpi"><div class="num" data-count="3500">3500+</div><p>Investierte Stunden in Entwicklung</p></div>
+      </div>
+    </section>
 
-<footer>
-  <div class="wrap" style="text-align:center;color:rgba(255,255,255,.75);padding:24px 0">
-    © <span id="y"></span> Dardan Ibri
-  </div>
-</footer>
+    <!-- ===== SLOGAN (vor Einblicke) ===== -->
+    <section class="container slogan-wrap">
+      <div class="slogan reveal">
+        <span class="gold">Logik</span> bringt Klarheit. <span class="gold">Emotion</span> bringt Energie. <span class="gold">Beides</span> schafft Wachstum.
+      </div>
+    </section>
 
-<script>
-/* Jahr */
-document.getElementById('y').textContent=new Date().getFullYear();
+    <!-- ===== EINBLICKE – CAROUSEL ===== -->
+    <section class="container carousel-section" id="einblicke">
+      <h2 class="section-title">Einblicke</h2>
+      <div class="carousel-outer reveal">
+        <div class="carousel" id="carousel">
+          <!-- 12 Slides -->
+          <figure class="slide"><img src="/assets/images/ref1.jpg" alt="Training & Vortrag – 1"></figure>
+          <figure class="slide"><img src="/assets/images/ref2.jpg" alt="Training & Vortrag – 2"></figure>
+          <figure class="slide"><img src="/assets/images/ref3.jpg" alt="Training & Vortrag – 3"></figure>
+          <figure class="slide"><img src="/assets/images/ref4.jpg" alt="Training & Vortrag – 4"></figure>
+          <figure class="slide"><img src="/assets/images/ref5.jpg" alt="Training & Vortrag – 5"></figure>
+          <figure class="slide"><img src="/assets/images/ref6.jpg" alt="Training & Vortrag – 6"></figure>
+          <figure class="slide"><img src="/assets/images/ref7.jpg" alt="Training & Vortrag – 7"></figure>
+          <figure class="slide"><img src="/assets/images/ref8.jpg" alt="Training & Vortrag – 8"></figure>
+          <figure class="slide"><img src="/assets/images/ref9.jpg" alt="Training & Vortrag – 9"></figure>
+          <figure class="slide"><img src="/assets/images/ref10.jpg" alt="Training & Vortrag – 10"></figure>
+          <figure class="slide"><img src="/assets/images/ref11.jpg" alt="Training & Vortrag – 11"></figure>
+          <figure class="slide"><img src="/assets/images/ref12.jpg" alt="Training & Vortrag – 12"></figure>
+        </div>
+        <div class="car-nav">
+          <button class="nav-btn" id="prev" aria-label="Zurück">‹</button>
+          <button class="nav-btn" id="next" aria-label="Weiter">›</button>
+        </div>
+      </div>
+    </section>
 
-/* Reveal on scroll */
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
-  });
-},{threshold:.25});
-reveals.forEach(el=>io.observe(el));
+  </main>
 
-/* KPI count up */
-const nums = document.querySelectorAll('.knum');
-const io2 = new IntersectionObserver((entries,obs)=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting) return;
-    const el = e.target;
-    const target = +el.dataset.count;
-    const suffix = el.dataset.suffix || '';
-    let current = 0;
-    const steps = 60;
-    const inc = target/steps;
-    const tick = ()=>{
-      current += inc;
-      if(current < target){ el.textContent = Math.ceil(current); requestAnimationFrame(tick); }
-      else { el.textContent = target + suffix; }
-    };
-    tick();
-    obs.unobserve(el);
-  });
-},{threshold:.6});
-nums.forEach(n=>io2.observe(n));
+  <footer class="container">
+    <p>Kontakt: <a href="mailto:info@dardanibri.com">info@dardanibri.com</a></p>
+    <p>© <span id="y"></span> Dardan Ibri</p>
+  </footer>
 
-/* Carousel – 3 sichtbar (Desktop) / 1 (mobil), Auto, Pfeile, Swipe, Endlos */
-(function(){
-  const rail = document.getElementById('rail');
-  const nextBtn = document.getElementById('next');
-  const prevBtn = document.getElementById('prev');
-  const carousel = document.getElementById('carousel');
-  const GAP = 18;
-  let slides = Array.from(rail.children);
-  let index = 0;
-  let perView = 3;
+  <script>
+    // Jahr
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-  const setPerView = () => {
-    perView = window.matchMedia('(max-width: 980px)').matches ? 1 : 3;
-  };
-  setPerView();
-  window.addEventListener('resize', setPerView);
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      })
+    },{threshold:.2});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  const need = () => perView + 2;
+    // KPI Count-up
+    const nums = document.querySelectorAll('.kpi .num');
+    const io2 = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          const el = ent.target;
+          const target = +el.dataset.count;
+          const plus = el.textContent.trim().endsWith('+');
+          let cur = 0;
+          const step = Math.max(1, Math.round(target/40));
+          const t = setInterval(()=>{
+            cur += step;
+            if(cur >= target){cur = target; clearInterval(t);}
+            el.textContent = cur.toLocaleString('de-CH') + (plus?'+':'');
+          }, 28);
+          io2.unobserve(el);
+        }
+      })
+    },{threshold:.5});
+    nums.forEach(n=>io2.observe(n));
 
-  const cloneForLoop = () => {
-    const n = need();
-    const head = slides.slice(0, n).map(n => n.cloneNode(true));
-    const tail = slides.slice(-n).map(n => n.cloneNode(true));
-    tail.forEach(n => rail.insertBefore(n, rail.firstChild));
-    head.forEach(n => rail.appendChild(n));
-    slides = Array.from(rail.children);
-    index = n;
-    update(false);
-  };
+    // Carousel
+    const car = document.getElementById('carousel');
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
 
-  const slideWidth = () => slides[0].getBoundingClientRect().width + GAP;
+    function scrollByOne(dir=1){
+      const w = car.querySelector('.slide').clientWidth + 16; // item + gap
+      car.scrollBy({left: dir*w, behavior:'smooth'});
+    }
+    next.addEventListener('click', ()=>scrollByOne(1));
+    prev.addEventListener('click', ()=>scrollByOne(-1));
 
-  const update = (animate=true) => {
-    const x = -index * slideWidth();
-    rail.style.transition = animate ? 'transform .55s ease' : 'none';
-    rail.style.transform = `translate3d(${x}px,0,0)`;
-  };
-
-  const go = (dir) => { index += dir; update(); boundary(); };
-  const boundary = () => {
-    const n = need();
-    const maxIndex = slides.length - n - 1;
-    setTimeout(()=>{ 
-      if(index > maxIndex){ index = n; update(false); }
-      if(index < n){ index = maxIndex; update(false); }
-    }, 580);
-  };
-
-  // autoplay
-  let timer=null;
-  const start = () => timer = setInterval(()=>go(1), 3200);
-  const stop  = () => { if(timer) clearInterval(timer); };
-  carousel.addEventListener('mouseenter', stop);
-  carousel.addEventListener('mouseleave', start);
-
-  // touch
-  let sx=null;
-  rail.addEventListener('touchstart', e=>{ sx=e.touches[0].clientX; stop(); }, {passive:true});
-  rail.addEventListener('touchmove', e=>{
-    if(sx===null) return;
-    const dx = e.touches[0].clientX - sx;
-    if(Math.abs(dx)>40){ go(dx<0?1:-1); sx=null; }
-  }, {passive:true});
-  rail.addEventListener('touchend', ()=>{ sx=null; start(); });
-
-  nextBtn.addEventListener('click', ()=>go(1));
-  prevBtn.addEventListener('click', ()=>go(-1));
-
-  // init
-  requestAnimationFrame(()=>{ cloneForLoop(); start(); });
-})();
-</script>
+    // Autoplay (pausiert bei Hover)
+    let timer = setInterval(()=>scrollByOne(1), 3500);
+    car.addEventListener('mouseenter', ()=>clearInterval(timer));
+    car.addEventListener('mouseleave', ()=>{timer = setInterval(()=>scrollByOne(1), 3500);});
+  </script>
 </body>
 </html>
