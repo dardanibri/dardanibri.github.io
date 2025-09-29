@@ -17,7 +17,6 @@
       --ink:#0F1822;
       --paper:#FFFFFF;
       --cloud:#F5F7FB;
-      --slate:#E6ECF5;
       --muted:#6C7A89;
 
       --h1:clamp(2.4rem,3.4vw,4.2rem);
@@ -114,12 +113,21 @@
     .vicon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#F2F7FF;border:1px solid #DFEAF7;flex:0 0 40px}
     .vicon svg{width:22px;height:22px;stroke:#1F4E79}
     .value .label{font-family:"Poppins";font-weight:800;font-size:1.12rem;letter-spacing:.1px;margin-bottom:.1rem}
-    .werte .value:nth-child(2):hover{box-shadow:var(--glow-yellow)} /* Entwicklung Akzent */
+    .werte .value:nth-child(2){background:linear-gradient(180deg,#FFFDF2 0%,#FFFFFF 45%);border-color:#F6E79C;box-shadow:0 6px 18px rgba(246,201,14,.18)}
+    .werte .value:nth-child(2):hover{box-shadow:0 10px 28px rgba(246,201,14,.28);transform:translateY(-2px)}
 
     /* Über mich */
     .about{display:grid;grid-template-columns:1.1fr .9fr;gap:min(4vw,48px);align-items:center}
     .about .photo{border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;box-shadow:var(--shadow-card)}
     .about .photo img{aspect-ratio:4/3;object-fit:cover}
+
+    /* Timeline + Callout */
+    .callout{background:#FFFBEA;border:1px solid #F6E79C;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow-soft);font-family:"Poppins";font-weight:600}
+    .timeline{position:relative;margin-top:18px;padding-left:26px}
+    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:#E6ECF5}
+    .tl-item{position:relative;margin:12px 0}
+    .tl-item::before{content:"";position:absolute;left:-2px;top:.35rem;width:12px;height:12px;border-radius:50%;background:#1F4E79;box-shadow:0 0 0 3px #EAF2FB}
+    .tl-item strong{font-family:"Poppins"}
 
     /* Heute */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
@@ -127,24 +135,21 @@
 
     /* KPIs */
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:min(2.6vw,28px)}
-    .kpi{position:relative;overflow:visible;background:var(--paper);border:1px solid #E6ECF5;border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow-card);transition:transform var(--speed),box-shadow var(--speed)}
+    .kpi{position:relative;overflow:visible;background:var(--paper);border:1px solid #E6ECF5;border-radius:var(--radius-xl);padding:22px;box-shadow:0 8px 20px rgba(15,24,34,.06);transition:transform var(--speed),box-shadow var(--speed)}
     .kpi:hover{transform:translateY(-4px)}
-    .kpi[data-tone="blue"]:hover{box-shadow:var(--glow-yellow)}
-    .kpi[data-tone="yellow"]:hover{box-shadow:var(--glow-blue)}
+    .kpi[data-tone="blue"]:hover{box-shadow:0 0 0 2px rgba(246,201,14,.25),0 16px 34px rgba(31,78,121,.28)}
+    .kpi[data-tone="yellow"]:hover{box-shadow:0 0 0 2px rgba(31,78,121,.25),0 16px 34px rgba(246,201,14,.28)}
     .kpi .big{font-family:"Poppins";font-weight:800;font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1;color:var(--royal)}
     .kpi[data-tone="yellow"] .big{color:var(--yellow)}
     .kpi .label{font-family:"Poppins";font-weight:700;margin-top:.45rem}
     .kpi p{color:#425466;margin-top:.35rem}
+    .kpi:focus-visible{outline:3px solid rgba(246,201,14,.45);outline-offset:2px}
+    @media (prefers-reduced-motion:reduce){.kpi{transition:none}}
 
     /* Logos (Partner) */
     .logos{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap:min(3vw,26px);
-      justify-items:center;
-      align-items:center;
-      max-width:1000px;
-      margin-inline:auto;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      gap:min(3vw,26px);justify-items:center;align-items:center;max-width:1000px;margin-inline:auto;
     }
     .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:16px;height:100px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
     .logos .logo:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
@@ -155,7 +160,7 @@
     .slides{display:flex;transition:transform 700ms ease;will-change:transform}
     .slide{min-width:100%}
     .slide img{width:100%;height:62vh;min-height:360px;object-fit:contain;background:#0b2641}
-    .slide img.cover{object-fit:cover}
+
     .nav-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,.85);border:1px solid #d9e4f2;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;cursor:pointer;transition:background var(--speed),transform var(--speed)}
     .nav-btn:hover{background:#fff;transform:translateY(-50%) scale(1.04)}
     .nav-prev{left:12px}.nav-next{right:12px}
@@ -164,22 +169,20 @@
     .dot.active{background:var(--yellow);box-shadow:var(--glow-yellow)}
 
     /* Slogan */
-    .slogan{ padding: clamp(40px, 8vw, 90px) 0; border-top:1px solid #E6ECF5; border-bottom:1px solid #E6ECF5; text-align:center; background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%) }
-    .slogan .quote{ font-family:"Poppins"; font-weight:800; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.33 }
-    .quote .line{ display:block; margin: .18em 0 }
+    .slogan{padding:clamp(40px,8vw,90px) 0;border-top:1px solid #E6ECF5;border-bottom:1px solid #E6ECF5;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%)}
+    .slogan .quote{font-family:"Poppins";font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.33}
+    .quote .line{display:block;margin:.18em 0}
 
-    /* Frage-Highlight */
-    .big-question{
-      font-family:"Poppins";
-      font-weight:800;
-      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-      margin: .4rem 0 .6rem;
-      letter-spacing:.2px;
-    }
+    /* Kontakt */
+    .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:min(3.2vw,32px)}
+    .contact .card{height:100%}
+    .list{display:grid;gap:.6rem;margin-top:.6rem}
+    .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;background:#F2F7FF;border:1px solid #D9E6F7;font-family:"Poppins";font-weight:600;font-size:.95rem;line-height:1.25}
+    .pill:hover{box-shadow:0 0 0 2px rgba(246,201,14,.25)}
 
-    /* Spacing helpers */
+    footer{border-top:1px solid #E6ECF5;padding:22px 0;color:#5c6a78;font-size:.95rem;background:var(--paper)}
+
     .sp-xxs{height:10px}.sp-xs{height:16px}.sp-sm{height:24px}.sp-md{height:36px}.sp-lg{height:54px}
-
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:min(3vw,28px)}
     .fade-in{opacity:0;transform:translateY(14px);transition:opacity 900ms ease,transform 900ms ease}
     .fade-in.appear{opacity:1;transform:none}
@@ -213,6 +216,7 @@
         <a href="#about">Über mich</a>
         <a href="#werte">Werte</a>
         <a href="#today">Heute</a>
+        <a href="#partner">Partner</a>
         <a href="#einblicke">Einblicke</a>
         <a href="#kontakt" class="cta">Kontakt</a>
       </nav>
@@ -248,7 +252,6 @@
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Vision &amp; Mission</h2></div>
       <div class="vm">
-        <!-- Vision -->
         <article class="card fade-in" data-theme="blue">
           <h3 class="sr-only">Vision</h3>
           <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
@@ -260,7 +263,6 @@
           <p class="lead">Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
         </article>
 
-        <!-- Mission -->
         <article class="card fade-in" data-theme="yellow">
           <h3 class="sr-only">Mission</h3>
           <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
@@ -280,7 +282,6 @@
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Werte</h2></div>
       <div class="werte">
-        <!-- Klarheit -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
@@ -294,7 +295,7 @@
             <p>Ohne Klarheit keine Richtung.</p>
           </div>
         </div>
-        <!-- Entwicklung -->
+
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
@@ -307,7 +308,7 @@
             <p>Wachstum entsteht durch Neugier und Mut.</p>
           </div>
         </div>
-        <!-- Verantwortung -->
+
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
@@ -324,28 +325,41 @@
     </div>
   </section>
 
-  <!-- ÜBER MICH + KPIs -->
+  <!-- ÜBER MICH + TIMELINE + KPIs -->
   <section id="about">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Über mich</h2></div>
       <div class="about">
         <div class="fade-in">
-          <p>Gelernter Techniker HF Maschinenbau (Juventus Zürich) mit internationaler Entwicklungserfahrung, von Japan über China und Indien bis in die USA, den Nahen Osten und Europa. Mit 27 Jahren erfolgte der Wechsel von der Entwicklung von Maschinen hin zur Entwicklung von Menschen und Business. In den ersten zwei Jahren im Vertrieb der Finanzbranche habe ich mich im Neuro-Linguistischen Programmieren (<strong>NLP Master</strong>) weitergebildet. So fand ich den Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen. Seitdem entwickle ich Unternehmen und Menschen weiter und begleite sie auf diesem Weg.</p>
+          <p><strong>Gelernter Techniker HF Maschinenbau</strong> mit internationaler Entwicklungserfahrung – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa. <strong>2014–2018</strong> habe ich in Ingenieurbüros Systeme entwickelt und <strong>internationale Projektleitungen</strong> verantwortet.</p>
+          <p><strong>Mit 27 Jahren erfolgte der Wechsel</strong> zur Entwicklung von Menschen und Business. In den ersten Jahren im <strong>Vertrieb</strong> lernte ich die Sprache von Entscheidungen kennen und absolvierte den <strong>NLP-Master</strong> (<em>60+ Ausbildungstage</em>). So entstand mein Ansatz, <strong>Logik mit Emotion</strong> zu verbinden und daraus <strong>messbare Entwicklung</strong> zu schaffen. Seit <strong>2020</strong> begleite ich Unternehmen und Menschen in <strong>Unternehmensentwicklung, Coaching und Führung</strong> – parallel mit starkem Praxisbezug im Vertrieb.</p>
+
+          <div class="sp-xs"></div>
+          <div class="callout">Nicht ein Leben lang hinter dem Schreibtisch – sondern <span class="blue" style="font-weight:800">dynamische Wirtschaft gestalten</span>, Menschen stärken und wirkungsvolle Strukturen bauen.</div>
+
+          <div class="timeline">
+            <div class="tl-item"><strong>2007–2011</strong> · Konstrukteur EFZ – Fundament Technik &amp; Präzision</div>
+            <div class="tl-item"><strong>2014–2018</strong> · HF Maschinenbau · Entwicklung in Ingenieurbüros, <em>internationale Projektleitungen</em></div>
+            <div class="tl-item"><strong>2019–2020</strong> · NLP-Master (<em>60+ Ausbildungstage</em>) – Verhalten, Kommunikation, Leadership-Kontext</div>
+            <div class="tl-item"><strong>2019–heute</strong> · Vertrieb – Aufbau, Steuerung und Skalierung von Sales-Prozessen</div>
+            <div class="tl-item"><strong>2020–heute</strong> · Unternehmensentwicklung &amp; Coaching – Strukturen, Prozesse, Teams, Führung</div>
+          </div>
 
           <div class="sp-xs"></div>
           <div class="kpis">
-            <div class="kpi fade-in" data-tone="blue">
+            <div class="kpi fade-in" data-tone="blue" tabindex="0">
               <div class="big">5+</div>
               <div class="label">Jahre Erfahrung</div>
-              <p>Unternehmensentwicklung, Coaching &amp; Leadership.</p>
+              <p>Unternehmensentwicklung, Coaching &amp; Führung.</p>
             </div>
-            <div class="kpi fade-in" data-tone="yellow">
+            <div class="kpi fade-in" data-tone="yellow" tabindex="0">
               <div class="big">500+</div>
               <div class="label">Teilnehmende</div>
-              <p>Menschen, die durch meine Ausbildungen gewachsen sind.</p>
+              <p>Menschen, die durch meine Ausbildungen <strong>und Trainings</strong> gewachsen sind.</p>
             </div>
           </div>
         </div>
+
         <div class="photo fade-in">
           <img src="assets/images/ref6.jpg" alt="Dardan Ibri – bei einem Referat">
         </div>
@@ -361,17 +375,16 @@
         <article class="card fade-in">
           <h3>Im Unternehmen</h3>
           <p>Heute kommt Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen zum Einsatz, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbindet sich strategisches Denken mit emotionaler Intelligenz für nachhaltige, lebendige Veränderungen.</p>
-          <p>Dies geschieht innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
+          <p>Dies geschieht innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und im Vertrieb.</p>
 
-          <div class="sp-md"></div> <!-- mehr Luft vor KPIs -->
-
+          <div class="sp-md"></div>
           <div class="kpis">
-            <div class="kpi fade-in" data-tone="blue">
+            <div class="kpi fade-in" data-tone="blue" tabindex="0">
               <div class="big">3’500+</div>
               <div class="label">investierte Stunden</div>
               <p>Praxis in Entwicklung &amp; Umsetzung.</p>
             </div>
-            <div class="kpi fade-in" data-tone="yellow">
+            <div class="kpi fade-in" data-tone="yellow" tabindex="0">
               <div class="big">150+</div>
               <div class="label">Ausbildungstage</div>
               <p>Intensive Schulungen &amp; Trainings.</p>
@@ -381,21 +394,18 @@
 
         <article class="card subtle fade-in">
           <h3>Als Referent &amp; Impulsgeber</h3>
-
           <div class="big-question">Warum funktioniert das in allen Bereichen der Wirtschaft?</div>
-
-          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter. Warum funktioniert das in allen Bereichen der Wirtschaft? Weil es nie allein um das Produkt oder die Dienstleistung geht, sondern um das WARUM dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
-
+          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter. Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das WARUM dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
           <p class="muted" style="color:#d7e6f7">Zusammenarbeit u. a. mit SSM Partner (Broker), Allianz (Versicherung), Properti (Immobilien), ICM Bau (Personalvermittlung) und weiteren.</p>
 
           <div class="sp-xs"></div>
           <div class="kpis">
-            <div class="kpi fade-in" data-tone="blue">
+            <div class="kpi fade-in" data-tone="blue" tabindex="0">
               <div class="big">6</div>
               <div class="label">Branchen</div>
               <p>Finanzen, Personalvermittlung, Immobilien, Bildung, Vitalität, Vertrieb.</p>
             </div>
-            <div class="kpi fade-in" data-tone="yellow">
+            <div class="kpi fade-in" data-tone="yellow" tabindex="0">
               <div class="big">98%</div>
               <div class="label">Zufriedenheit</div>
               <p>Durchschnittliche Bewertung der Teilnehmenden.</p>
@@ -406,7 +416,7 @@
     </div>
   </section>
 
-  <!-- PARTNER-LOGOS (jetzt inkl. MG & Evergrow) -->
+  <!-- PARTNER-LOGOS (inkl. MG & Evergrow als Marken, ohne Nennung im Text oben) -->
   <section id="partner">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner-Logos</h2></div>
