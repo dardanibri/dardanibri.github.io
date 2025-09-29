@@ -1,476 +1,419 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dardan Ibri – Entwickler für Menschen & Business</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg-top:#c2c9d1;      /* ruhiger, dunklerer Hintergrund */
-      --bg-bottom:#b7bec6;
-      --navy:#0F2F46;
-      --navy-2:#0d2940;
-      --gold:#F6C90E;
-      --gold-deep:#E2B90D;
-      --white:#ffffff;
-      --ink:#0f2f46;
-      --muted:#dfe6ee;
-      --card-radius:24px;
-      --shadow:0 10px 30px rgba(0,0,0,.18);
-      --ring:0 0 0 1px rgba(255,215,0,.35), 0 14px 30px rgba(255,215,0,.18);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family:Poppins,system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
-      color:var(--ink);
-      background:linear-gradient(to bottom,var(--bg-top),var(--bg-bottom));
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    }
-    .wrap{max-width:1200px;margin:0 auto;padding:56px 20px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:end}
-    @media (max-width:980px){.hero{grid-template-columns:1fr;gap:24px}}
-    .title{
-      font-family:Lato,system-ui,sans-serif;
-      font-weight:900; line-height:.95;
-      font-size:clamp(42px,7.5vw,110px);
-      color:var(--white);
-      text-shadow:0 3px 18px rgba(0,0,0,.18);
-      margin:0 0 10px 0;
-      letter-spacing:.2px;
-    }
-    .subtitle{
-      font-family:Lato,system-ui,sans-serif;
-      font-weight:800; color:var(--gold);
-      font-size:clamp(20px,2.6vw,38px);
-      text-shadow:0 2px 10px rgba(0,0,0,.16);
-      margin:0 0 22px 0;
-    }
-    .lead{font-size:clamp(18px,1.6vw,26px); line-height:1.5; color:var(--navy); opacity:.95}
-    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .btn{
-      font-family:Lato,system-ui,sans-serif;
-      border:none;border-radius:14px;padding:18px 26px;font-size:18px;
-      cursor:pointer; transition:.25s transform,.25s box-shadow,.25s background;
-      box-shadow:var(--shadow);
-    }
-    .btn-primary{background:var(--gold);color:#1a1a1a;font-weight:800}
-    .btn-primary:hover{transform:translateY(-2px);background:var(--gold-deep)}
-    .btn-ghost{background:rgba(255,255,255,.35);backdrop-filter:saturate(1.4) blur(6px); color:var(--navy); font-weight:700}
-    .btn-ghost:hover{background:rgba(255,255,255,.55)}
-    .hero-figure{
-      aspect-ratio:4/5; border-radius:32px 32px 12px 32px; overflow:hidden; position:relative;
-      box-shadow:0 18px 40px rgba(0,0,0,.22);
-      background:var(--navy);
-    }
-    .hero-figure img{
-      width:100%;height:100%;object-fit:cover;object-position:center top; /* weniger „Haarschnitt“ */
-      filter:contrast(1.04) saturate(1.02);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dardan Ibri – Entwickler für Menschen & Business</title>
 
-    /* Cards */
-    .section{margin-top:64px}
-    .section h2{
-      font-family:Lato,system-ui,sans-serif; font-weight:900; color:var(--gold);
-      font-size:clamp(28px,3.3vw,48px); margin:0 0 18px 0; letter-spacing:.2px;
-      text-shadow:0 2px 12px rgba(0,0,0,.16);
-    }
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    @media (max-width:900px){.grid-2{grid-template-columns:1fr}}
-    .card{
-      border-radius:var(--card-radius);
-      padding:28px;
-      background:var(--navy);
-      color:var(--white);
-      box-shadow:var(--shadow);
-      position:relative;
-    }
-    .card.gold{background:var(--gold);color:#111}
-    .ring{outline:1px solid rgba(255,215,0,.35); box-shadow:var(--ring)}
-    .card h3{
-      font-family:Lato,system-ui,sans-serif; font-weight:900; margin:4px 0 14px 0;
-      font-size:clamp(22px,2.3vw,34px);
-    }
-    .card p{color:rgba(255,255,255,.96); font-size:clamp(16px,1.35vw,20px); line-height:1.6; margin:0}
-    .card.gold p{color:#17212b}
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-    /* Werte */
-    .values{margin-top:36px}
-    .values-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
-    @media (max-width:980px){.values-grid{grid-template-columns:1fr}}
-    .value{display:flex;flex-direction:column;gap:14px;background:var(--navy);color:var(--white);border-radius:22px;padding:20px 22px;box-shadow:var(--shadow);position:relative}
-    .value:hover{transform:translateY(-3px); transition:.25s; box-shadow:0 20px 40px rgba(0,0,0,.28)}
-    .value .hdr{display:flex;align-items:center;gap:14px}
-    .value .icon{
-      width:46px;height:46px;border-radius:999px;background:rgba(246,201,14,.14);
-      display:grid;place-items:center; box-shadow:inset 0 0 0 2px rgba(246,201,14,.55);
-    }
-    .value .icon svg{width:26px;height:26px;fill:var(--gold)}
-    .value h4{font-family:Lato,system-ui,sans-serif;margin:0;font-weight:900;font-size:clamp(20px,2vw,28px)}
-    .value p{margin:0;color:rgba(255,255,255,.94)}
-    /* Entwicklung bleibt gold – kein Farbwechsel */
-    .value.dev{background:var(--gold);color:#111}
-    .value.dev .icon{background:rgba(0,0,0,.1); box-shadow:inset 0 0 0 2px rgba(0,0,0,.18)}
-    .value.dev .icon svg{fill:#111}
-    .value.dev p{color:#111}
-    /* Klarheit/Verantwortung: kein Umschalten auf Gelb */
-    .value:not(.dev):hover{outline:1px solid rgba(255,255,255,.08)}
+<style>
+:root{
+  --navy:#0f2a47;
+  --navy-2:#0c2038;
+  --gold:#e2b100;
+  --bg:#b3bac2;          /* leicht dunkler, ruhiger fürs Auge */
+  --card-bg:#0f2a47;
+  --white:#fff;
+  --muted:#d0d6dd;
+  --shadow:0 10px 35px rgba(0,0,0,.18);
+  --glow-gold:0 0 0 2px rgba(226,177,0,.55), 0 18px 35px rgba(226,177,0,.15);
+  --radius-xl:22px;
+  --radius-lg:18px;
+}
 
-    /* Über mich / Heute / Referent Inhalt lesbar */
-    .card p strong, .card em{color:var(--white)}
-    .card .muted{color:rgba(255,255,255,.82)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--navy)}
+body{font-family:Lato,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
 
-    /* Logos */
-    .logo-row, .logo-grid{
-      display:grid; gap:18px; align-items:center; justify-items:center;
-    }
-    .logo-row{grid-template-columns:repeat(2,minmax(140px,1fr)); margin:8px 0 6px}
-    .logo-grid{grid-template-columns:repeat(4,minmax(120px,1fr)); margin:10px 0 6px}
-    @media (max-width:900px){.logo-grid{grid-template-columns:repeat(2,1fr)}}
-    .logo img{max-height:58px; width:auto; object-fit:contain; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));}
-    .logo.-big img{max-height:68px}
+/* Utility */
+.container{max-width:1180px;margin:0 auto;padding:0 28px}
+.section{margin:72px auto}
+.h-spread{display:flex;gap:28px}
+h1,h2,h3{font-family:Poppins,system-ui,sans-serif;margin:0 0 14px}
+h2.section-title{color:var(--gold);font-weight:800;letter-spacing:.2px}
 
-    /* KPI */
-    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-    @media (max-width:900px){.kpis{grid-template-columns:1fr}}
-    .kpi{
-      background:rgba(255,255,255,.08);
-      border-radius:18px; padding:18px 22px;
-      display:flex; align-items:center; gap:18px;
-      box-shadow:var(--shadow);
-    }
-    .kpi.gold{background:var(--gold); color:#111; box-shadow:var(--ring)}
-    .kpi .num{font-family:Lato,system-ui,sans-serif; font-weight:900; letter-spacing:.3px; font-size:clamp(28px,3vw,40px)}
-    .kpi .lbl{font-weight:600; opacity:.92}
-    .count{opacity:0; transform:translateY(6px); transition:.35s}
-    .count.visible{opacity:1; transform:none}
+/* Buttons (ohne Unterstrich) */
+a.btn,.btn{display:inline-block;text-decoration:none!important;outline:none;border:none;border-radius:14px;padding:16px 22px;font-weight:700;cursor:pointer;transition:.25s transform,.25s box-shadow,.25s background}
+.btn-primary{background:var(--gold);color:var(--navy);box-shadow:var(--shadow)}
+.btn-ghost{background:var(--white);color:var(--navy);box-shadow:var(--shadow)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.22)}
 
-    /* Slogan */
-    .slogan{margin:70px 0 20px;text-align:center}
-    .slogan h2{
-      font-family:Lato,system-ui,sans-serif; font-size:clamp(28px,3.6vw,56px); line-height:1.25;
-      font-weight:900; margin:0; color:var(--navy);
-    }
-    .slogan .hi{color:var(--gold)}
-    .slogan .line{display:block}
+/* ---------------- HERO ---------------- */
+.hero{padding:90px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:64px;line-height:1.05;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.18)}
+.hero h2{font-size:28px;color:var(--gold);font-weight:800;margin-top:6px}
+.hero p{font-size:20px;max-width:760px;margin-top:14px;color:var(--navy)}
+.hero-cta{display:flex;gap:16px;margin-top:26px}
 
-    /* Carousel */
-    .carousel{margin-top:30px}
-    .slider{
-      position:relative; overflow:hidden; border-radius:24px; padding:10px; background:rgba(15,47,70,.08);
-      box-shadow:var(--shadow);
-    }
-    .track{display:flex; gap:16px; transition:transform .5s ease}
-    .slide{
-      min-width:calc(33.333% - 10.6px); /* 3 sichtbar */
-      border-radius:22px; overflow:hidden; position:relative; background:#000;
-      box-shadow:0 14px 30px rgba(0,0,0,.28);
-    }
-    .slide img{width:100%;height:100%;object-fit:cover;display:block}
-    @media (max-width:980px){.slide{min-width:calc(50% - 10px)}}
-    @media (max-width:640px){.slide{min-width:100%}}
-    .arrow{
-      position:absolute; top:50%; transform:translateY(-50%);
-      width:48px;height:48px;border-radius:50%;
-      background:rgba(15,47,70,.85); color:#fff; display:grid;place-items:center; cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,0,0,.35); border:2px solid rgba(255,255,255,.65); z-index:3;
-    }
-    .arrow:hover{background:rgba(15,47,70,.95)}
-    .arrow.left{left:12px}
-    .arrow.right{right:12px}
-    .arrow svg{width:22px;height:22px;fill:#fff}
+.hero-portrait{
+  position:relative;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);
+  background:var(--navy);
+  clip-path:polygon(8% 0,100% 0,100% 92%,92% 100%,0 100%,0 8%);
+}
+.hero-portrait img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 8%;
+  display:block;filter:contrast(1.05) saturate(1.02)
+}
 
-    /* Footer / Kontakt */
-    footer{margin:60px 0 30px}
-    .foot-card{
-      background:rgba(15,47,70,.08); border-radius:20px; padding:24px 22px; display:grid; gap:8px;
-      box-shadow:var(--shadow)
-    }
-    .foot-card h3{margin:0;font-family:Lato;font-weight:900;color:var(--navy)}
-    .foot-card p{margin:0;color:#1c2f45}
-    .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;color:#1b2a3a;text-decoration:none;font-weight:700;box-shadow:var(--shadow)}
-    .chip:hover{transform:translateY(-2px)}
-  </style>
+/* ---------------- VISION / MISSION ---------------- */
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.card{border-radius:var(--radius-xl);padding:26px 28px;box-shadow:var(--shadow)}
+.card.v{background:var(--card-bg);color:#fff}
+.card.m{background:var(--gold);color:var(--navy)}
+.card h3{font-family:Poppins;font-size:28px;margin-bottom:6px}
+.card.v h3{color:var(--gold)}
+
+/* ---------------- WERTE ---------------- */
+.values{margin-top:66px}
+.values-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.value-card{
+  background:var(--card-bg);color:#fff;border-radius:var(--radius-xl);
+  padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  transition:transform .25s, box-shadow .25s;isolation:isolate
+}
+.value-card:hover{transform:translateY(-4px);box-shadow:var(--glow-gold)}
+.value-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.value-icon{
+  width:42px;height:42px;border-radius:999px;background:var(--gold);
+  display:grid;place-items:center;flex:0 0 42px;
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.06)
+}
+.value-title{font-family:Poppins;font-size:28px;font-weight:800}
+
+/* SVG icons inside gold circle */
+.value-icon svg{width:22px;height:22px;fill:none;stroke:var(--navy);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------------- HEUTE / UNTERNEHMEN ---------------- */
+.block{background:var(--card-bg);color:#fff;border-radius:var(--radius-xl);padding:36px;box-shadow:var(--shadow)}
+.block p{color:var(--muted)}
+.logo-row{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:flex-start;margin:16px 0 12px}
+.logo-row img{height:46px;object-fit:contain}
+.logo-row .brand-large{height:58px} /* MG / Evergrow etwas größer */
+
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:14px}
+.kpi-card{
+  background:var(--navy-2);border-radius:16px;padding:22px 24px;box-shadow:0 0 0 2px rgba(226,177,0,.25), 0 10px 24px rgba(0,0,0,.22)
+}
+.kpi-num{font-family:Poppins;font-weight:800;color:var(--gold);font-size:30px}
+.kpi-desc{color:#fff;margin-top:6px}
+
+/* ---------------- IMPULSGEBER ---------------- */
+.impuls h3.q{font-family:Poppins;font-size:28px;color:var(--gold);margin:10px 0 8px}
+.partner-row{display:flex;flex-wrap:wrap;gap:30px;align-items:center;margin:18px 0 6px}
+.partner-row img{height:60px;object-fit:contain;filter:brightness(0) invert(1)}
+
+/* ---------------- SLOGAN ---------------- */
+.slogan-section{display:grid;place-items:center;padding:90px 0 70px}
+.slogan{font-family:Poppins;font-weight:800;text-align:center;line-height:1.28;color:var(--navy)}
+.slogan .big{font-size:50px}
+.slogan .gold{color:var(--gold)}
+
+/* ---------------- EINBLICKE / KARUSSELL ---------------- */
+.carousel-wrap{margin-top:18px;background:var(--navy);padding:30px;border-radius:26px;box-shadow:var(--shadow)}
+.carousel-title{color:#fff;font-family:Poppins;font-weight:800;font-size:34px;margin:0 0 14px}
+.slider{
+  position:relative;overflow:hidden;border-radius:20px
+}
+.track{
+  display:flex;gap:18px;will-change:transform
+}
+.slide{
+  flex:0 0 calc((100% - 36px)/3); /* 3 sichtbar */
+  border-radius:18px;overflow:hidden;position:relative
+}
+.slide img{width:100%;height:420px;object-fit:cover;display:block;clip-path:polygon(8% 0,100% 0,100% 88%,92% 100%,0 100%,0 8%)}
+
+/* Pfeile – ausserhalb und sichtbar */
+.nav-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--gold);color:var(--navy);display:grid;place-items:center;
+  box-shadow:0 10px 26px rgba(0,0,0,.28)
+}
+.nav-btn svg{width:22px;height:22px}
+.nav-prev{left:-24px}
+.nav-next{right:-24px}
+
+/* ---------------- KONTAKT-KACHELN ---------------- */
+.kontakt-bereich{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;margin:16px 0 100px}
+.kontakt-card{background:var(--card-bg);color:#fff;border-radius:var(--radius-xl);padding:28px 26px;width:330px;box-shadow:var(--shadow);transition:transform .25s, box-shadow .25s}
+.kontakt-card:hover{transform:translateY(-4px);box-shadow:var(--glow-gold)}
+.kontakt-card .icon{width:44px;height:44px;border-radius:999px;background:var(--gold);display:grid;place-items:center;margin-bottom:10px}
+.kontakt-card .icon span{font-size:22px;color:var(--navy);font-weight:800}
+.kontakt-card h3{font-family:Poppins;font-size:22px;margin:6px 0 8px}
+.kontakt-card p{margin:0 0 10px;color:#fff}
+.kontakt-card .buttons{display:flex;gap:10px;flex-wrap:wrap}
+.btn-chip{background:#fff;color:var(--navy);border-radius:999px;padding:10px 16px;font-weight:700;text-decoration:none!important}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1fr}
+  .slide{flex:0 0 calc(100% - 0px)}         /* 1 sichtbar mobil */
+  .slide img{height:420px}
+  .nav-prev{left:10px}.nav-next{right:10px}
+  .vm-grid{grid-template-columns:1fr}
+  .values-row{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:1fr}
+  .slogan .big{font-size:40px}
+}
+</style>
 </head>
 <body>
 
-  <div class="wrap hero">
+<!-- ========== HERO ==========- -->
+<section class="hero">
+  <div class="container hero-grid">
     <div>
-      <h1 class="title">Dardan Ibri</h1>
-      <div class="subtitle">Entwickler für Menschen &amp; Business</div>
-      <p class="lead">
-        Struktur, Strategie und Bewusstsein – klar gedacht, menschlich umgesetzt.
-        Ich verbinde Logik mit Emotion, damit Entwicklung <em>messbar</em> und <em>lebendig</em> wird.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">LinkedIn ansehen</a>
+      <h1>Dardan Ibri</h1>
+      <h2>Entwickler für Menschen &amp; Business</h2>
+      <p>Struktur, Strategie und Bewusstsein – klar gedacht, menschlich umgesetzt. Ich verbinde Logik mit Emotion, damit Entwicklung <em>messbar</em> und <em>lebendig</em> wird.</p>
+      <div class="hero-cta">
+        <a href="mailto:info@dardanibri.com" class="btn btn-primary">Kontakt aufnehmen</a>
+        <a href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ansehen</a>
       </div>
     </div>
-    <figure class="hero-figure">
-      <img src="/assets/images/dardan-hero.jpg" alt="Dardan Ibri Portrait">
-    </figure>
-  </div>
 
-  <div class="wrap section">
-    <div class="grid-2">
-      <div class="card ring">
-        <h3 style="color:var(--gold)">Vision</h3>
-        <p>Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
-      </div>
-      <div class="card gold ring">
-        <h3>Mission</h3>
-        <p>Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.</p>
-      </div>
+    <div class="hero-portrait">
+      <img src="/assets/images/dardan-hero.jpg" alt="Dardan Ibri – Portrait">
     </div>
   </div>
+</section>
 
-  <div class="wrap section values">
-    <h2>Werte</h2>
-    <div class="values-grid">
+<!-- ========== VISION / MISSION ==========- -->
+<section class="section">
+  <div class="container vm-grid">
+    <article class="card v">
+      <h3>Vision</h3>
+      <p>Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
+    </article>
+    <article class="card m">
+      <h3>Mission</h3>
+      <p>Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ========== WERTE ==========- -->
+<section class="section values">
+  <div class="container">
+    <h2 class="section-title">Werte</h2>
+    <div class="values-row">
       <!-- Klarheit -->
-      <div class="value">
-        <div class="hdr">
-          <div class="icon" aria-hidden="true">
-            <!-- Kompass-Nadel / kein Kreuz -->
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm3.9 6.1-3.2 7.1a1 1 0 0 1-.6.6l-7.1 3.2 3.2-7.1a1 1 0 0 1 .6-.6l7.1-3.2Z"/></svg>
+      <article class="value-card">
+        <div class="value-head">
+          <div class="value-icon" aria-hidden="true">
+            <!-- Kompass im Kreis -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <polygon points="10,10 16,8 14,14 8,16"></polygon>
+            </svg>
           </div>
-          <h4>Klarheit</h4>
+          <div class="value-title">Klarheit</div>
         </div>
         <p>Ohne Klarheit keine Richtung.</p>
-      </div>
-      <!-- Entwicklung (bleibt gold) -->
-      <div class="value dev ring">
-        <div class="hdr">
-          <div class="icon" aria-hidden="true">
-            <!-- Level-Up Pfeil -->
-            <svg viewBox="0 0 24 24"><path d="M12 3 4 11h5v10h6V11h5z"/></svg>
+      </article>
+
+      <!-- Entwicklung -->
+      <article class="value-card" style="box-shadow:var(--glow-gold)">
+        <div class="value-head">
+          <div class="value-icon" aria-hidden="true">
+            <!-- Level-Up Pfeil im Kreis -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 7v10M8 11l4-4 4 4"></path>
+            </svg>
           </div>
-          <h4>Entwicklung</h4>
+          <div class="value-title">Entwicklung</div>
         </div>
         <p>Wachstum entsteht durch Neugier und Mut.</p>
-      </div>
+      </article>
+
       <!-- Verantwortung -->
-      <div class="value">
-        <div class="hdr">
-          <div class="icon" aria-hidden="true">
-            <!-- Commitment/Häkchen-Paar -->
-            <svg viewBox="0 0 24 24"><path d="M9.2 16.2 5.5 12.5l1.4-1.4 2.3 2.3 7-7 1.4 1.4-8.4 8.4Zm5.6 3.3-3.3-3.3 1.4-1.4 1.9 1.9 4.9-4.9 1.4 1.4-6.3 6.3Z"/></svg>
+      <article class="value-card">
+        <div class="value-head">
+          <div class="value-icon" aria-hidden="true">
+            <!-- Commitment / ineinandergreifende Haken -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M8 13l3 3 5-6"></path>
+              <path d="M10 9l-2 2"></path>
+            </svg>
           </div>
-          <h4>Verantwortung</h4>
+          <div class="value-title">Verantwortung</div>
         </div>
         <p>Erfolg ist das Resultat bewusster Entscheidungen.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HEUTE – IM UNTERNEHMEN ==========- -->
+<section class="section">
+  <div class="container block">
+    <h2 class="section-title" style="margin-bottom:6px">Heute – im Unternehmen</h2>
+    <p>Ich setze meine Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen ein, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbinde ich strategisches Denken mit emotionaler Intelligenz, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
+
+    <div class="logo-row" aria-label="Unternehmen">
+      <img class="brand-large" src="/assets/logos/mg.png" alt="MG Coaching">
+      <img class="brand-large" src="/assets/logos/evergrow.png" alt="Evergrow">
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-num">150+</div>
+        <div class="kpi-desc">Ausbildungstage</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">6 Branchen</div>
+        <div class="kpi-desc">Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität &amp; Vertrieb</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="wrap section">
-    <h2>Über mich</h2>
-    <div class="card ring">
-      <p class="muted">
-        Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt –
-        von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.
-      </p>
-      <p class="muted" style="margin-top:12px">
-        Mit 27 Jahren entschied ich mich, meinen bekannten Weg zu verlassen: weg von der Entwicklung von Maschinen – hin zur Entwicklung von Menschen und Business.
-        Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (NLP Practitioner &amp; Master)
-        fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen.
-      </p>
+<!-- ========== ALS REFERENT & IMPULSGEBER ==========- -->
+<section class="section">
+  <div class="container block impuls">
+    <h2 class="section-title">Als Referent &amp; Impulsgeber</h2>
+    <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter.</p>
+
+    <h3 class="q">Warum funktioniert das in allen Bereichen der Wirtschaft?</h3>
+    <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <strong style="color:var(--gold)">WARUM</strong> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+
+    <div class="partner-row" aria-label="Zusammenarbeit u. a. mit">
+      <img src="/assets/logos/ssm.png" alt="SSM Partner">
+      <img src="/assets/logos/allianz.png" alt="Allianz">
+      <img src="/assets/logos/properti.png" alt="Properti">
+      <img src="/assets/logos/icm.png" alt="ICM Bau">
     </div>
-  </div>
 
-  <div class="wrap section">
-    <h2>Heute – im Unternehmen</h2>
-    <div class="card ring">
-      <p class="muted">
-        Heute setze ich meine Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen ein, um Unternehmen in ihrer
-        Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbinde ich strategisches Denken mit
-        emotionaler Intelligenz, um nachhaltige und lebendige Veränderungen zu ermöglichen.
-      </p>
-      <p class="muted" style="margin:10px 0 6px"><em>Innerhalb der Unternehmen:</em> MG Coaching (Personal- &amp; Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
-
-      <div class="logo-row" style="margin:8px 0 2px">
-        <div class="logo -big"><img src="/assets/logos/mg.png" alt="MG Coaching Logo"></div>
-        <div class="logo -big"><img src="/assets/logos/evergrow.png" alt="Evergrow Logo"></div>
+    <div class="kpi-row" style="margin-top:18px">
+      <div class="kpi-card">
+        <div class="kpi-num">500+</div>
+        <div class="kpi-desc">Teilnehmende</div>
       </div>
-
-      <div class="kpis">
-        <div class="kpi gold">
-          <div class="num"><span class="count" data-target="150">0</span>+</div>
-          <div class="lbl">Ausbildungstage</div>
-        </div>
-        <div class="kpi">
-          <div class="num"><span>6</span></div>
-          <div class="lbl">Branchen (Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität &amp; Vertrieb)</div>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-num">3’500+</div>
+        <div class="kpi-desc">Investierte Stunden in Entwicklung</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="wrap section">
-    <h2>Als Referent &amp; Impulsgeber</h2>
-    <div class="card ring">
-      <p class="muted">
-        Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter.
-      </p>
+<!-- ========== SLOGAN ==========- -->
+<section class="slogan-section">
+  <div class="slogan">
+    <div class="big"><span class="gold">Logik</span> bringt Klarheit.</div>
+    <div class="big"><span class="gold">Emotion</span> bringt Energie.</div>
+    <div class="big"><span class="gold">Beides</span> schafft Wachstum.</div>
+  </div>
+</section>
 
-      <h3 style="color:var(--gold);margin:16px 0 6px">Warum funktioniert das in allen Bereichen der Wirtschaft?</h3>
-      <p class="muted"><strong>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <span style="color:var(--gold)">WARUM</span> dahinter:</strong> den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
-
-      <div class="logo-grid" style="margin-top:10px">
-        <div class="logo"><img src="/assets/logos/ssm.png" alt="SSM Partner"></div>
-        <div class="logo"><img src="/assets/logos/allianz.png" alt="Allianz"></div>
-        <div class="logo"><img src="/assets/logos/properti.png" alt="properti"></div>
-        <div class="logo"><img src="/assets/logos/icm.png" alt="ICM Bau"></div>
+<!-- ========== EINBLICKE / KARUSSELL ==========- -->
+<section class="section">
+  <div class="container carousel-wrap">
+    <div class="carousel-title">Einblicke</div>
+    <div class="slider" id="slider">
+      <button class="nav-btn nav-prev" id="prev" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 6l-6 6 6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="track" id="track">
+        <!-- 12 Bilder -->
+        <div class="slide"><img src="/assets/images/ref1.jpg"  alt="Referat 1"></div>
+        <div class="slide"><img src="/assets/images/ref2.jpg"  alt="Referat 2"></div>
+        <div class="slide"><img src="/assets/images/ref3.jpg"  alt="Referat 3"></div>
+        <div class="slide"><img src="/assets/images/ref4.jpg"  alt="Referat 4"></div>
+        <div class="slide"><img src="/assets/images/ref5.jpg"  alt="Referat 5"></div>
+        <div class="slide"><img src="/assets/images/ref6.jpg"  alt="Referat 6"></div>
+        <div class="slide"><img src="/assets/images/ref7.jpg"  alt="Referat 7"></div>
+        <div class="slide"><img src="/assets/images/ref8.jpg"  alt="Referat 8"></div>
+        <div class="slide"><img src="/assets/images/ref9.jpg"  alt="Referat 9"></div>
+        <div class="slide"><img src="/assets/images/ref10.jpg" alt="Referat 10"></div>
+        <div class="slide"><img src="/assets/images/ref11.jpg" alt="Referat 11"></div>
+        <div class="slide"><img src="/assets/images/ref12.jpg" alt="Referat 12"></div>
       </div>
-
-      <div class="kpis" style="margin-top:16px">
-        <div class="kpi">
-          <div class="num"><span class="count" data-target="500">0</span>+</div>
-          <div class="lbl">Teilnehmende</div>
-        </div>
-        <div class="kpi gold">
-          <div class="num"><span class="count" data-target="3500">0</span>+</div>
-          <div class="lbl">Investierte Stunden in Entwicklung</div>
-        </div>
-      </div>
+      <button class="nav-btn nav-next" id="next" aria-label="Weiter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
+</section>
 
-  <div class="wrap slogan">
-    <h2>
-      <span class="line"><span class="hi">Logik</span> bringt Klarheit.</span>
-      <span class="line"><span class="hi">Emotion</span> bringt Energie.</span>
-      <span class="line"><span class="hi">Beides</span> schafft Wachstum.</span>
-    </h2>
-  </div>
-
-  <div class="wrap section">
-    <h2>Einblicke</h2>
-    <div class="carousel">
-      <div class="slider" id="slider">
-        <button class="arrow left" aria-label="Zurück" id="prev">
-          <svg viewBox="0 0 24 24"><path d="M15.5 19 8.5 12l7-7"/></svg>
-        </button>
-        <div class="track" id="track">
-          <!-- 12 Bilder in deiner Reihenfolge -->
-          <div class="slide"><img src="/assets/images/ref1.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref2.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref3.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref4.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref5.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref6.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref7.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref8.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref9.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref10.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref11.jpg" alt=""></div>
-          <div class="slide"><img src="/assets/images/ref12.jpg" alt=""></div>
-        </div>
-        <button class="arrow right" aria-label="Weiter" id="next">
-          <svg viewBox="0 0 24 24"><path d="M8.5 5 15.5 12l-7 7"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap section">
-    <div class="foot-card">
+<!-- ========== KONTAKT (3 KACHELN) ==========- -->
+<section class="section">
+  <div class="container kontakt-bereich">
+    <article class="kontakt-card">
+      <div class="icon"><span>👨‍👩‍👦</span></div>
       <h3>Privat</h3>
       <p>Verheiratet, 1 Sohn, wohnhaft im Grossraum Zürich.</p>
-      <h3 style="margin-top:10px">Referenzen</h3>
+    </article>
+
+    <article class="kontakt-card">
+      <div class="icon"><span>🧾</span></div>
+      <h3>Referenzen</h3>
       <p>Detaillierte Auskünfte über meine Leistungen werden auf Anfrage gerne vorgelegt.</p>
-      <h3 style="margin-top:10px">Kontakt</h3>
-      <div class="links">
-        <a class="chip" href="mailto:info@dardanibri.com">✉️&nbsp;info@dardanibri.com</a>
-        <a class="chip" href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">in&nbsp;LinkedIn</a>
+    </article>
+
+    <article class="kontakt-card">
+      <div class="icon"><span>✉️</span></div>
+      <h3>Kontakt</h3>
+      <div class="buttons">
+        <a class="btn-chip" href="mailto:info@dardanibri.com">info@dardanibri.com</a>
+        <a class="btn-chip" href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">in LinkedIn</a>
       </div>
-    </div>
+    </article>
   </div>
+</section>
 
-  <footer class="wrap" style="text-align:center;color:#1b2a3a;opacity:.85">
-    © <span id="y"></span> Dardan Ibri
-  </footer>
+<script>
+/* -------- Slider mit Loop, Pfeilen & AutoPlay -------- */
+(function(){
+  const track = document.getElementById('track');
+  const prev  = document.getElementById('prev');
+  const next  = document.getElementById('next');
 
-  <script>
-    // Jahr
-    document.getElementById('y').textContent = new Date().getFullYear();
+  // Klonen für Endlos-Effekt
+  const slides = Array.from(track.children);
+  slides.slice(0,3).forEach(s => track.appendChild(s.cloneNode(true)));
+  slides.slice(-3).forEach(s => track.insertBefore(s.cloneNode(true), track.firstChild));
 
-    // KPI Count-In mit leichter Verzögerung
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          const el = e.target;
-          const target = +el.dataset.target;
-          const dur = 1200; // ms
-          const start = performance.now();
-          const fmt = (n)=> n.toLocaleString('de-CH');
-          function step(t){
-            const p = Math.min(1,(t-start)/dur);
-            const val = Math.floor(target * (0.1 + 0.9*Math.pow(p,0.85)));
-            el.textContent = fmt(val);
-            if(p<1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-          el.classList.add('visible');
-          observer.unobserve(el);
-        }
-      });
-    },{threshold:.6}); // erst ziemlich mittig
-    document.querySelectorAll('.count').forEach(c=>observer.observe(c));
-
-    // Endlos-Carousel (3 sichtbar / 2 / 1) mit Pfeilen, Swipe & Keyboard
-    const track = document.getElementById('track');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-
-    let slides = Array.from(track.children);
-    // Klone für Endlosschleife
-    slides.slice(0,3).forEach(s=>track.appendChild(s.cloneNode(true)));
-    slides.slice(-3).forEach(s=>track.insertBefore(s.cloneNode(true), track.firstChild));
-
-    let idx = 3; // Start nach den Prepend-Klonen
-    const update = ()=> {
-      const slideW = track.querySelector('.slide').getBoundingClientRect().width + 16; // inkl. gap
-      track.style.transform = `translateX(${-idx * slideW}px)`;
-    };
-    window.addEventListener('resize', update);
-    update();
-
+  let index = 3;                      // Start nach den Prepend-Klonen
+  let slideW = track.children[0].getBoundingClientRect().width + 18; // inkl. gap
+  function goto(i, animate=true){
+    if(!animate){ track.style.transition='none'; }
+    else { track.style.transition='transform .45s ease'; }
+    track.style.transform = `translateX(${-i*slideW}px)`;
+  }
+  function normalize(){
     const total = track.children.length;
-    const jumpIfNeeded = ()=>{
-      const real = total - 6; // echte ohne 3+3 Klone
-      if(idx < 3){ idx += real; track.style.transition='none'; update(); requestAnimationFrame(()=>track.style.transition='transform .5s ease'); }
-      if(idx >= 3 + real){ idx -= real; track.style.transition='none'; update(); requestAnimationFrame(()=>track.style.transition='transform .5s ease'); }
-    };
-    const go = (dir)=>{ idx += dir; track.style.transition='transform .5s ease'; update(); setTimeout(jumpIfNeeded, 520); };
+    if(index >= total - 3){ index = 3; goto(index,false); }
+    if(index <= 2){ index = total - 4; goto(index,false); }
+  }
+  function nextSlide(){ index++; goto(index); setTimeout(normalize, 470); }
+  function prevSlide(){ index--; goto(index); setTimeout(normalize, 470); }
 
-    prev.addEventListener('click', ()=>go(-1));
-    next.addEventListener('click', ()=>go(1));
+  goto(index,false);
 
-    // Auto
-    let timer = setInterval(()=>go(1), 4200);
-    const slider = document.getElementById('slider');
-    slider.addEventListener('mouseenter', ()=>clearInterval(timer));
-    slider.addEventListener('mouseleave', ()=>timer = setInterval(()=>go(1), 4200));
+  next.addEventListener('click', nextSlide);
+  prev.addEventListener('click', prevSlide);
 
-    // Swipe
-    let sx = 0, dx = 0;
-    slider.addEventListener('touchstart', e=>{sx=e.touches[0].clientX; dx=0;},{passive:true});
-    slider.addEventListener('touchmove', e=>{dx=e.touches[0].clientX - sx;},{passive:true});
-    slider.addEventListener('touchend', ()=>{
-      if(Math.abs(dx)>40){ go(dx<0?1:-1); }
-    });
+  // AutoPlay (pausiert bei Hover)
+  let timer = setInterval(nextSlide, 3800);
+  const slider = document.getElementById('slider');
+  slider.addEventListener('mouseenter', ()=>clearInterval(timer));
+  slider.addEventListener('mouseleave', ()=>timer = setInterval(nextSlide, 3800));
 
-    // Keyboard
-    slider.setAttribute('tabindex','0');
-    slider.addEventListener('keydown', (e)=>{
-      if(e.key==='ArrowLeft') go(-1);
-      if(e.key==='ArrowRight') go(1);
-    });
-  </script>
+  // Touch/Swipe
+  let startX = 0, dx = 0;
+  slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dx=0; clearInterval(timer); }, {passive:true});
+  slider.addEventListener('touchmove',  e => { dx = e.touches[0].clientX - startX; }, {passive:true});
+  slider.addEventListener('touchend',   () => { if(Math.abs(dx) > 40){ dx<0 ? nextSlide() : prevSlide(); } timer = setInterval(nextSlide, 3800); });
+  window.addEventListener('resize', ()=>{ slideW = track.children[0].getBoundingClientRect().width + 18; goto(index,false); });
+})();
+</script>
+
 </body>
 </html>
