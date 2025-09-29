@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dardan Ibri – Entwickler für Menschen & Business</title>
-  <meta name="description" content="Dardan Ibri – Entwickler für Menschen & Business. Verbindung von Logik und Emotion – für messbares Wachstum.">
+  <meta name="description" content="Dardan Ibri – Verbindung von Logik und Emotion – für messbares Wachstum.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Titel/Untertitel: Poppins, Fliesstext: Lato -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -20,7 +20,7 @@
       --slate:#E6ECF5;
       --muted:#6C7A89;
 
-      --h1:clamp(2.2rem,3.2vw,4rem);
+      --h1:clamp(2.4rem,3.4vw,4.2rem);
       --h2:clamp(1.6rem,2.4vw,2.6rem);
       --h3:clamp(1.2rem,1.6vw,1.6rem);
       --lead:clamp(1.05rem,1.15vw,1.125rem);
@@ -45,18 +45,20 @@
       line-height:1.6; letter-spacing:.2px;
     }
     h1,h2,h3{font-family:"Poppins";margin:0 0 .6rem}
-    h1{font-size:var(--h1);line-height:1.1;letter-spacing:-.5px}
+    h1{font-size:var(--h1);line-height:1.08;letter-spacing:-.5px}
     h2{font-size:var(--h2);line-height:1.2;letter-spacing:-.2px}
     h3{font-size:var(--h3);line-height:1.3}
     p{margin:0 0 1rem;font-size:var(--body)}
     .lead{font-size:var(--lead);opacity:.92}
     .accent-yellow{color:var(--yellow)}
+    .blue{color:var(--royal)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
     .wrap{width:min(1200px,92vw);margin-inline:auto}
 
+    /* NAV */
     header{
       position:sticky;top:0;z-index:50;
       backdrop-filter:saturate(140%) blur(8px);
@@ -67,16 +69,21 @@
     .brand{display:flex;align-items:center;gap:.75rem;font-family:"Poppins";font-weight:700;letter-spacing:.3px}
     .brand-badge{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--royal);color:var(--paper);font-size:.95rem;box-shadow:var(--glow-blue)}
     .menu{display:flex;gap:1.25rem;align-items:center;font-weight:600;font-family:"Poppins";font-size:.95rem}
-    .menu a{opacity:.78;padding:.4rem .6rem;border-radius:10px;transition:opacity var(--speed),background var(--speed),transform var(--speed);overflow:visible}
+    .menu a{opacity:.78;padding:.4rem .6rem;border-radius:10px;transition:opacity var(--speed),background var(--speed),transform var(--speed)}
     .menu a:hover{opacity:1;background:#eff4fb;transform:translateY(-1px)}
     .cta{background:var(--royal);color:var(--paper);padding:.6rem .9rem;border-radius:12px;box-shadow:var(--glow-blue);border:1px solid #163756}
 
+    /* HERO */
     .hero{padding:clamp(48px,9vw,110px) 0 clamp(24px,6vw,70px)}
     .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:min(5vw,60px);align-items:center}
-    .badge{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .65rem;border-radius:999px;background:#EEF5FF;border:1px solid #D9E6F7;color:#103A5C;font-weight:700;font-family:"Poppins";letter-spacing:.2px;font-size:.8rem}
-    .hero h1 span{color:var(--royal)}
+    .badge{
+      display:inline-flex;gap:.6rem;align-items:center;
+      padding:.48rem .9rem;border-radius:14px;
+      background:#EEF5FF;border:1px solid #D9E6F7;color:#103A5C;
+      font-weight:800;font-family:"Poppins";letter-spacing:.2px;font-size:.9rem;
+    }
     .hero .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.1rem;border-radius:14px;font-family:"Poppins";font-weight:600;border:1px solid #1b3f63;background:var(--royal);color:var(--paper);box-shadow:var(--glow-blue);transition:transform var(--speed),box-shadow var(--speed),filter var(--speed);overflow:visible}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.1rem;border-radius:14px;font-family:"Poppins";font-weight:600;border:1px solid #1b3f63;background:var(--royal);color:var(--paper);box-shadow:var(--glow-blue);transition:transform var(--speed),box-shadow var(--speed),filter var(--speed)}
     .btn.secondary{background:var(--paper);color:#173653;border:1px solid #d5e2f2;box-shadow:var(--shadow-soft)}
     .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
     .btn:focus-visible{outline:3px solid rgba(246,201,14,.65);outline-offset:2px}
@@ -91,7 +98,7 @@
     .section-title .dot{width:10px;height:10px;border-radius:999px;background:var(--yellow);box-shadow:var(--glow-yellow)}
     .muted{color:var(--muted)}
 
-    /* Vision & Mission (mit Icon-Badges in den Karten) */
+    /* Vision & Mission */
     .vm{display:grid;grid-template-columns:1fr 1fr;gap:min(3.5vw,36px)}
     .card{background:var(--paper);border:1px solid #E8EEF7;border-radius:var(--radius-xl);padding:clamp(18px,2.2vw,26px);box-shadow:var(--shadow-card);transition:transform var(--speed),box-shadow var(--speed),border-color var(--speed)}
     .card:hover{transform:translateY(-3px)}
@@ -107,8 +114,7 @@
     .vicon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#F2F7FF;border:1px solid #DFEAF7;flex:0 0 40px}
     .vicon svg{width:22px;height:22px;stroke:#1F4E79}
     .value .label{font-family:"Poppins";font-weight:800;font-size:1.12rem;letter-spacing:.1px;margin-bottom:.1rem}
-    /* gelber Akzent nur für den mittleren Wert (Entwicklung) */
-    .werte .value:nth-child(2):hover{box-shadow:var(--glow-yellow)}
+    .werte .value:nth-child(2):hover{box-shadow:var(--glow-yellow)} /* Entwicklung Akzent */
 
     /* Über mich */
     .about{display:grid;grid-template-columns:1.1fr .9fr;gap:min(4vw,48px);align-items:center}
@@ -118,7 +124,7 @@
     /* Heute */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
     .brand-row{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:.6rem}
-    .brand-row img{height:44px;width:auto;filter:grayscale(0)}
+    .brand-logo{height:52px;width:auto;object-fit:contain}
     .subtle{background:#0f2c48;color:var(--paper);border:1px solid #123b60;box-shadow:var(--glow-blue)}
 
     /* KPIs */
@@ -132,13 +138,21 @@
     .kpi .label{font-family:"Poppins";font-weight:700;margin-top:.45rem}
     .kpi p{color:#425466;margin-top:.35rem}
 
-    /* Logos */
-    .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:min(3vw,26px);align-items:center}
-    .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:16px;height:84px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
+    /* Logos (Partner) */
+    .logos{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap:min(3vw,26px);
+      justify-items:center;
+      align-items:center;
+      max-width:1000px;
+      margin-inline:auto;
+    }
+    .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:16px;height:100px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
     .logos .logo:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
-    .logos img{max-height:46px;width:auto;object-fit:contain}
+    .logos img{max-height:52px;width:auto;object-fit:contain}
 
-    /* Slider – contain, damit nichts abgeschnitten wird */
+    /* Slider */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
     .slides{display:flex;transition:transform 700ms ease;will-change:transform}
     .slide{min-width:100%}
@@ -151,7 +165,7 @@
     .dot{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);cursor:pointer}
     .dot.active{background:var(--yellow);box-shadow:var(--glow-yellow)}
 
-    /* Slogan – grösser & mehr Luft */
+    /* Slogan */
     .slogan{ padding: clamp(40px, 8vw, 90px) 0; border-top:1px solid #E6ECF5; border-bottom:1px solid #E6ECF5; text-align:center; background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%) }
     .slogan .quote{ font-family:"Poppins"; font-weight:800; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.33 }
     .quote .line{ display:block; margin: .18em 0 }
@@ -160,7 +174,7 @@
     .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:min(3.2vw,32px)}
     .contact .card{height:100%}
     .list{display:grid;gap:.6rem;margin-top:.6rem}
-    .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;background:#F2F7FF;border:1px solid #D9E6F7;font-family:"Poppins";font-weight:600;font-size:.95rem;line-height:1.25;overflow:visible;white-space:normal}
+    .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;background:#F2F7FF;border:1px solid #D9E6F7;font-family:"Poppins";font-weight:600;font-size:.95rem;line-height:1.25}
     .pill:hover{ box-shadow: 0 0 0 2px rgba(246,201,14,.25) }
 
     footer{border-top:1px solid #E6ECF5;padding:22px 0;color:#5c6a78;font-size:.95rem;background:var(--paper)}
@@ -183,6 +197,7 @@
       .kpis{grid-template-columns:1fr}
       .logos{grid-template-columns:repeat(2,1fr)}
       .menu{display:none}
+      .brand-logo{height:44px}
     }
   </style>
 </head>
@@ -211,7 +226,11 @@
       <div class="fade-in">
         <span class="badge">Entwickler für Menschen &amp; Business</span>
         <div class="sp-xs"></div>
-        <h1>Verbindung von <span>Logik</span> und <span>Emotion</span> – für messbares Wachstum.</h1>
+        <h1>
+          Verbindung von <span class="blue">Logik</span><br>
+          und <span class="blue">Emotion</span> –<br>
+          für messbares <span class="blue">Wachstum</span>.
+        </h1>
         <p class="lead">Strukturen gestalten, Menschen stärken und Klarheit schaffen – damit Unternehmen lebendig, wirksam und skalierbar werden.</p>
         <div class="actions">
           <a class="btn" href="#kontakt">Kontakt aufnehmen</a>
@@ -236,7 +255,6 @@
         <article class="card fade-in" data-theme="blue">
           <h3 class="sr-only">Vision</h3>
           <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
-            <!-- Auge -->
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1F4E79" stroke-width="2" aria-hidden="true">
               <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
               <circle cx="12" cy="12" r="3"></circle>
@@ -249,7 +267,6 @@
         <article class="card fade-in" data-theme="yellow">
           <h3 class="sr-only">Mission</h3>
           <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
-            <!-- Flagge -->
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1F4E79" stroke-width="2" aria-hidden="true">
               <path d="M4 3v18"></path>
               <path d="M4 4h11l-2 3 2 3H4z"></path>
@@ -269,7 +286,6 @@
         <!-- Klarheit -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Bullseye -->
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
               <circle cx="12" cy="12" r="8"></circle>
               <circle cx="12" cy="12" r="3"></circle>
@@ -281,11 +297,9 @@
             <p>Ohne Klarheit keine Richtung.</p>
           </div>
         </div>
-
         <!-- Entwicklung -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Aufwärtspfeil -->
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
               <path d="M4 16l6-6 4 4 6-6"></path>
               <path d="M14 8h6v6"></path>
@@ -296,11 +310,9 @@
             <p>Wachstum entsteht durch Neugier und Mut.</p>
           </div>
         </div>
-
         <!-- Verantwortung -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Schild + Check -->
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
               <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"></path>
               <path d="M9 12l2 2 4-4"></path>
@@ -321,8 +333,7 @@
       <div class="section-title"><span class="dot"></span><h2>Über mich</h2></div>
       <div class="about">
         <div class="fade-in">
-          <p>Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.</p>
-          <p>Mit 27 Jahren erfolgte der Wechsel – von der Entwicklung von Maschinen hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (<strong>NLP Master</strong>) fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen. <br>Nach zwei weiteren Jahren im Vertrieb und einer Weiterbildung im NLP vertiefte sich dieser Ansatz in der Praxis.</p>
+          <p>Gelernter Techniker HF Maschinenbau (Juventus Zürich) mit internationaler Entwicklungserfahrung – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa. Mit 27 Jahren erfolgte der Wechsel: von der Entwicklung von Maschinen hin zur Entwicklung von Menschen und Business. Über zwei Jahre im Vertrieb in der Finanzbranche und mehrere Ausbildungen im Neuro-Linguistischen Programmieren (<strong>NLP Master</strong>) fand sich der Zugang, Logik mit Emotion zu verbinden – und daraus messbare Entwicklung zu schaffen.</p>
 
           <div class="sp-xs"></div>
           <div class="kpis">
@@ -352,20 +363,12 @@
       <div class="heute">
         <article class="card fade-in">
           <h3>Im Unternehmen</h3>
-          <p>Heute setze ich meine Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen ein, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbinde ich strategisches Denken mit emotionaler Intelligenz, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
-          <p>Dies tue ich innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
-
+          <p>Heute kommt Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen zum Einsatz, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbindet sich strategisches Denken mit emotionaler Intelligenz – für nachhaltige, lebendige Veränderungen.</p>
+          <p>Dies geschieht innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
           <div class="brand-row" aria-label="Aktuelle Unternehmen">
-            <div style="display:flex;align-items:center;gap:10px">
-              <img src="assets/logos/mg.png" alt="MG Coaching">
-              <span class="pill">MG Coaching</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px">
-              <img src="assets/logos/evergrow.png" alt="Evergrow">
-              <span class="pill">Evergrow</span>
-            </div>
+            <img class="brand-logo" src="assets/logos/mg.png" alt="MG Coaching">
+            <img class="brand-logo" src="assets/logos/evergrow.png" alt="Evergrow">
           </div>
-
           <div class="sp-xs"></div>
           <div class="kpis">
             <div class="kpi fade-in" data-tone="blue">
@@ -383,9 +386,9 @@
 
         <article class="card subtle fade-in">
           <h3>Als Referent &amp; Impulsgeber</h3>
-          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter.</p>
-          <p>Warum funktioniert das in allen Bereichen der Wirtschaft? Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das WARUM dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
-          <p class="muted" style="color:#d7e6f7">Zusammenarbeit u. a. mit SSM Partner (Broker), Allianz (Versicherung), Properti (Immobilien), ICM Bau (Personalvermittlung) und weiteren.</p>
+          <div class="big-question">Warum funktioniert das in allen Bereichen der Wirtschaft?</div>
+          <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das WARUM dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+          <p class="muted" style="color:#d7e6f7">Zusammenarbeit u. a. mit SSM Partner (heute Wisana), Allianz (Versicherung), Properti (Immobilien), ICM Bau (Personalvermittlung) und weiteren.</p>
 
           <div class="sp-xs"></div>
           <div class="kpis">
@@ -405,7 +408,7 @@
     </div>
   </section>
 
-  <!-- PARTNER-LOGOS (ohne MG/Evergrow, Reihenfolge wie gewünscht) -->
+  <!-- PARTNER-LOGOS -->
   <section id="partner">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner-Logos</h2></div>
@@ -418,7 +421,7 @@
     </div>
   </section>
 
-  <!-- SLOGAN / PHILOSOPHIE -->
+  <!-- SLOGAN -->
   <section class="slogan">
     <div class="wrap">
       <p class="quote">
@@ -429,7 +432,7 @@
     </div>
   </section>
 
-  <!-- EINBLICKE / SLIDER -->
+  <!-- EINBLICKE -->
   <section id="einblicke">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Einblicke</h2></div>
@@ -461,49 +464,42 @@
     </div>
   </section>
 
-  <!-- PRIVAT • REFERENZEN • KONTAKT -->
+  <!-- KONTAKT -->
   <section id="kontakt">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Kontakt</h2></div>
       <div class="contact">
-        <!-- Privat -->
         <div class="card fade-in">
           <h3>Privat</h3>
           <p>Verheiratet, ein Sohn, wohnhaft im Grossraum Zürich.</p>
           <div class="list">
             <span class="pill" aria-label="Wohnort">
-              <!-- Haus-Icon -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2"><path d="M3 10l9-7 9 7"/><path d="M9 22V12h6v10"/></svg>
               Grossraum Zürich
             </span>
           </div>
         </div>
 
-        <!-- Referenzen -->
         <div class="card fade-in">
           <h3>Referenzen</h3>
           <p>Detaillierte Referenzen stelle ich auf Anfrage gerne zur Verfügung.</p>
           <div class="list">
             <span class="pill">
-              <!-- Dokument-Icon -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
               Referenzen auf Anfrage
             </span>
           </div>
         </div>
 
-        <!-- Kontakt -->
         <div class="card fade-in">
           <h3>Zusammenarbeit &amp; Unternehmensentwicklung</h3>
           <p>Für Anfragen zu Referaten, Unternehmensentwicklung oder Zusammenarbeit:</p>
           <div class="list">
             <a class="pill" href="mailto:info@dardanibri.com">
-              <!-- Mail-Icon -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
               info@dardanibri.com
             </a>
             <a class="pill" href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">
-              <!-- LinkedIn-Logo -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#1F4E79" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.98h5V24H0zM8.98 8.98H14v2.05h.07c.7-1.33 2.42-2.74 4.98-2.74C23.6 8.29 24 11.1 24 15.06V24h-5v-8.02c0-1.91-.03-4.36-2.66-4.36-2.66 0-3.07 2.07-3.07 4.22V24H8.98z"/></svg>
               LinkedIn
             </a>
@@ -531,6 +527,7 @@
     }, {threshold:.16});
     document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
 
+    // Slider
     const slides = document.getElementById('slides');
     const slideEls = Array.from(slides.children);
     const prev = document.getElementById('prev');
@@ -538,7 +535,6 @@
     const dotsWrap = document.getElementById('dots');
 
     let idx = 0;
-
     slideEls.forEach((_,i)=>{
       const d=document.createElement('button');
       d.className='dot'+(i===0?' active':'');
