@@ -1,410 +1,535 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dardan Ibri – Entwickler für Menschen & Business</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dardan Ibri – Entwickler für Menschen & Business</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ========== Root / Theme ========== */
+:root{
+  --bg-top:#E9EEF3;          /* Air-Look */
+  --bg-btm:#C7D7E3;
+  --navy-900:#0E2740;
+  --navy-800:#1C2F45;
+  --navy-700:#2A4963;
+  --card:#0F2F4B;            /* dunkles Navy für Karten */
+  --white:#ffffff;
+  --gold:#F6C90E;
+  --gold-900:#DDB200;
+  --muted:#5C7287;
+  --ring:#B9CADA;
+  --shadow:0 12px 30px rgba(17,41,65,0.18);
+  --radius-xl:26px;
+  --radius-lg:20px;
+  --radius-md:16px;
+}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+/* ========== Base ========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--navy-900);
+  background:linear-gradient(180deg,var(--bg-top),var(--bg-btm));
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+.section{padding:72px 0}
+.section--tight{padding:48px 0}
+.h1,.h2,.h3{
+  font-family:Lato, Poppins, sans-serif;
+  line-height:1.1;
+  margin:0 0 16px 0;
+  letter-spacing:0.2px;
+}
+.h1{font-size:clamp(36px,5vw,64px); color:var(--white); font-weight:900}
+.h2{font-size:clamp(28px,3.4vw,42px); color:var(--gold); font-weight:800}
+.h3{font-size:clamp(22px,2.4vw,30px); color:var(--gold); font-weight:800}
+.lead{font-size:clamp(16px,1.7vw,20px); color:var(--navy-800)}
+p{margin:0 0 14px 0}
 
-  <style>
-    :root{
-      --blue-bg:#244C6C;        /* angenehmere, weichere Fläche */
-      --blue-card:#1C3E59;      /* Kachel-Dunkelblau */
-      --blue-soft:#2C5E7F;
-      --gold:#F6C90E;           /* Sonnengelb / Gold */
-      --gold-strong:#FFD21E;    /* etwas kräftiger für Glows */
-      --white:#FFFFFF;
-      --muted:#CFE2F1;
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
-      --shadow-card: 0 10px 30px rgba(0,0,0,.22);
-      --shadow-soft: 0 6px 18px rgba(0,0,0,.18);
-      --glow: 0 0 0px rgba(255,210,30,0), 0 0 24px rgba(255,210,30,.25), 0 0 48px rgba(255,210,30,.15);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--blue-bg);color:var(--white);font-family:Lato, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;scroll-behavior:smooth}
-    h1,h2,h3{font-family:Poppins, sans-serif;margin:0 0 .6rem}
-    h2.section-title{color:var(--gold);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.4rem);letter-spacing:.2px;margin-bottom:1.2rem}
-    p{line-height:1.65;font-size:clamp(1.02rem,1.1vw,1.12rem);margin:.35rem 0 1rem}
-    a{color:var(--muted);text-decoration:none}
-    .container{width:min(1200px,94%);margin:0 auto}
-    .spc{padding:64px 0}
-    .spc-large{padding:88px 0}
-    .stack{display:flex;flex-direction:column;gap:26px}
-    .row{display:grid;gap:22px}
-    @media (min-width:900px){.row-2{grid-template-columns:1fr 1fr}}
-    @media (min-width:1000px){.row-3{grid-template-columns:repeat(3,1fr)}}
+/* utility */
+.m0{margin:0}
+.mt8{margin-top:8px}
+.mt16{margin-top:16px}
+.mt24{margin-top:24px}
+.mt32{margin-top:32px}
+.mt40{margin-top:40px}
+.mb0{margin-bottom:0}
+.grid{display:grid;gap:24px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media (max-width: 960px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+}
 
-    /* HERO */
-    .hero{padding:40px 0 20px}
-    .hero-wrap{display:grid;gap:36px;align-items:center}
-    @media (min-width:980px){.hero-wrap{grid-template-columns:1.05fr .95fr}}
-    .badge{display:inline-block;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.15);padding:6px 12px;border-radius:999px;font-size:.9rem;color:#E7F0F7}
-    .title{font-size:clamp(2rem,4.2vw,3.25rem);line-height:1.15;font-weight:700;margin:.6rem 0 1rem}
-    .subtitle{font-family:Poppins, sans-serif;color:#EAF4FF;opacity:.92}
-    .cta{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap}
-    .btn{
-      background:var(--gold);
-      color:#112;
-      padding:12px 18px;border:none;border-radius:12px;
-      font-family:Poppins, sans-serif;font-weight:600;cursor:pointer;
-      box-shadow:var(--glow);
-      transition:transform .15s ease, box-shadow .2s ease;
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 0 0 rgba(0,0,0,0),0 0 36px rgba(255,210,30,.35)}
-    .portrait{
-      position:relative;background:var(--blue-card);
-      border-radius:var(--radius-xl);padding:18px;box-shadow:var(--shadow-card);
-      clip-path: polygon(0 8%, 6% 0, 100% 0, 100% 92%, 94% 100%, 0 100%); /* modern shape */
-    }
-    .portrait img{
-      display:block;width:100%;height:560px;object-fit:cover;
-      object-position:50% 18%; /* Kopf bleibt sichtbar */
-      border-radius:18px;
-    }
+/* ========== Hero ========== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding: clamp(36px,6vw,72px) 0 clamp(24px,4vw,48px);
+}
+.hero__wrap{
+  display:grid; gap:32px;
+  grid-template-columns: 1.2fr 1fr;
+  align-items:center;
+}
+@media (max-width: 980px){
+  .hero__wrap{grid-template-columns:1fr}
+}
+.hero__title{margin-bottom:8px}
+.hero__subtitle{
+  color:var(--gold);
+  font-family:Lato, Poppins, sans-serif;
+  font-weight:800;
+  font-size:clamp(20px,2.2vw,26px);
+  letter-spacing:0.3px;
+}
+.hero__desc{color:var(--navy-800); max-width:660px}
+.hero__actions{display:flex; gap:16px; margin-top:24px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px; padding:14px 22px; border-radius:14px;
+  border:1px solid transparent; cursor:pointer; transition:.25s ease;
+  font-weight:600; letter-spacing:.2px
+}
+.btn--gold{background:var(--gold); color:var(--navy-900); box-shadow:var(--shadow)}
+.btn--gold:hover{transform:translateY(-1px); filter:brightness(1.02)}
+.btn--ghost{background:transparent; border-color:var(--ring); color:var(--navy-900)}
+.btn--ghost:hover{background:#ffffffaa}
 
-    /* CARD GENERIC */
-    .card{
-      background:var(--blue-card);
-      border-radius:var(--radius-xl);
-      padding:26px 26px;
-      box-shadow:var(--shadow-soft);
-    }
-    .card h3{font-family:Poppins, sans-serif;font-weight:700;margin-bottom:.45rem;font-size:clamp(1.25rem,1.9vw,1.6rem)}
-    .highlight{color:var(--gold)}
+.hero__portrait{
+  position:relative; width:100%; height:540px; border-radius:var(--radius-xl);
+  overflow:hidden; box-shadow:var(--shadow); background:#dfe8f1;
+}
+.hero__img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 10%;
+  transform:scale(1.02);
+  clip-path: polygon(0 6%, 92% 0, 100% 12%, 100% 94%, 8% 100%, 0 88%);
+}
 
-    /* Vision & Mission */
-    .card.mission{background:var(--gold); color:#13223A; box-shadow:var(--glow)}
-    .card.mission h3{color:#13223A}
-    .card.mission p{color:#13223A}
+/* ========== Cards + Halo (ohne Text-Glow) ========== */
+.card{
+  position:relative; padding:22px clamp(18px,2.2vw,26px);
+  border-radius:var(--radius-lg);
+  background:var(--card); color:var(--white);
+  box-shadow:var(--shadow); overflow:visible;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.card--gold{ background:var(--gold); color:var(--navy-900) }
+.card--soft{ background:rgba(255,255,255,0.66); color:var(--navy-900); backdrop-filter:saturate(120%) blur(2px) }
+.card__halo:after{
+  content:""; position:absolute; inset:-8px; border-radius:inherit;
+  pointer-events:none;
+  box-shadow:0 0 0 0 rgba(246,201,14,0);
+  transition:box-shadow .35s ease;
+}
+.card--halo:after{ box-shadow: 0 0 0 2px rgba(246,201,14,.25), 0 12px 36px rgba(14,39,64,.18) }
+.card--halo:hover:after{ box-shadow: 0 0 0 2px rgba(246,201,14,.45), 0 18px 44px rgba(14,39,64,.26) }
 
-    /* Werte */
-    .values{display:grid;gap:20px}
-    @media (min-width:1000px){.values{grid-template-columns:repeat(3,1fr)}}
-    .value{
-      display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;
-      padding:26px 26px 22px;border-radius:var(--radius-xl);background:var(--blue-card);
-      transition:transform .18s ease, box-shadow .2s ease;
-    }
-    .value:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(0,0,0,.28)}
-    .value.yellow{background:var(--gold);color:#13223A;box-shadow:var(--glow)}
-    .value.yellow h4{color:#13223A}
-    .value h4{font-family:Poppins, sans-serif;margin:.1rem 0 .35rem;font-size:clamp(1.25rem,1.8vw,1.55rem)}
-    .value p{margin:0;color:#E6F0F8}
-    .value.yellow p{color:#203045}
-    .icon-wrap{
-      width:54px;height:54px;border-radius:999px;background:radial-gradient(ellipse at 40% 35%, #FFE37A, var(--gold));
-      display:grid;place-items:center;box-shadow:0 6px 14px rgba(0,0,0,.25), 0 0 18px rgba(255,210,30,.35);
-      flex-shrink:0;
-    }
-    .icon-wrap svg{width:28px;height:28px;stroke:#fff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+/* Titel in Karten */
+.card .title{ font-family:Lato; font-weight:900; letter-spacing:.3px; margin:0 0 8px 0; }
+.card .title--white{ color:var(--white) }
+.card .title--navy{ color:var(--navy-900) }
 
-    /* Logos */
-    .logos{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
-    .logos img{height:54px;filter:brightness(1) contrast(1.1);}
-    .logos .small{height:46px}
-    .logos.center{justify-content:flex-start}
-    .partners{display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
-    @media(min-width:900px){.partners{grid-template-columns:repeat(4,1fr)}}
-    .partner{background:rgba(0,0,0,.15);border-radius:18px;display:grid;place-items:center;padding:18px}
-    .partner img{max-width:180px;max-height:64px;filter:grayscale(100%) brightness(1.15) contrast(1.2);opacity:.95}
-    .partner:hover img{filter:grayscale(0%) brightness(1) contrast(1);opacity:1;transition:filter .22s ease}
+/* ========== Vision & Mission (ohne globalen Sektions-Titel) ========== */
+.vm{display:grid; gap:24px; grid-template-columns:1fr 1fr}
+@media (max-width: 960px){ .vm{grid-template-columns:1fr} }
 
-    /* KPIs */
-    .kpis{display:grid;gap:18px}
-    @media(min-width:900px){.kpis{grid-template-columns:repeat(4,1fr)}}
-    .kpi{
-      background:var(--blue-card);
-      padding:22px;border-radius:22px;text-align:center;box-shadow:var(--shadow-soft), var(--glow);
-      position:relative;overflow:hidden;
-    }
-    .kpi .num{font-family:Poppins, sans-serif;font-weight:700;color:var(--gold);font-size:clamp(1.6rem,2.6vw,2rem)}
-    .kpi p{margin:.25rem 0 0;color:#E6F0F8}
-    .kpi::after{
-      content:"";position:absolute;inset:-60% -60% auto auto;width:140px;height:140px;border-radius:50%;
-      background:radial-gradient(circle, rgba(255,210,30,.33), rgba(255,210,30,0));
-      animation:glow 4.8s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes glow{to{transform:translate(-12px,10px) scale(1.1)}}
+/* ========== Werte ========== */
+.values{margin-top:8px}
+.value{
+  display:grid; grid-template-columns:auto 1fr; align-items:baseline; gap:16px;
+  padding:24px 24px 22px;
+}
+.value--gold{ background:var(--gold); color:var(--navy-900) }
+.value__icon{
+  width:54px; height:54px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.1);
+  border:2px solid var(--gold);
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,.06);
+}
+.value--gold .value__icon{ border-color:var(--navy-900); background:rgba(255,255,255,.16) }
+.value__title{ font-family:Lato; font-size:28px; font-weight:900; margin:0 0 6px 0 }
+.value__text{ color:rgba(255,255,255,.92) }
+.value--gold .value__text{ color:var(--navy-900) }
 
-    /* Slogan */
-    .slogan{font-family:Poppins, sans-serif;font-weight:700;line-height:1.25;
-      font-size:clamp(1.6rem,3.6vw,2.3rem);
-    }
-    .slogan .gold{color:var(--gold)}
-    .slogan-wrap{padding:34px 0 18px}
+/* ========== Heute / Logos ========== */
+.partner-logos{
+  display:flex; gap:28px; align-items:center; flex-wrap:wrap; margin-top:14px
+}
+.partner-logos img{
+  height:52px; width:auto; filter:none; opacity:.96;
+}
+.partner-logos .is-small{ height:46px }
+.partner-logos .is-tall{ height:58px }
 
-    /* Carousel (Einblicke) */
-    .carousel-section{padding:18px 0 70px}
-    .carousel-outer{
-      background:rgba(0,0,0,.14);border:1px solid rgba(255,255,255,.05);border-radius:26px;padding:18px;
-      box-shadow:var(--shadow-soft)
-    }
-    .carousel{
-      display:grid;grid-auto-flow:column;grid-auto-columns:calc(100% - 8px);
-      gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth;
-    }
-    .carousel::-webkit-scrollbar{display:none}
-    @media(min-width:760px){.carousel{grid-auto-columns:calc(50% - 10px)}}
-    @media(min-width:1080px){.carousel{grid-auto-columns:calc(33.333% - 12px)}}
-    .slide{
-      scroll-snap-align:center;background:var(--blue-card);border-radius:24px;overflow:hidden;position:relative;
-      clip-path: polygon(0 8%, 6% 0, 100% 0, 100% 92%, 94% 100%, 0 100%);
-      box-shadow:var(--shadow-card);
-    }
-    .slide img{display:block;width:100%;height:360px;object-fit:cover}
-    .car-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
-    .nav-btn{
-      background:rgba(255,255,255,.1);backdrop-filter: blur(3px);
-      border:1px solid rgba(255,255,255,.18);color:#fff;width:40px;height:40px;border-radius:12px;cursor:pointer;
-    }
-    .nav-btn:hover{background:rgba(255,255,255,.18)}
+/* ========== KPIs integriert ========== */
+.kpis{display:grid; gap:18px; grid-template-columns:repeat(2,1fr); margin-top:18px}
+.kpi{
+  position:relative; padding:18px 20px; border-radius:18px;
+  background:rgba(255,255,255,0.78); color:var(--navy-900);
+  box-shadow:var(--shadow); border:1px solid rgba(12,31,51,.06);
+}
+.kpi.gold{ background:var(--gold); color:var(--navy-900) }
+.kpi:after{
+  content:""; position:absolute; inset:-7px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 2px rgba(246,201,14,.30);
+}
+.kpi__num{ font-family:Lato; font-weight:900; font-size:34px; line-height:1; margin-bottom:6px }
+.kpi__label{ color:var(--navy-800) }
+.kpi.gold .kpi__label{ color:#2a2a2a }
+@media (max-width: 720px){ .kpis{grid-template-columns:1fr} }
 
-    /* reveal effects */
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.show{opacity:1;transform:none}
+/* ========== Slogan ========== */
+.slogan{
+  font-family:Lato; font-weight:900; letter-spacing:.2px;
+  font-size:clamp(26px,3vw,34px);
+}
+.slogan b{ color:var(--gold) }
 
-    footer{padding:40px 0 70px;color:#CFE2F1}
-  </style>
+/* ========== Carousel ========== */
+.carousel{ position:relative }
+.track{
+  display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px;
+}
+.track::-webkit-scrollbar{height:8px}
+.track::-webkit-scrollbar-thumb{background:#b8c7d4;border-radius:20px}
+.slide{
+  flex:0 0 calc(33.333% - 12px); scroll-snap-align:start; border-radius:22px;
+  overflow:hidden; position:relative; box-shadow:var(--shadow); background:#cfdbe7;
+  min-height: 320px;
+  clip-path: polygon(0 7%, 92% 0, 100% 10%, 100% 93%, 8% 100%, 0 88%);
+}
+.slide img{ width:100%; height:100%; object-fit:cover }
+@media (max-width: 1100px){ .slide{flex-basis: calc(50% - 10px)} }
+@media (max-width: 700px){ .slide{flex-basis: 100%} }
+.nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:42px; height:42px; border-radius:50%;
+  background:rgba(14,39,64,.75); color:#fff; border:none; cursor:pointer;
+  display:grid; place-items:center; box-shadow:var(--shadow)
+}
+.nav:hover{ background:rgba(14,39,64,.92) }
+.nav--prev{ left:-10px } .nav--next{ right:-10px }
+
+/* ========== Abschluss-Triple ========== */
+.triple{ display:grid; gap:22px; grid-template-columns:repeat(3,1fr) }
+@media (max-width: 980px){ .triple{ grid-template-columns:1fr } }
+.triple .card{ background:#fff; color:var(--navy-900) }
+.badge{
+  display:inline-flex; align-items:center; gap:10px; padding:8px 12px;
+  border-radius:999px; border:1px solid #d8e3ec; background:#f8fbfd; color:#1c2f45; font-weight:600;
+}
+
+/* ========== Footer ========== */
+.footer{ padding:36px 0 48px; color:#334d66; text-align:center }
+.footer a{ color:#0E2740; font-weight:600; border-bottom:1px solid #9fb4c8 }
+.footer a:hover{ color:#0b2138 }
+
+/* small helpers for svg icons */
+.svg{width:28px;height:28px}
+.svg--lg{width:30px;height:30px}
+</style>
 </head>
 <body>
 
-  <!-- ===== HERO ===== -->
-  <header class="hero container">
-    <div class="hero-wrap">
-      <div>
-        <span class="badge">Dardan Ibri</span>
-        <h1 class="title">Entwickler für Menschen&nbsp;&amp;&nbsp;Business</h1>
-        <p class="subtitle">Logische Struktur &amp; echte Emotion – für messbares Wachstum.</p>
-        <div class="cta">
-          <a class="btn" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
-          <a class="btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#EAF4FF;box-shadow:none" href="#einblicke">Einblicke ansehen</a>
-        </div>
-      </div>
-
-      <div class="portrait reveal">
-        <img src="/assets/images/dardan-hero.jpg" alt="Dardan Ibri – Portrait">
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container hero__wrap">
+    <div>
+      <h1 class="h1 hero__title">Dardan Ibri</h1>
+      <div class="hero__subtitle">Entwickler für Menschen &amp; Business</div>
+      <p class="lead hero__desc mt16">
+        Struktur, Strategie und Bewusstsein – klar gedacht, menschlich umgesetzt.  
+        Ich verbinde Logik mit Emotion, damit Entwicklung <em>messbar</em> und <em>lebendig</em> wird.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--gold" href="mailto:info@dardanibri.com">Kontakt aufnehmen</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">LinkedIn ansehen</a>
       </div>
     </div>
-  </header>
 
-  <main>
+    <div class="hero__portrait">
+      <img class="hero__img" src="assets/images/dardan-hero.jpg" alt="Dardan Ibri Portrait">
+    </div>
+  </div>
+</header>
 
-    <!-- ===== VISION & MISSION ===== -->
-    <section class="container spc">
-      <h2 class="section-title">Vision &amp; Mission</h2>
-      <div class="row row-2">
-        <article class="card reveal">
-          <h3>Vision</h3>
-          <p>Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
-        </article>
-        <article class="card mission reveal">
-          <h3>Mission</h3>
-          <p>Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.</p>
-        </article>
-      </div>
-    </section>
+<!-- ================= VISION & MISSION (ohne globalen Titel) ================= -->
+<section class="section section--tight">
+  <div class="container vm">
+    <article class="card card--halo">
+      <h3 class="title title--white">Vision</h3>
+      <p class="lead">
+        Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.
+      </p>
+    </article>
 
-    <!-- ===== WERTE ===== -->
-    <section class="container spc" id="werte">
-      <h2 class="section-title">Werte</h2>
-      <div class="values">
-        <!-- Klarheit -->
-        <div class="value reveal">
-          <div class="icon-wrap" aria-hidden="true">
-            <!-- Kompass -->
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="7"></circle>
-              <path d="M10 14l4-2 2-4-4 2-2 4z"></path>
-              <circle cx="12" cy="12" r="1.2" fill="#fff"></circle>
-            </svg>
-          </div>
-          <div>
-            <h4>Klarheit</h4>
-            <p>Ohne Klarheit keine Richtung.</p>
-          </div>
+    <article class="card card--gold card--halo">
+      <h3 class="title title--navy">Mission</h3>
+      <p class="lead">
+        Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum zu führen.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= WERTE ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="h2">Werte</h2>
+
+    <div class="grid grid-3 values mt24">
+      <!-- Klarheit (navy) -->
+      <article class="card value card--halo">
+        <div class="value__icon" aria-hidden="true">
+          <!-- Icon: Focus/Bullseye im Kreis -->
+          <svg class="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="var(--gold)" stroke-width="3"/>
+            <circle cx="24" cy="24" r="4" fill="var(--gold)"/>
+          </svg>
         </div>
-        <!-- Entwicklung (permanent gelb) -->
-        <div class="value yellow reveal">
-          <div class="icon-wrap" aria-hidden="true">
-            <!-- Level-Up -->
-            <svg viewBox="0 0 24 24">
-              <polyline points="6,14 11,9 13.5,11.5 18,7"></polyline>
-              <polyline points="18,7 18,12 13,12"></polyline>
-            </svg>
-          </div>
-          <div>
-            <h4>Entwicklung</h4>
-            <p>Wachstum entsteht durch Neugier und Mut.</p>
-          </div>
-        </div>
-        <!-- Verantwortung -->
-        <div class="value reveal">
-          <div class="icon-wrap" aria-hidden="true">
-            <!-- Commitment / Verbundene Haken (wie Hände) -->
-            <svg viewBox="0 0 24 24">
-              <path d="M7 13c1.5-1.5 3.5-1.5 5 0l.5.5"></path>
-              <path d="M17 11c-1.5 1.5-3.5 1.5-5 0l-.5-.5"></path>
-              <path d="M8.2 15.2l3.8 3.8 3.8-3.8"></path>
-            </svg>
-          </div>
-          <div>
-            <h4>Verantwortung</h4>
-            <p>Erfolg ist das Resultat bewusster Entscheidungen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== ÜBER MICH ===== -->
-    <section class="container spc" id="ueber">
-      <h2 class="section-title">Über mich</h2>
-      <div class="card reveal">
-        <p>Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.</p>
-        <p>Mit <strong>27 Jahren</strong> entschied ich mich, meinen bekannten Weg zu verlassen. Weg von der Entwicklung von Maschinen – hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (NLP Practitioner &amp; Master) fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen.</p>
-      </div>
-    </section>
-
-    <!-- ===== HEUTE – IM UNTERNEHMEN (untereinander) ===== -->
-    <section class="container spc-large" id="heute">
-      <h2 class="section-title">Heute – im Unternehmen</h2>
-      <article class="card reveal">
-        <p>Heute setze ich meine Erfahrung in <strong>Vertrieb, Referaten und gezielten Ausbildungen</strong> ein, um Unternehmen in ihrer <strong>Struktur-, Prozess- und Teamentwicklung</strong> aktiv mitzugestalten. Dabei verbinde ich <strong>strategisches Denken</strong> mit <strong>emotionaler Intelligenz</strong>, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
-        <p><em>Innerhalb der Unternehmen:</em> MG Coaching (Personal- &amp; Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
-        <div class="logos center" style="margin-top:10px">
-          <img src="/assets/logos/mg.png" alt="MG Coaching Logo" style="height:56px">
-          <img src="/assets/logos/evergrow.png" alt="Evergrow Logo" style="height:56px">
+        <div>
+          <h3 class="value__title">Klarheit</h3>
+          <p class="value__text">Ohne Klarheit keine Richtung.</p>
         </div>
       </article>
-    </section>
 
-    <!-- ===== ALS REFERENT & IMPULSGEBER ===== -->
-    <section class="container spc" id="referent">
-      <h2 class="section-title">Als Referent &amp; Impulsgeber</h2>
-      <article class="card reveal">
-        <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über <strong>vier Jahren</strong> an Kunden und Partner aus verschiedensten Branchen weiter.</p>
-        <h3 style="color:var(--gold);margin-top:.2rem">Warum funktioniert das in allen Bereichen der Wirtschaft?</h3>
-        <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <strong>WARUM</strong> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+      <!-- Entwicklung (bleibt gold) -->
+      <article class="card value value--gold card--halo">
+        <div class="value__icon" aria-hidden="true">
+          <!-- Icon: Level-Up / Aufwärtspfeil im Kreis (dunkel) -->
+          <svg class="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="var(--navy-900)" stroke-width="3"/>
+            <path d="M16 28l8-8 8 8" stroke="var(--navy-900)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 20v12" stroke="var(--navy-900)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="value__title">Entwicklung</h3>
+          <p class="value__text">Wachstum entsteht durch Neugier und Mut.</p>
+        </div>
       </article>
 
-      <div class="stack" style="margin-top:16px">
-        <h3 class="section-title" style="margin:0">Zusammenarbeit u. a. mit</h3>
-        <div class="partners reveal">
-          <div class="partner"><img src="/assets/logos/ssm.png" alt="SSM Partner"></div>
-          <div class="partner"><img src="/assets/logos/allianz.png" alt="Allianz"></div>
-          <div class="partner"><img src="/assets/logos/properti.png" alt="Properti"></div>
-          <div class="partner"><img src="/assets/logos/icm.png" alt="ICM Bau"></div>
+      <!-- Verantwortung (navy) -->
+      <article class="card value card--halo">
+        <div class="value__icon" aria-hidden="true">
+          <!-- Icon: zwei ineinandergreifende Haken/Hände -->
+          <svg class="svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="var(--gold)" stroke-width="3"/>
+            <path d="M16 26l6 6 12-12" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="value__title">Verantwortung</h3>
+          <p class="value__text">Erfolg ist das Resultat bewusster Entscheidungen.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HEUTE – IM UNTERNEHMEN ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="h2">Heute – im Unternehmen</h2>
+    <article class="card card--halo mt16">
+      <p class="lead">
+        Heute setze ich meine Erfahrung in <b>Vertrieb, Referaten</b> und <b>gezielten Ausbildungen</b> ein,
+        um Unternehmen in ihrer <b>Struktur-, Prozess- und Teamentwicklung</b> aktiv mitzugestalten.
+        Dabei verbinde ich <b>strategisches Denken</b> mit <b>emotionaler Intelligenz</b>, um nachhaltige
+        und lebendige Veränderungen zu ermöglichen.
+      </p>
+      <p class="lead mt16">
+        <em>Innerhalb der Unternehmen:</em> <b>MG Coaching</b> (Personal- &amp; Business-Coaching)
+        und <b>Evergrow</b> (Vertrieb &amp; Wachstum).
+      </p>
+
+      <!-- Logos MG / Evergrow – vereinheitlicht -->
+      <div class="partner-logos mt24">
+        <img class="is-small" src="assets/logos/mg.png" alt="MG Coaching Logo">
+        <img src="assets/logos/evergrow.png" alt="Evergrow Logo">
+      </div>
+
+      <!-- Integrierte KPIs (2 oben) -->
+      <div class="kpis mt24">
+        <div class="kpi gold">
+          <div class="kpi__num" data-count="150">150+</div>
+          <div class="kpi__label">Ausbildungstage</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num" data-count="6">6</div>
+          <div class="kpi__label">Branchen (Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität &amp; Vertrieb)</div>
         </div>
       </div>
-    </section>
+    </article>
+  </div>
+</section>
 
-    <!-- ===== KPIs ===== -->
-    <section class="container spc" id="zahlen">
-      <h2 class="section-title">Kennzahlen &amp; Wirkung</h2>
-      <div class="kpis reveal">
-        <div class="kpi"><div class="num" data-count="150">150+</div><p>Ausbildungstage</p></div>
-        <div class="kpi"><div class="num" data-count="6">6</div><p>Branchen (Finanzen &amp; Versicherung, Coaching, Personalvermittlung, Immobilien, Vitalität, Vertrieb)</p></div>
-        <div class="kpi"><div class="num" data-count="500">500+</div><p>Teilnehmende</p></div>
-        <div class="kpi"><div class="num" data-count="3500">3500+</div><p>Investierte Stunden in Entwicklung</p></div>
+<!-- ================= ALS REFERENT & IMPULSGEBER ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="h2">Als Referent &amp; Impulsgeber</h2>
+    <article class="card card--halo mt16">
+      <p class="lead">
+        Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse
+        gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter.
+      </p>
+
+      <h3 class="h3 mt24">Warum funktioniert das in allen Bereichen der Wirtschaft?</h3>
+      <p class="lead mt8">
+        Weil es nie allein um das Produkt oder die Dienstleistung geht –
+        sondern um das <b>WARUM</b> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.
+      </p>
+
+      <!-- Partnerlogos (gleichhoch) -->
+      <div class="partner-logos mt24" aria-label="Auswahl an Partnern">
+        <img src="assets/logos/ssm.png" alt="SSM Partner">
+        <img class="is-small" src="assets/logos/allianz.png" alt="Allianz">
+        <img src="assets/logos/properti.png" alt="Properti">
+        <img class="is-tall" src="assets/logos/icm.png" alt="ICM Bau">
       </div>
-    </section>
 
-    <!-- ===== SLOGAN (vor Einblicke) ===== -->
-    <section class="container slogan-wrap">
-      <div class="slogan reveal">
-        <span class="gold">Logik</span> bringt Klarheit. <span class="gold">Emotion</span> bringt Energie. <span class="gold">Beides</span> schafft Wachstum.
-      </div>
-    </section>
-
-    <!-- ===== EINBLICKE – CAROUSEL ===== -->
-    <section class="container carousel-section" id="einblicke">
-      <h2 class="section-title">Einblicke</h2>
-      <div class="carousel-outer reveal">
-        <div class="carousel" id="carousel">
-          <!-- 12 Slides -->
-          <figure class="slide"><img src="/assets/images/ref1.jpg" alt="Training & Vortrag – 1"></figure>
-          <figure class="slide"><img src="/assets/images/ref2.jpg" alt="Training & Vortrag – 2"></figure>
-          <figure class="slide"><img src="/assets/images/ref3.jpg" alt="Training & Vortrag – 3"></figure>
-          <figure class="slide"><img src="/assets/images/ref4.jpg" alt="Training & Vortrag – 4"></figure>
-          <figure class="slide"><img src="/assets/images/ref5.jpg" alt="Training & Vortrag – 5"></figure>
-          <figure class="slide"><img src="/assets/images/ref6.jpg" alt="Training & Vortrag – 6"></figure>
-          <figure class="slide"><img src="/assets/images/ref7.jpg" alt="Training & Vortrag – 7"></figure>
-          <figure class="slide"><img src="/assets/images/ref8.jpg" alt="Training & Vortrag – 8"></figure>
-          <figure class="slide"><img src="/assets/images/ref9.jpg" alt="Training & Vortrag – 9"></figure>
-          <figure class="slide"><img src="/assets/images/ref10.jpg" alt="Training & Vortrag – 10"></figure>
-          <figure class="slide"><img src="/assets/images/ref11.jpg" alt="Training & Vortrag – 11"></figure>
-          <figure class="slide"><img src="/assets/images/ref12.jpg" alt="Training & Vortrag – 12"></figure>
+      <!-- Integrierte KPIs (2 unten) -->
+      <div class="kpis mt24">
+        <div class="kpi">
+          <div class="kpi__num" data-count="500">500+</div>
+          <div class="kpi__label">Teilnehmende</div>
         </div>
-        <div class="car-nav">
-          <button class="nav-btn" id="prev" aria-label="Zurück">‹</button>
-          <button class="nav-btn" id="next" aria-label="Weiter">›</button>
+        <div class="kpi gold">
+          <div class="kpi__num" data-count="3500">3500+</div>
+          <div class="kpi__label">Investierte Stunden in Entwicklung</div>
         </div>
       </div>
-    </section>
+    </article>
+  </div>
+</section>
 
-  </main>
+<!-- ================= SLOGAN ================= -->
+<section class="section section--tight">
+  <div class="container">
+    <p class="slogan">
+      <b>Logik</b> bringt Klarheit. <b>Emotion</b> bringt Energie. Beides erzeugt Wachstum.
+    </p>
+  </div>
+</section>
 
-  <footer class="container">
-    <p>Kontakt: <a href="mailto:info@dardanibri.com">info@dardanibri.com</a></p>
-    <p>© <span id="y"></span> Dardan Ibri</p>
-  </footer>
+<!-- ================= EINBLICKE (Karussell) ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="h2">Einblicke</h2>
+    <div class="carousel mt16">
+      <button class="nav nav--prev" aria-label="Zurück" title="Zurück">‹</button>
+      <div class="track" id="track">
+        <div class="slide"><img src="assets/images/ref1.jpg"  alt="Training / Vortrag 1"></div>
+        <div class="slide"><img src="assets/images/ref8.jpg"  alt="Training / Vortrag 2"></div>
+        <div class="slide"><img src="assets/images/ref3.jpg"  alt="Training / Vortrag 3"></div>
+        <div class="slide"><img src="assets/images/ref4.jpg"  alt="Training / Vortrag 4"></div>
+        <div class="slide"><img src="assets/images/ref9.jpg"  alt="Training / Vortrag 5"></div>
+        <div class="slide"><img src="assets/images/ref2.jpg"  alt="Training / Vortrag 6"></div>
+        <div class="slide"><img src="assets/images/ref5.jpg"  alt="Training / Vortrag 7"></div>
+        <div class="slide"><img src="assets/images/ref11.jpg" alt="Training / Vortrag 8"></div>
+        <div class="slide"><img src="assets/images/ref6.jpg"  alt="Training / Vortrag 9"></div>
+        <div class="slide"><img src="assets/images/ref12.jpg" alt="Training / Vortrag 10"></div>
+        <div class="slide"><img src="assets/images/ref7.jpg"  alt="Training / Vortrag 11"></div>
+        <div class="slide"><img src="assets/images/ref10.jpg" alt="Training / Vortrag 12"></div>
+      </div>
+      <button class="nav nav--next" aria-label="Weiter" title="Weiter">›</button>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Jahr
-    document.getElementById('y').textContent = new Date().getFullYear();
+<!-- ================= ABSCHLUSS: PRIVAT / REFERENZEN / KONTAKT ================= -->
+<section class="section">
+  <div class="container">
+    <div class="triple">
+      <article class="card card--halo">
+        <span class="badge">
+          <svg class="svg--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l9-7 9 7v8a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2V13H8v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8z"/></svg>
+          Privat
+        </span>
+        <p class="lead mt16">Verheiratet, 1 Sohn, wohnhaft im Grossraum Zürich.</p>
+      </article>
 
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('show');
-          io.unobserve(e.target);
-        }
-      })
-    },{threshold:.2});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      <article class="card card--halo">
+        <span class="badge">
+          <svg class="svg--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h8"/></svg>
+          Referenzen
+        </span>
+        <p class="lead mt16">Detaillierte Auskünfte über meine Leistungen werden auf Anfrage gerne vorgelegt.</p>
+      </article>
 
-    // KPI Count-up
-    const nums = document.querySelectorAll('.kpi .num');
-    const io2 = new IntersectionObserver((entries)=>{
-      entries.forEach(ent=>{
-        if(ent.isIntersecting){
-          const el = ent.target;
-          const target = +el.dataset.count;
-          const plus = el.textContent.trim().endsWith('+');
-          let cur = 0;
-          const step = Math.max(1, Math.round(target/40));
-          const t = setInterval(()=>{
-            cur += step;
-            if(cur >= target){cur = target; clearInterval(t);}
-            el.textContent = cur.toLocaleString('de-CH') + (plus?'+':'');
-          }, 28);
-          io2.unobserve(el);
-        }
-      })
-    },{threshold:.5});
-    nums.forEach(n=>io2.observe(n));
+      <article class="card card--halo">
+        <span class="badge">
+          <svg class="svg--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3 7.18 2 2 0 0 1 5 5h4.09a2 2 0 0 1 2 1.72l.57 3.42a2 2 0 0 1-.55 1.82l-1.27 1.27a16 16 0 0 0 6.88 6.88l1.27-1.27a2 2 0 0 1 1.82-.55l3.42.57A2 2 0 0 1 22 16.92z"/></svg>
+          Kontakt
+        </span>
+        <p class="lead mt16">
+          Gerne direkt melden: <br>
+          📞 <a href="tel:+41786668634">+41 78 666 86 34</a><br>
+          📧 <a href="mailto:info@dardanibri.com">info@dardanibri.com</a>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    // Carousel
-    const car = document.getElementById('carousel');
-    const next = document.getElementById('next');
-    const prev = document.getElementById('prev');
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <p class="mb0">© <span id="y"></span> Dardan Ibri ·
+      <a href="https://www.linkedin.com/in/dardan-ibri-3988591b4/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </div>
+</footer>
 
-    function scrollByOne(dir=1){
-      const w = car.querySelector('.slide').clientWidth + 16; // item + gap
-      car.scrollBy({left: dir*w, behavior:'smooth'});
-    }
-    next.addEventListener('click', ()=>scrollByOne(1));
-    prev.addEventListener('click', ()=>scrollByOne(-1));
+<script>
+/* Jahr */
+document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Autoplay (pausiert bei Hover)
-    let timer = setInterval(()=>scrollByOne(1), 3500);
-    car.addEventListener('mouseenter', ()=>clearInterval(timer));
-    car.addEventListener('mouseleave', ()=>{timer = setInterval(()=>scrollByOne(1), 3500);});
-  </script>
+/* Count-up KPI when visible */
+const counters=[...document.querySelectorAll('.kpi__num')];
+const opts={threshold:.4};
+const obs=new IntersectionObserver((ents,observer)=>{
+  ents.forEach(ent=>{
+    if(!ent.isIntersecting) return;
+    const el=ent.target;
+    const target=Number(el.getAttribute('data-count'));
+    let cur=0;
+    const step=Math.max(1, Math.round(target/60));
+    const inc=()=>{ cur+=step; if(cur>=target){ el.textContent=target.toLocaleString('de-CH') + (el.textContent.includes('+') || el.dataset.plus ? '+' : ''); return; }
+      el.textContent=cur.toLocaleString('de-CH') + (el.textContent.includes('+') ? '+' : '');
+      requestAnimationFrame(inc);
+    };
+    inc();
+    observer.unobserve(el);
+  });
+},opts);
+counters.forEach(c=>obs.observe(c));
+
+/* Carousel */
+const track=document.getElementById('track');
+const prev=document.querySelector('.nav--prev');
+const next=document.querySelector('.nav--next');
+function scrollBySlides(dir=1){
+  const slide=track.querySelector('.slide');
+  if(!slide) return;
+  const gap=18;
+  const width=slide.getBoundingClientRect().width+gap;
+  track.scrollBy({left: dir*width, behavior:'smooth'});
+}
+prev.addEventListener('click',()=>scrollBySlides(-1));
+next.addEventListener('click',()=>scrollBySlides(1));
+let auto=setInterval(()=>scrollBySlides(1), 4800);
+track.addEventListener('pointerdown',()=>clearInterval(auto));
+</script>
 </body>
 </html>
