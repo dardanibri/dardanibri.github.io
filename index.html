@@ -158,7 +158,7 @@
       background:var(--paper);
       border:1px solid #E6ECF5;
       border-radius:14px;
-      padding:16px;
+      padding:12px;               /* ↓ von 16px auf 12px */
       aspect-ratio: 5 / 3;
       width:100%;
       max-width: 320px;
@@ -171,14 +171,14 @@
 
     /* Bild: Limits (Desktop & Mobile) */
     :root{
-      --logo-h-desktop: 100px;  /* ↑ größer: nur Inhalt wächst */
+      --logo-h-desktop: 140px;   /* ↑ größer: nur Inhalt wächst */
       --logo-h-mobile:  72px;
     }
     .logos .logo img{
       width:auto;
       height:auto;
-      max-height: min(var(--logo-h-desktop), 78%);
-      max-width: 96%;            /* ↑ etwas mehr als 92% */
+      max-height: min(var(--logo-h-desktop), 90%); /* ↑ von 78% auf 90% */
+      max-width: 96%;
       object-fit: contain;
     }
 
@@ -451,7 +451,6 @@
           <h3>Als Referent &amp; Impulsgeber</h3>
           <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit <strong>mehreren Jahren</strong> an Kunden und Partnern aus verschiedensten Branchen weiter.</p>
 
-          <!-- Frage: gelb & größer -->
           <div class="big-question" style="color:var(--yellow);font-family:'Poppins';font-weight:800;font-size:clamp(1.3rem,2.8vw,2rem);margin:12px 0 10px;">
             Warum funktioniert das in allen Bereichen der Wirtschaft?
           </div>
@@ -539,7 +538,7 @@
   <section id="kontakt">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Kontakt</h2></div>
-      <div class="contact">
+    <div class="contact">
         <div class="card fade-in">
           <h3>Privat</h3>
           <p>Verheiratet, ein Sohn, wohnhaft im Grossraum Zürich.</p>
