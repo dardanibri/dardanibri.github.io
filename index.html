@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dardan Ibri – Entwickler für Menschen & Business</title>
-  <meta name="description" content="Dardan Ibri – Entwickler für Menschen & Business. Logik + Emotion = nachhaltiges Wachstum.">
+  <meta name="description" content="Dardan Ibri – Entwickler für Menschen & Business. Verbindung von Logik und Emotion – für messbares Wachstum.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Titel/Untertitel: Poppins, Fliesstext: Lato -->
@@ -79,6 +79,7 @@
     .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.1rem;border-radius:14px;font-family:"Poppins";font-weight:600;border:1px solid #1b3f63;background:var(--royal);color:var(--paper);box-shadow:var(--glow-blue);transition:transform var(--speed),box-shadow var(--speed),filter var(--speed);overflow:visible}
     .btn.secondary{background:var(--paper);color:#173653;border:1px solid #d5e2f2;box-shadow:var(--shadow-soft)}
     .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .btn:focus-visible{outline:3px solid rgba(246,201,14,.65);outline-offset:2px}
 
     .hero-card{background:linear-gradient(160deg,#0f2c48 0%,#1F4E79 65%,#244f7d 100%);border:1px solid #123b60;color:var(--paper);border-radius:var(--radius-xl);padding:14px;box-shadow:var(--glow-blue)}
     .hero-card-inner{position:relative;overflow:hidden;border-radius:calc(var(--radius-xl) - 6px);background:radial-gradient(900px 400px at 120% -10%, rgba(246,201,14,.12), transparent 60%)}
@@ -90,7 +91,7 @@
     .section-title .dot{width:10px;height:10px;border-radius:999px;background:var(--yellow);box-shadow:var(--glow-yellow)}
     .muted{color:var(--muted)}
 
-    /* Vision & Mission: Titel entfernt, Text bleibt */
+    /* Vision & Mission (mit Icon-Badges in den Karten) */
     .vm{display:grid;grid-template-columns:1fr 1fr;gap:min(3.5vw,36px)}
     .card{background:var(--paper);border:1px solid #E8EEF7;border-radius:var(--radius-xl);padding:clamp(18px,2.2vw,26px);box-shadow:var(--shadow-card);transition:transform var(--speed),box-shadow var(--speed),border-color var(--speed)}
     .card:hover{transform:translateY(-3px)}
@@ -105,7 +106,7 @@
     .value:hover{transform:translateY(-3px);border-color:#d9e4f2;box-shadow:0 10px 24px rgba(15,24,34,.08)}
     .vicon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#F2F7FF;border:1px solid #DFEAF7;flex:0 0 40px}
     .vicon svg{width:22px;height:22px;stroke:#1F4E79}
-    .value .label{font-family:"Poppins";font-weight:700;font-size:1.05rem;letter-spacing:.2px;margin-bottom:.1rem}
+    .value .label{font-family:"Poppins";font-weight:800;font-size:1.12rem;letter-spacing:.1px;margin-bottom:.1rem}
     /* gelber Akzent nur für den mittleren Wert (Entwicklung) */
     .werte .value:nth-child(2):hover{box-shadow:var(--glow-yellow)}
 
@@ -117,7 +118,7 @@
     /* Heute */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
     .brand-row{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:.6rem}
-    .brand-row img{height:34px;width:auto;filter:grayscale(0)}
+    .brand-row img{height:44px;width:auto;filter:grayscale(0)}
     .subtle{background:#0f2c48;color:var(--paper);border:1px solid #123b60;box-shadow:var(--glow-blue)}
 
     /* KPIs */
@@ -127,7 +128,7 @@
     .kpi[data-tone="blue"]:hover{box-shadow:var(--glow-yellow)}
     .kpi[data-tone="yellow"]:hover{box-shadow:var(--glow-blue)}
     .kpi .big{font-family:"Poppins";font-weight:800;font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1;color:var(--royal)}
-    .kpi[data-tone="yellow"] .big{color:var(--yellow)} /* kein gold-braun mehr */
+    .kpi[data-tone="yellow"] .big{color:var(--yellow)}
     .kpi .label{font-family:"Poppins";font-weight:700;margin-top:.45rem}
     .kpi p{color:#425466;margin-top:.35rem}
 
@@ -137,11 +138,12 @@
     .logos .logo:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
     .logos img{max-height:46px;width:auto;object-fit:contain}
 
-    /* Slider – jetzt contain statt cover, damit nichts abgeschnitten wird */
+    /* Slider – contain, damit nichts abgeschnitten wird */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
     .slides{display:flex;transition:transform 700ms ease;will-change:transform}
     .slide{min-width:100%}
     .slide img{width:100%;height:62vh;min-height:360px;object-fit:contain;background:#0b2641}
+    .slide img.cover{object-fit:cover}
     .nav-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,.85);border:1px solid #d9e4f2;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;cursor:pointer;transition:background var(--speed),transform var(--speed)}
     .nav-btn:hover{background:#fff;transform:translateY(-50%) scale(1.04)}
     .nav-prev{left:12px}.nav-next{right:12px}
@@ -149,16 +151,17 @@
     .dot{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);cursor:pointer}
     .dot.active{background:var(--yellow);box-shadow:var(--glow-yellow)}
 
-    /* Slogan – dreizeilig, gelbe Schlagworte */
-    .slogan{text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%);padding:clamp(28px,6vw,60px) 0}
-    .slogan .quote{font-family:"Poppins";font-weight:800;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.35;letter-spacing:.2px}
-    .quote .line{display:block}
+    /* Slogan – grösser & mehr Luft */
+    .slogan{ padding: clamp(40px, 8vw, 90px) 0; border-top:1px solid #E6ECF5; border-bottom:1px solid #E6ECF5; text-align:center; background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%) }
+    .slogan .quote{ font-family:"Poppins"; font-weight:800; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.33 }
+    .quote .line{ display:block; margin: .18em 0 }
 
     /* Kontakt */
     .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:min(3.2vw,32px)}
     .contact .card{height:100%}
     .list{display:grid;gap:.6rem;margin-top:.6rem}
     .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;background:#F2F7FF;border:1px solid #D9E6F7;font-family:"Poppins";font-weight:600;font-size:.95rem;line-height:1.25;overflow:visible;white-space:normal}
+    .pill:hover{ box-shadow: 0 0 0 2px rgba(246,201,14,.25) }
 
     footer{border-top:1px solid #E6ECF5;padding:22px 0;color:#5c6a78;font-size:.95rem;background:var(--paper)}
 
@@ -208,8 +211,8 @@
       <div class="fade-in">
         <span class="badge">Entwickler für Menschen &amp; Business</span>
         <div class="sp-xs"></div>
-        <h1>Ich verbinde <span>Logik</span> und <span>Emotion</span> – für messbares Wachstum.</h1>
-        <p class="lead">Kurz, deutsch, authentisch: Ich gestalte Strukturen, stärke Menschen und schaffe Klarheit – damit Unternehmen lebendig, wirksam und skalierbar werden.</p>
+        <h1>Verbindung von <span>Logik</span> und <span>Emotion</span> – für messbares Wachstum.</h1>
+        <p class="lead">Strukturen gestalten, Menschen stärken und Klarheit schaffen – damit Unternehmen lebendig, wirksam und skalierbar werden.</p>
         <div class="actions">
           <a class="btn" href="#kontakt">Kontakt aufnehmen</a>
           <a class="btn secondary" href="#einblicke">Einblicke ansehen</a>
@@ -224,17 +227,34 @@
     </div>
   </section>
 
-  <!-- VISION & MISSION (ohne sichtbare Titel) -->
+  <!-- VISION & MISSION -->
   <section id="vm">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Vision &amp; Mission</h2></div>
       <div class="vm">
+        <!-- Vision -->
         <article class="card fade-in" data-theme="blue">
           <h3 class="sr-only">Vision</h3>
+          <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
+            <!-- Auge -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1F4E79" stroke-width="2" aria-hidden="true">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
           <p class="lead">Mit Logik und Weitsicht echte Emotionen wecken, um Grossartiges zu erreichen.</p>
         </article>
+
+        <!-- Mission -->
         <article class="card fade-in" data-theme="yellow">
           <h3 class="sr-only">Mission</h3>
+          <div style="display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid #DFEAF7;border-radius:12px;background:#F2F7FF;margin-bottom:10px">
+            <!-- Flagge -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1F4E79" stroke-width="2" aria-hidden="true">
+              <path d="M4 3v18"></path>
+              <path d="M4 4h11l-2 3 2 3H4z"></path>
+            </svg>
+          </div>
           <p class="lead">Menschen und Unternehmen durch Struktur, Strategie und Bewusstsein in nachhaltiges Wachstum führen.</p>
         </article>
       </div>
@@ -246,13 +266,14 @@
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Werte</h2></div>
       <div class="werte">
+        <!-- Klarheit -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Kompass -->
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="M15 9l-6 6 3-6 3 6z"></path>
-              <circle cx="12" cy="12" r="1"></circle>
+            <!-- Bullseye -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
+              <circle cx="12" cy="12" r="8"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 4v2M12 18v2M4 12h2M18 12h2"></path>
             </svg>
           </div>
           <div>
@@ -260,13 +281,14 @@
             <p>Ohne Klarheit keine Richtung.</p>
           </div>
         </div>
+
+        <!-- Entwicklung -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Keimling -->
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M12 21V11"></path>
-              <path d="M7 7c4 0 5 4 5 4s-4 1-5-4z"></path>
-              <path d="M17 3c-4 0-5 4-5 4s4 1 5-4z"></path>
+            <!-- Aufwärtspfeil -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
+              <path d="M4 16l6-6 4 4 6-6"></path>
+              <path d="M14 8h6v6"></path>
             </svg>
           </div>
           <div>
@@ -274,13 +296,14 @@
             <p>Wachstum entsteht durch Neugier und Mut.</p>
           </div>
         </div>
+
+        <!-- Verantwortung -->
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
-            <!-- Handschlag -->
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M3 12l4-4 4 4 4-4 6 6"></path>
-              <path d="M3 12l6 6 4-4"></path>
-              <path d="M15 8l6 6"></path>
+            <!-- Schild + Check -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
+              <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"></path>
+              <path d="M9 12l2 2 4-4"></path>
             </svg>
           </div>
           <div>
@@ -299,14 +322,14 @@
       <div class="about">
         <div class="fade-in">
           <p>Ich bin gelernter Techniker HF Maschinenbau (Juventus Zürich) und habe über Jahre Anlagen und Maschinen für internationale Industriekunden entwickelt – von Japan über China und Indien bis in die USA, den Nahen Osten und Europa.</p>
-          <p>Mit 27 Jahren entschied ich mich, meinen bekannten Weg zu verlassen. Weg von der Entwicklung von Maschinen – hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (NLP Practitioner &amp; Master) fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen.</p>
+          <p>Mit 27 Jahren erfolgte der Wechsel – von der Entwicklung von Maschinen hin zur Entwicklung von Menschen und Business. Über die Finanzbranche und meine Ausbildung im Neuro-Linguistischen Programmieren (<strong>NLP Master</strong>) fand ich meinen Zugang, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen. <br>Nach zwei weiteren Jahren im Vertrieb und einer Weiterbildung im NLP vertiefte sich dieser Ansatz in der Praxis.</p>
 
           <div class="sp-xs"></div>
           <div class="kpis">
             <div class="kpi fade-in" data-tone="blue">
               <div class="big">5+</div>
               <div class="label">Jahre Erfahrung</div>
-              <p>Coaching, Leadership &amp; Unternehmensentwicklung.</p>
+              <p>Unternehmensentwicklung, Coaching &amp; Leadership.</p>
             </div>
             <div class="kpi fade-in" data-tone="yellow">
               <div class="big">500+</div>
@@ -331,9 +354,16 @@
           <h3>Im Unternehmen</h3>
           <p>Heute setze ich meine Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen ein, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbinde ich strategisches Denken mit emotionaler Intelligenz, um nachhaltige und lebendige Veränderungen zu ermöglichen.</p>
           <p>Dies tue ich innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und Evergrow (Vertrieb &amp; Wachstum).</p>
+
           <div class="brand-row" aria-label="Aktuelle Unternehmen">
-            <img src="assets/logos/mg.png" alt="MG Coaching Logo">
-            <img src="assets/logos/evergrow.png" alt="Evergrow Logo">
+            <div style="display:flex;align-items:center;gap:10px">
+              <img src="assets/logos/mg.png" alt="MG Coaching">
+              <span class="pill">MG Coaching</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <img src="assets/logos/evergrow.png" alt="Evergrow">
+              <span class="pill">Evergrow</span>
+            </div>
           </div>
 
           <div class="sp-xs"></div>
@@ -375,7 +405,7 @@
     </div>
   </section>
 
-  <!-- PARTNER-LOGOS -->
+  <!-- PARTNER-LOGOS (ohne MG/Evergrow, Reihenfolge wie gewünscht) -->
   <section id="partner">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner-Logos</h2></div>
@@ -384,13 +414,11 @@
         <div class="logo"><img src="assets/logos/allianz.png" alt="Allianz"></div>
         <div class="logo"><img src="assets/logos/properti.png" alt="Properti"></div>
         <div class="logo"><img src="assets/logos/icm.png" alt="ICM Bau"></div>
-        <div class="logo"><img src="assets/logos/mg.png" alt="MG Coaching"></div>
-        <div class="logo"><img src="assets/logos/evergrow.png" alt="Evergrow"></div>
       </div>
     </div>
   </section>
 
-  <!-- SLOGAN / PHILOSOPHIE (dreizeilig) -->
+  <!-- SLOGAN / PHILOSOPHIE -->
   <section class="slogan">
     <div class="wrap">
       <p class="quote">
@@ -433,7 +461,7 @@
     </div>
   </section>
 
-  <!-- PRIVATES • REFERENZEN • KONTAKT -->
+  <!-- PRIVAT • REFERENZEN • KONTAKT -->
   <section id="kontakt">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Kontakt</h2></div>
@@ -526,8 +554,8 @@
     function goTo(target,user){ idx=(target+slideEls.length)%slideEls.length; render(); if(user) resetTimer(); }
     function nextSlide(user){ goTo(idx+1,user); }
     function prevSlide(user){ goTo(idx-1,user); }
-    next.addEventListener('click',()=>nextSlide(true));
-    prev.addEventListener('click',()=>prevSlide(true));
+    if(next) next.addEventListener('click',()=>nextSlide(true));
+    if(prev) prev.addEventListener('click',()=>prevSlide(true));
 
     let timer=setInterval(nextSlide,3000);
     function resetTimer(){ clearInterval(timer); timer=setInterval(nextSlide,3000); }
