@@ -171,22 +171,26 @@
     
     /* Bild: gleiches Limit in beide Richtungen */
     :root{
-      --logo-h-desktop:56px;    /* einheitliche visuelle Höhe */
-      --logo-h-mobile:48px;
+      /* ... */
+      --logo-h-desktop: 84px;   /* vorher 56px */
+      --logo-h-mobile:  72px;   /* vorher 48px */
     }
     .logos .logo img{
-      width:auto; height:auto;
-      max-height:var(--logo-h-desktop);
-      max-width:80%;            /* verhindert, dass sehr breite Logos die Kachel „sprengen“ */
-      object-fit:contain;       /* Sicherheitsnetz */
+      width:auto;
+      height:auto;
+      max-height: min(var(--logo-h-desktop), 78%); /* mehr Raum nutzen */
+      max-width: 92%;                              /* vorher 80% */
+      object-fit: contain;
     }
     
-    /* Mobile: etwas kleiner */
     @media (max-width:560px){
-      .logos{ grid-template-columns:repeat(2,1fr) }
-      .logos .logo img{ max-height:var(--logo-h-mobile) }
+      .logos{ grid-template-columns: repeat(2,1fr) }
+      .logos .logo img{
+        max-height: min(var(--logo-h-mobile), 78%);
+        max-width: 96%;
+      }
     }
-    
+   
     /* WICHTIG: Sonderbehandlung entfernen */
     .logo--mg{ /* bitte löschen oder leer lassen */ }
 
