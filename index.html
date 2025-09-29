@@ -133,13 +133,29 @@
     /* Callout */
     .callout{background:#FFFBEA;border:1px solid #F6E79C;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow-soft);font-family:"Poppins";font-weight:600}
 
-    /* Timeline – vertikale blaue Linie mit gelbem Kern */
-    .timeline.tl{position:relative;margin-top:18px;padding-left:26px}
-    .timeline.tl::before{content:"";position:absolute;left:116px;top:0;bottom:0;width:2px;background:#1F4E79;opacity:.35}
-    .tl-item{display:grid;grid-template-columns:110px 1fr;gap:24px;position:relative;padding:8px 0 14px}
+    /* Timeline – zentrale Achse exakt durch Marker */
+    .timeline.tl{
+      --tl-col-year: 110px;
+      --tl-gap: 24px;
+      --tl-x: calc(var(--tl-col-year) + (var(--tl-gap) / 2));
+      position: relative;
+      margin-top: 18px;
+      padding-left: 26px;
+    }
+    .timeline.tl::before{
+      content:"";
+      position:absolute; left:var(--tl-x); top:0; bottom:0;
+      width:2px; background:#1F4E79; opacity:.28; box-shadow:0 0 0 3px rgba(31,78,121,.06);
+    }
+    .tl-item{display:grid;grid-template-columns:var(--tl-col-year) 1fr;gap:var(--tl-gap);position:relative;padding:8px 0 14px}
     .tl-item .year{font-family:"Poppins";font-weight:700;color:#0F1822}
     .tl-item .text{color:#283746}
-    .tl-item::after{content:"";position:absolute;left:116px;top:18px;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at center, #F6C90E 42%, #1F4E79 43%);box-shadow:0 0 0 3px #EAF2FB}
+    .tl-item::after{
+      content:""; position:absolute; left:var(--tl-x); top:18px; transform:translate(-50%,-50%);
+      width:12px;height:12px;border-radius:50%;
+      background:var(--yellow); border:2px solid var(--royal);
+      box-shadow:0 0 0 5px rgba(31,78,121,.12);
+    }
 
     /* ====== Heute ====== */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
@@ -176,7 +192,7 @@
     .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:16px;height:100px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
     .logos .logo:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
     .logos .logo img{max-height:var(--h,52px);width:auto;object-fit:contain}
-    .logo--mg{--h:64px} /* MG optisch größer, wegen Hochformat */
+    .logo--mg{--h:64px} /* MG optisch größer */
 
     /* ====== Slider (Einblicke) ====== */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
@@ -339,7 +355,8 @@
         <div class="value fade-in">
           <div class="vicon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#1F4E79" stroke-width="2">
-              <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path>
+              <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"></path>
+              <path d="M9 12l2 2 4-4"></path>
             </svg>
           </div>
           <div><div class="label">Verantwortung</div><p>Erfolg ist das Resultat bewusster Entscheidungen.</p></div>
@@ -358,7 +375,11 @@
           <p>Mit 27 Jahren erfolgte der Wechsel zur Entwicklung von Menschen und Business. In den ersten Jahren im Vertrieb lernte ich die Sprache von Entscheidungen kennen und absolvierte den NLP-Master (60+ Ausbildungstage). So entstand mein Ansatz, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen. Seit 2020 begleite ich Unternehmen und Menschen in Unternehmensentwicklung, Coaching und Führung, parallel mit starkem Praxisbezug im Vertrieb.</p>
 
           <div class="sp-xs"></div>
-          <div class="callout">Dynamische Wirtschaft gestalten, Menschen stärken und wirkungsvolle Strukturen bauen.</div>
+          <div class="callout">
+            <strong>Früher habe ich Maschinen entwickelt – heute entwickle ich Menschen.</strong><br>
+            Ich wollte nicht bis zur Pension hinter dem Schreibtisch warten, sondern <strong>Bewegung schaffen</strong>:
+            Menschen stärken, Unternehmen lebendig machen und <strong>Strukturen bauen, die tragen</strong>.
+          </div>
 
           <div class="timeline tl">
             <div class="tl-item"><div class="year">2007–2011</div><div class="text">Konstrukteur EFZ – Fundament Technik und Präzision</div></div>
@@ -398,7 +419,7 @@
         <article class="card fade-in">
           <h3>Im Unternehmen</h3>
           <p>Heute kommt Erfahrung in Vertrieb, Referaten und gezielten Ausbildungen zum Einsatz, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbindet sich strategisches Denken mit emotionaler Intelligenz für nachhaltige, lebendige Veränderungen.</p>
-          <p>Dies geschieht innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und im Vertrieb.</p>
+          <p>Dies geschieht innerhalb der Unternehmen MG Coaching (Personal- und Business-Coaching) und bei Evergrow (Wachstum und Vertrieb).</p>
 
           <div class="sp-md"></div>
           <div class="kpis">
@@ -417,8 +438,13 @@
 
         <article class="card subtle fade-in">
           <h3>Als Referent &amp; Impulsgeber</h3>
-          <div class="big-question" style="font-family:Poppins;font-weight:800;margin:.2rem 0 1rem">Warum funktioniert das in allen Bereichen der Wirtschaft?</div>
-          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit über vier Jahren an Kunden und Partner aus verschiedensten Branchen weiter. Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das WARUM dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+
+          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit <strong>mehreren Jahren</strong> an Kunden und Partner aus verschiedensten Branchen weiter.</p>
+
+          <div class="big-question emphasis">Warum funktioniert das in allen Bereichen der Wirtschaft?</div>
+
+          <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <strong>WARUM</strong> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+
           <p class="muted" style="color:#d7e6f7">Zusammenarbeit u. a. mit SSM Partner (Broker), Allianz (Versicherung), Properti (Immobilien), ICM Bau (Personalvermittlung) und weiteren.</p>
 
           <div class="sp-xs"></div>
@@ -554,7 +580,7 @@
     // Jahr im Footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scroll to top on brand click
+    // Brand click => nach oben
     document.getElementById('brandHome').addEventListener('click', (e)=>{
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
