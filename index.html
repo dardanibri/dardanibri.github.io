@@ -153,36 +153,35 @@
       margin-inline:auto;
     }
 
-    /* Kachel: leichte feste Proportion, damit alles ruhiger wirkt */
+    /* Kachel: feste Proportion */
     .logos .logo{
       background:var(--paper);
       border:1px solid #E6ECF5;
       border-radius:14px;
       padding:16px;
-      aspect-ratio: 5 / 3;      /* << neu: gleiches Verhältnis für alle */
+      aspect-ratio: 5 / 3;
       width:100%;
-      max-width: 320px;         /* optional, begrenzt zu breite Kacheln */
+      max-width: 320px;
       display:grid;
       place-items:center;
       box-shadow:var(--shadow-soft);
       transition:transform var(--speed),box-shadow var(--speed);
     }
     .logos .logo:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card) }
-    
-    /* Bild: gleiches Limit in beide Richtungen */
+
+    /* Bild: Limits (Desktop & Mobile) */
     :root{
-      /* ... */
-      --logo-h-desktop: 84px;   /* vorher 56px */
-      --logo-h-mobile:  72px;   /* vorher 48px */
+      --logo-h-desktop: 100px;  /* ↑ größer: nur Inhalt wächst */
+      --logo-h-mobile:  72px;
     }
     .logos .logo img{
       width:auto;
       height:auto;
-      max-height: min(var(--logo-h-desktop), 78%); /* mehr Raum nutzen */
-      max-width: 92%;                              /* vorher 80% */
+      max-height: min(var(--logo-h-desktop), 78%);
+      max-width: 96%;            /* ↑ etwas mehr als 92% */
       object-fit: contain;
     }
-    
+
     @media (max-width:560px){
       .logos{ grid-template-columns: repeat(2,1fr) }
       .logos .logo img{
@@ -190,9 +189,6 @@
         max-width: 96%;
       }
     }
-   
-    /* WICHTIG: Sonderbehandlung entfernen */
-    .logo--mg{ /* bitte löschen oder leer lassen */ }
 
     /* ====== Slider ====== */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
@@ -486,13 +482,13 @@
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner-Logos</h2></div>
       <div class="logos fade-in" aria-label="Ausgewählte Partnerlogos">
-      <div class="logo"><img src="assets/logos/mg.png" alt="MG Coaching"></div>
-      <div class="logo"><img src="assets/logos/evergrow.png" alt="Evergrow"></div>
-      <div class="logo"><img src="assets/logos/ssm.png" alt="SSM Partner"></div>
-      <div class="logo"><img src="assets/logos/allianz.png" alt="Allianz"></div>
-      <div class="logo"><img src="assets/logos/properti.png" alt="Properti"></div>
-      <div class="logo"><img src="assets/logos/icm.png" alt="ICM Bau"></div>
-    </div>
+        <div class="logo"><img src="assets/logos/mg.png" alt="MG Coaching"></div>
+        <div class="logo"><img src="assets/logos/evergrow.png" alt="Evergrow"></div>
+        <div class="logo"><img src="assets/logos/ssm.png" alt="SSM Partner"></div>
+        <div class="logo"><img src="assets/logos/allianz.png" alt="Allianz"></div>
+        <div class="logo"><img src="assets/logos/properti.png" alt="Properti"></div>
+        <div class="logo"><img src="assets/logos/icm.png" alt="ICM Bau"></div>
+      </div>
     </div>
   </section>
 
@@ -669,7 +665,7 @@
     slider.addEventListener('focusin',()=>clearInterval(timer));
     slider.addEventListener('focusout',resetTimer);
 
-    // KPI Count-Up (locale de-CH, respektiert reduced motion)
+    // KPI Count-Up
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function formatCH(num){ return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "’"); }
     function countUp(el){
