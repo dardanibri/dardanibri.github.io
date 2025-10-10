@@ -87,13 +87,14 @@
     .ba img{
       position:absolute; inset:0; width:100%; height:100%;
       object-fit:cover;
-      /* FIX 1: Kopf beim Logik-Bild nicht abgeschnitten → etwas nach unten */
-      object-position:center 30%;
+      /* ADJUSTED: Logik-Bild wieder höher (Kopf frei) */
+      object-position:center 8%;
       user-select:none; pointer-events:none;
     }
     .ba .after{
       clip-path: inset(0 0 0 calc(var(--split)*1%));
-      object-position:center 22%; /* Emotion: harmonisch etwas höher */
+      /* ADJUSTED: Emotion etwas höher, wie im alten Code */
+      object-position:center 18%;
     }
     .ba .handle{ position:absolute; inset:0; }
     .ba .line{ position:absolute; top:0; bottom:0; left:calc(var(--split)*1%); width:2px; background:rgba(255,255,255,.9); border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.08); }
@@ -244,7 +245,6 @@
       .drawer .menu{display:grid; gap:10px;}
       .drawer .menu a{display:block; padding:14px 16px; border-radius:14px; background:#F6F9FE; opacity:1;}
       .drawer .menu a.active{background:#E9F1FD;}
-      /* FIX 2: „Kontakt“ sichtbar und prominent */
       .drawer .menu .cta{background:var(--royal); color:#fff; text-align:center; border:1px solid #163756;}
     }
   </style>
