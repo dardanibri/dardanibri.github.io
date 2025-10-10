@@ -12,7 +12,7 @@
   <style>
     :root{
       --royal:#1F4E79; --yellow:#F6C90E; --ink:#0F1822; --paper:#FFFFFF; --cloud:#F5F7FB; --muted:#6C7A89;
-      --warm:#C9AE79; /* warme Tonalität passend zum Emotion-Bild */
+      --warm:#C9AE79;
       --h1:clamp(2.4rem,3.4vw,4.2rem); --h2:clamp(1.6rem,2.4vw,2.6rem); --h3:clamp(1.2rem,1.6vw,1.6rem);
       --lead:clamp(1.05rem,1.15vw,1.125rem); --body:clamp(1rem,1.05vw,1.0625rem);
       --radius-xl:22px; --radius-lg:16px; --radius:12px;
@@ -40,7 +40,7 @@
     .lead{font-size:var(--lead);opacity:.92}
     .accent-yellow{color:var(--yellow)}
     .blue{color:var(--royal)}
-    .warm{color:var(--warm)} /* wird dynamisch gesetzt */
+    .warm{color:var(--warm)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
@@ -64,29 +64,8 @@
     .menu a.active{opacity:1;background:#eff4fb}
     .cta{background:var(--royal);color:var(--paper);padding:.52rem .8rem;border-radius:12px;box-shadow:var(--glow-blue);border:1px solid #163756}
 
-    /* Hamburger (nur mobil sichtbar) */
-    .hamburger{display:none}
-    @media (max-width:560px){
-      .menu{display:none}
-      .hamburger{position:fixed; top:12px; right:12px; z-index:1100;
-        width:46px; height:46px; display:grid; place-items:center;
-        background:#fff; border:1px solid #d9e4f2; border-radius:14px;
-        box-shadow:0 8px 20px rgba(15,24,34,.12);
-      }
-      .drawer-scrim{position:fixed; inset:0; background:rgba(15,24,34,.35);
-        backdrop-filter:blur(2px); opacity:0; visibility:hidden; transition:200ms; z-index:1090;
-      }
-      .drawer{position:fixed; top:10px; right:10px; z-index:1110;
-        width:min(86vw,320px); border-radius:16px; padding:12px;
-        background:#fff; border:1px solid #E6ECF5; box-shadow:0 16px 40px rgba(15,24,34,.18);
-        transform:translateY(-8px) scale(.98); opacity:0; pointer-events:none; transition:220ms;
-      }
-      .drawer.open{transform:none; opacity:1; pointer-events:auto;}
-      .drawer.open ~ .drawer-scrim{opacity:1; visibility:visible;}
-      .drawer .menu{display:grid; gap:8px;}
-      .drawer .menu a{display:block; padding:12px 14px; border-radius:12px; background:#F6F9FE; opacity:1;}
-      .drawer .menu a.active{background:#E9F1FD;}
-    }
+    /* Hamburger / Drawer – Basis: auf Desktop verbergen */
+    .hamburger, .drawer, .drawer-scrim{display:none}
 
     /* ====== HERO ====== */
     .hero{padding:clamp(48px,9vw,110px) 0 clamp(24px,6vw,70px)}
@@ -107,12 +86,14 @@
     .ba{ --split:90; position:relative; aspect-ratio:4/4.8; overflow:hidden; touch-action:none; }
     .ba img{
       position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center 22%; /* Logik: etwas nach unten, Kopf nicht am Rand */
+      object-fit:cover;
+      /* FIX 1: Kopf beim Logik-Bild nicht abgeschnitten → etwas nach unten */
+      object-position:center 30%;
       user-select:none; pointer-events:none;
     }
     .ba .after{
       clip-path: inset(0 0 0 calc(var(--split)*1%));
-      object-position:center 18%; /* Emotion leicht höher; harmoniert mit Logik */
+      object-position:center 22%; /* Emotion: harmonisch etwas höher */
     }
     .ba .handle{ position:absolute; inset:0; }
     .ba .line{ position:absolute; top:0; bottom:0; left:calc(var(--split)*1%); width:2px; background:rgba(255,255,255,.9); border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.08); }
@@ -230,6 +211,8 @@
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:min(3vw,28px)}
     .fade-in{opacity:0;transform:translateY(14px);transition:opacity 900ms ease,transform 900ms ease}
     .fade-in.appear{opacity:1;transform:none}
+
+    /* ====== Mobile (Hamburger & Drawer sichtbar) */
     @media (max-width:980px){
       .hero-grid,.about,.heute{grid-template-columns:1fr}
       .vm{grid-template-columns:1fr}
@@ -240,8 +223,29 @@
       .contact{grid-template-columns:1fr}
     }
     @media (max-width:560px){
+      .menu{display:none}
       .kpis{grid-template-columns:1fr}
       .logos{grid-template-columns:repeat(2,1fr)}
+
+      .hamburger{display:grid; position:fixed; top:12px; right:12px; z-index:1100;
+        width:46px; height:46px; place-items:center; background:#fff; border:1px solid #d9e4f2;
+        border-radius:14px; box-shadow:0 8px 20px rgba(15,24,34,.12);
+      }
+      .drawer{display:block; position:fixed; top:10px; right:10px; z-index:1110;
+        width:min(86vw,360px); border-radius:18px; padding:12px;
+        background:#fff; border:1px solid #E6ECF5; box-shadow:0 16px 40px rgba(15,24,34,.18);
+        transform:translateY(-8px) scale(.98); opacity:0; pointer-events:none; transition:220ms;
+      }
+      .drawer.open{transform:none; opacity:1; pointer-events:auto;}
+      .drawer-scrim{display:block; position:fixed; inset:0; background:rgba(15,24,34,.35);
+        backdrop-filter:blur(2px); opacity:0; visibility:hidden; transition:200ms; z-index:1090;
+      }
+      .drawer.open ~ .drawer-scrim{opacity:1; visibility:visible;}
+      .drawer .menu{display:grid; gap:10px;}
+      .drawer .menu a{display:block; padding:14px 16px; border-radius:14px; background:#F6F9FE; opacity:1;}
+      .drawer .menu a.active{background:#E9F1FD;}
+      /* FIX 2: „Kontakt“ sichtbar und prominent */
+      .drawer .menu .cta{background:var(--royal); color:#fff; text-align:center; border:1px solid #163756;}
     }
   </style>
 </head>
@@ -675,7 +679,6 @@
     setSplit(baRange.value || 90);
 
     // Farbwechsel der Wörter, wenn Emotion > 60% sichtbar (=> split < 40)
-    const hero = document.querySelector('.hero');
     const keys = document.querySelectorAll('.key');
     function updateWordsBySplit(split){
       const emotionVisible = 100 - split;
@@ -691,7 +694,7 @@
       updateWordsBySplit(v);
     });
 
-    // Robuste Pointer-Gesten (kein Scrollen, keine Sprünge)
+    // Sanfte Pointer-Gesten: Dead-Zone + Scroll sperren während Drag
     ba.addEventListener('pointerdown', (e)=>{
       e.preventDefault();
       ba.setPointerCapture?.(e.pointerId);
@@ -703,7 +706,7 @@
       const move = (ev)=>{
         const dx = Math.abs(ev.clientX - startX);
         const dy = Math.abs(ev.clientY - startY);
-        if(!dragging && dx < 6 && dy < 12) return; // kleine Dead-Zone
+        if(!dragging && dx < 6 && dy < 12) return;
         dragging = true;
         const p = Math.min(100, Math.max(0, ((ev.clientX - rect.left) / rect.width) * 100));
         const pv = p.toFixed(0);
@@ -769,10 +772,10 @@
       requestAnimationFrame(tick);
     }
     document.querySelectorAll('.counter').forEach(el=>{
-      const io = new IntersectionObserver((ents,obs)=>{
+      const io2 = new IntersectionObserver((ents,obs)=>{
         ents.forEach(e=>{ if(e.isIntersecting){ countUp(el); obs.unobserve(el);} });
       },{threshold:.5});
-      io.observe(el);
+      io2.observe(el);
     });
   </script>
 </body>
