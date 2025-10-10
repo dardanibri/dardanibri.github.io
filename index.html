@@ -12,7 +12,8 @@
   <style>
     :root{
       --royal:#1F4E79; --yellow:#F6C90E; --ink:#0F1822; --paper:#FFFFFF; --cloud:#F5F7FB; --muted:#6C7A89;
-      --warm:#C8A96A; /* warm/gold für Emotion */
+      --warm:#C0A37A; /* warmer Ton für Emotion */
+      --accent-current: var(--royal); /* wird dynamisch auf --warm umgeschaltet */
       --h1:clamp(2.4rem,3.4vw,4.2rem); --h2:clamp(1.6rem,2.4vw,2.6rem); --h3:clamp(1.2rem,1.6vw,1.6rem);
       --lead:clamp(1.05rem,1.15vw,1.125rem); --body:clamp(1rem,1.05vw,1.0625rem);
       --radius-xl:22px; --radius-lg:16px; --radius:12px;
@@ -38,9 +39,7 @@
     h3{font-size:var(--h3);line-height:1.3}
     p{margin:0 0 1rem;font-size:var(--body)}
     .lead{font-size:var(--lead);opacity:.92}
-    .accent-yellow{color:var(--yellow)}
-    .blue{color:var(--royal)}
-    .warm{color:var(--warm)}
+    .accent{color:var(--accent-current)} /* ersetzt .blue */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
@@ -58,25 +57,11 @@
     .nav{height:100%; display:flex;align-items:center;justify-content:space-between;gap:1rem}
     .brand{display:flex;align-items:center;gap:.75rem;font-family:"Poppins";font-weight:700;letter-spacing:.3px;cursor:pointer}
     .brand-badge{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--royal);color:var(--paper);font-size:.95rem;box-shadow:var(--glow-blue)}
-
-    /* Desktop menu */
     .menu{display:flex;gap:1.1rem;align-items:center;font-weight:600;font-family:"Poppins";font-size:.95rem}
     .menu a{opacity:.78;padding:.4rem .6rem;border-radius:10px;transition:opacity .25s,background .25s,transform .25s}
     .menu a:hover{opacity:1;background:#eff4fb;transform:translateY(-1px)}
     .menu a.active{opacity:1;background:#eff4fb}
     .cta{background:var(--royal);color:var(--paper);padding:.52rem .8rem;border-radius:12px;box-shadow:var(--glow-blue);border:1px solid #163756}
-
-    /* Hamburger */
-    .hamburger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid #d5e2f2;background:#fff;box-shadow:var(--shadow-soft);align-items:center;justify-content:center}
-    .hamburger span{display:block;width:20px;height:2px;background:#173653;position:relative}
-    .hamburger span::before,.hamburger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:#173653}
-    .hamburger span::before{top:-6px}.hamburger span::after{top:6px}
-
-    .drawer{position:fixed;inset:var(--header-h) 0 0 auto;width:min(280px,80vw);background:#fff;border-left:1px solid #e5eef8;box-shadow:-8px 0 22px rgba(15,24,34,.08);transform:translateX(100%);transition:transform .35s ease;z-index:999}
-    .drawer.open{transform:none}
-    .drawer nav{display:grid;padding:16px}
-    .drawer a{padding:10px 12px;border-radius:10px;font-family:"Poppins";font-weight:600}
-    .drawer a:hover{background:#eff4fb}
 
     /* ====== HERO ====== */
     .hero{padding:clamp(48px,9vw,110px) 0 clamp(24px,6vw,70px)}
@@ -90,36 +75,27 @@
     .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
     .btn:focus-visible{outline:3px solid rgba(246,201,14,.65);outline-offset:2px}
 
-    /* Hero Compare Card */
+    /* Karte + Split */
     .hero-card{background:linear-gradient(160deg,#0f2c48 0%,#1F4E79 65%,#244f7d 100%);border:1px solid #123b60;color:var(--paper);border-radius:var(--radius-xl);padding:14px;box-shadow:var(--glow-blue)}
-    .compare{position:relative;overflow:hidden;border-radius:calc(var(--radius-xl) - 6px);isolation:isolate;--split:0.9} /* 90/10 Start */
-    .compare img{width:100%;aspect-ratio:4/4.8;object-fit:cover;object-position:center 20%}
-    .compare .img-top{position:absolute;inset:0;clip-path:polygon(0 0, calc(var(--split)*100%) 0, calc(var(--split)*100%) 100%, 0 100%)}
-    .divider{position:absolute;top:0;bottom:0;left:calc(var(--split)*100%);width:2px;background:rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-    .handle{position:absolute;left:calc(var(--split)*100% - 18px);top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;background:#fff;border:1px solid #d9e4f2;display:grid;place-items:center;box-shadow:0 6px 14px rgba(15,24,34,.15);cursor:ew-resize}
-    .handle svg{display:block}
+    .hero-card-inner{position:relative;overflow:hidden;border-radius:calc(var(--radius-xl) - 6px)}
+    .split{--pos:66%; /* Start 66/34 */ position:relative; width:100%; aspect-ratio:4/4.8; overflow:hidden;}
+    .split .frame{position:absolute; inset:0; }
+    .split img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+    /* Logik-Bild leicht tiefer, damit oben ruhiger */
+    .split .img-logic{object-position:center 22%;}
+    .split .img-emotion{object-position:center 15%; filter:saturate(.9) contrast(1.02);}
+    /* Masken */
+    .split .mask-logic{clip-path:polygon(0 0, var(--pos) 0, var(--pos) 100%, 0 100%)}
+    .split .mask-emotion{clip-path:polygon(var(--pos) 0, 100% 0, 100% 100%, var(--pos) 100%)}
+    /* Divider */
+    .divider{position:absolute; top:0; bottom:0; left:var(--pos); transform:translateX(-50%); width:2px; background:rgba(255,255,255,.85); box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+    .knob{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:#fff; border:1px solid #d9e4f2; display:grid; place-items:center; box-shadow:0 6px 14px rgba(0,0,0,.15); cursor:ew-resize}
+    .knob svg{pointer-events:none}
 
-    /* Page-curl unten links */
-    .curl{position:absolute;left:0;bottom:0;width:min(22%,160px);aspect-ratio:1/1;pointer-events:auto;cursor:grab}
-    .curl::before{
-      content:"";
-      position:absolute;inset:0;
-      background:
-        radial-gradient(120% 120% at 0% 100%, rgba(0,0,0,.18), transparent 60%),
-        radial-gradient(80% 80% at 100% 0%, rgba(255,255,255,.75), transparent 55%),
-        linear-gradient(135deg, rgba(255,255,255,.9), #f0e6cf 60%, #c9b17a 100%);
-      border-top-right-radius:18px;
-      clip-path:polygon(0% 40%, 40% 0%, 100% 0%, 100% 100%, 0% 100%);
-      box-shadow:0 8px 18px rgba(15,24,34,.2);
-      transform-origin:0% 100%;
-      animation:curl-bob 2.8s ease-in-out infinite;
-    }
-    @keyframes curl-bob{
-      0%,100%{ transform:rotate(-2deg) translate(0,0) }
-      50%     { transform:rotate(2deg) translate(2px,-2px) }
-    }
+    .hero-name{position:absolute;left:14px;bottom:14px;padding:.6rem .9rem;border-radius:12px;backdrop-filter:blur(6px);background:color-mix(in srgb,#102e4b 55%, rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);font-family:"Poppins";font-weight:600;letter-spacing:.2px}
 
-    .hero-name{position:absolute;right:14px;bottom:14px;padding:.6rem .9rem;border-radius:12px;backdrop-filter:blur(6px);background:color-mix(in srgb,#102e4b 55%, rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);font-family:"Poppins";font-weight:600;letter-spacing:.2px}
+    /* Dynamischer Farbwechsel für Wörter */
+    .tone-emotion{--accent-current: var(--warm);} /* sonst bleibt --accent-current = var(--royal) */
 
     /* ====== GENERIC ====== */
     .section-title{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
@@ -151,22 +127,23 @@
     .about .photo img{aspect-ratio:4/3;object-fit:cover}
     #about p strong{font-weight:600} #about p{font-weight:400}
 
+    /* Callout */
     .callout{background:#FFFBEA;border:1px solid #F3E9AA;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-soft);font-family:"Lato"}
     .callout p{margin:0} .callout p + p{margin-top:10px}
     .callout strong{font-weight:700}
 
-    /* ====== Timeline ====== */
+    /* Timeline */
     .timeline{margin-top:18px}
     .tl-item{display:grid;grid-template-columns:110px 26px 1fr;gap:18px;align-items:start;padding:8px 0 14px}
     .tl-item .year{font-family:"Poppins";font-weight:700;color:#0F1822}
     .tl-item .node{width:12px;height:12px;border-radius:50%;margin-top:6px;background:var(--yellow);border:2px solid var(--royal);box-shadow:0 0 0 5px rgba(31,78,121,.12)}
     .tl-item .text{color:#283746}
 
-    /* ====== Heute ====== */
+    /* Heute */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
     .subtle{background:#0f2c48;color:var(--paper);border:1px solid #123b60;box-shadow:var(--glow-blue)}
 
-    /* ====== KPIs ====== */
+    /* KPIs */
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:min(2.6vw,28px)}
     .kpi{position:relative;overflow:visible;background:var(--paper);border:1px solid #E6ECF5;border-radius:var(--radius-xl);padding:22px;box-shadow:0 8px 20px rgba(15,24,34,.06);transition:transform var(--speed),box-shadow var(--speed)}
     .kpi:hover{transform:translateY(-4px)}
@@ -177,26 +154,23 @@
     .kpi .label{font-family:"Poppins";font-weight:700;margin-top:.45rem}
     .kpi p{color:#425466;margin-top:.35rem}
     .kpi:focus-visible{outline:3px solid rgba(246,201,14,.45);outline-offset:2px}
+    .subtle .kpi{color:#0F1822} .subtle .kpi .label{color:#0F1822} .subtle .kpi p{color:#425466}
+    .subtle .kpi .big{color:var(--royal)} .subtle .kpi[data-tone="yellow"] .big{color:var(--yellow)}
+    .subtle .kpi[data-tone="blue"]:hover{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 0 5px rgba(31,78,121,.25),0 16px 34px rgba(31,78,121,.28)}
+    .subtle .kpi[data-tone="yellow"]:hover{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 0 5px rgba(246,201,14,.28),0 16px 34px rgba(246,201,14,.28)}
 
-    /* ====== Partner / Referenzen ====== */
-    .logos{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-      gap:min(3vw,26px);
-      justify-items:center; align-items:center;
-      max-width:1000px; margin-inline:auto;
-    }
-    .logos .logo{
-      background:var(--paper); border:1px solid #E6ECF5; border-radius:14px;
-      padding:12px; aspect-ratio:5/3; width:100%; max-width:320px;
-      display:grid; place-items:center; box-shadow:var(--shadow-soft);
-      transition:transform var(--speed),box-shadow var(--speed);
-    }
+    /* Partner-Logos */
+    .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:min(3vw,26px);justify-items:center;align-items:center;max-width:1000px;margin-inline:auto;}
+    .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:12px;aspect-ratio:5/3;width:100%;max-width:320px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
     .logos .logo:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card) }
     :root{ --logo-h-desktop:140px; --logo-h-mobile:72px; }
-    .logos .logo img{ width:auto; height:auto; max-height:min(var(--logo-h-desktop),90%); max-width:96%; object-fit:contain }
+    .logos .logo img{width:auto;height:auto;max-height:min(var(--logo-h-desktop),90%);max-width:96%;object-fit:contain}
+    @media (max-width:560px){
+      .logos{ grid-template-columns: repeat(2,1fr) }
+      .logos .logo img{max-height:min(var(--logo-h-mobile),78%);max-width:96%}
+    }
 
-    /* ====== Slider (Einblicke) ====== */
+    /* Slider „Einblicke“ (unverändert) */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
     .slides{display:flex;transition:transform 700ms ease;will-change:transform}
     .slide{min-width:100%}
@@ -208,6 +182,7 @@
     .dot{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);cursor:pointer}
     .dot.active{background:var(--yellow);box-shadow:var(--glow-yellow)}
 
+    /* Slogan */
     .slogan{padding:clamp(60px,10vw,120px) 0;border-top:1px solid #E6ECF5;border-bottom:1px solid #E6ECF5;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%)}
     .slogan .quote{font-family:"Poppins";font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.33}
     .quote .line{display:block;margin:.18em 0;opacity:0;transform:translateY(8px)}
@@ -218,6 +193,7 @@
     .slogan .accent-yellow{color:var(--yellow);background-image:linear-gradient(to right, rgba(246,201,14,.45), rgba(246,201,14,.45));background-size:0% .18em;background-position:0 92%;background-repeat:no-repeat;text-shadow:0 1px 0 #fff, 0 0 14px rgba(246,201,14,.20);transition:background-size .9s ease}
     .slogan.appear .accent-yellow{background-size:100% .18em}
 
+    /* Kontakt & Footer */
     .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:min(3.2vw,32px)}
     .contact .card{height:100%}
     .list{display:grid;gap:.6rem;margin-top:.6rem}
@@ -225,12 +201,11 @@
     .pill:hover{box-shadow:0 0 0 2px rgba(246,201,14,.25)}
     footer{border-top:1px solid #E6ECF5;padding:22px 0;color:#5c6a78;font-size:.95rem;background:var(--paper)}
 
+    /* Responsive */
     .sp-xxs{height:10px}.sp-xs{height:16px}.sp-sm{height:24px}.sp-md{height:36px}.sp-lg{height:54px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:min(3vw,28px)}
     .fade-in{opacity:0;transform:translateY(14px);transition:opacity 900ms ease,transform 900ms ease}
     .fade-in.appear{opacity:1;transform:none}
-
-    /* ====== Responsive ====== */
     @media (max-width:980px){
       .hero-grid,.about,.heute{grid-template-columns:1fr}
       .vm{grid-template-columns:1fr}
@@ -239,12 +214,11 @@
       .logos{grid-template-columns:repeat(3,1fr)}
       .slide img{height:46vh}
       .contact{grid-template-columns:1fr}
-      .menu{display:none}
-      .hamburger{display:flex}
     }
     @media (max-width:560px){
       .kpis{grid-template-columns:1fr}
       .logos{grid-template-columns:repeat(2,1fr)}
+      .menu{display:none}
     }
   </style>
 </head>
@@ -267,17 +241,6 @@
         <a href="#einblicke">Einblicke</a>
         <a href="#kontakt" class="cta">Kontakt</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Menü öffnen"><span></span></button>
-    </div>
-    <div class="drawer" id="drawer" aria-hidden="true">
-      <nav>
-        <a href="#about">Über mich</a>
-        <a href="#werte">Werte</a>
-        <a href="#today">Heute</a>
-        <a href="#partner">Partner</a>
-        <a href="#einblicke">Einblicke</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
     </div>
   </header>
 
@@ -287,11 +250,11 @@
       <div class="fade-in">
         <span class="badge">Entwickler für Menschen &amp; Business</span>
         <div class="sp-xs"></div>
-        <h1 id="heroTitle">
+        <h1>
           <span class="line">Verbindung von</span>
-          <span class="line"><span class="blue logicWord">Logik</span> und <span class="blue emoWord">Emotion</span></span>
+          <span class="line"><span class="accent">Logik</span> und <span class="accent">Emotion</span></span>
           <span class="line">für messbares</span>
-          <span class="line"><span class="blue growWord">Wachstum</span>.</span>
+          <span class="line"><span class="accent">Wachstum</span>.</span>
         </h1>
         <p class="lead">Strukturen gestalten, Menschen stärken und Klarheit schaffen – damit Unternehmen lebendig, wirksam und skalierbar werden.</p>
         <div class="actions">
@@ -300,17 +263,22 @@
         </div>
       </div>
 
+      <!-- Neuer Split-Hero -->
       <div class="hero-card fade-in">
-        <div class="compare" id="compare">
-          <!-- Unteres Bild = Logik -->
-          <img src="assets/images/dardan-hero.jpg" alt="Dardan Ibri – Portrait" class="img-bottom" style="object-position:center 8%">
-          <!-- Oberes Bild = Emotion -->
-          <img src="assets/images/dardan-hero2.jpg" alt="Dardan Ibri – Emotion" class="img-top" style="object-position:center 18%">
-          <div class="divider" aria-hidden="true"></div>
-          <button class="handle" id="handle" aria-label="Bilder vergleichen">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button class="curl" id="curl" aria-label="Zum Vergleichen ziehen"></button>
+        <div class="hero-card-inner">
+          <div class="split" id="split">
+            <div class="frame mask-logic">
+              <img class="img-logic" src="assets/images/dardan-hero.jpg" alt="Dardan Ibri – Logik">
+            </div>
+            <div class="frame mask-emotion">
+              <img class="img-emotion" src="assets/images/dardan-hero2.jpg" alt="Dardan Ibri – Emotion">
+            </div>
+            <div class="divider" id="divider">
+              <button class="knob" id="knob" aria-label="Bilder vergleichen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+            </div>
+          </div>
           <div class="hero-name">Dardan Ibri</div>
         </div>
       </div>
@@ -389,7 +357,7 @@
       <div class="about">
         <div class="fade-in">
           <p>Gelernter Techniker HF Maschinenbau mit internationaler Entwicklungserfahrung – von der Schweiz aus Projekte in Japan, China, Indien, den USA, im Nahen Osten und in Europa realisiert. In Ingenieurbüros verantwortete ich Systementwicklung und internationale Projektleitung.</p>
-          <p>Mit 27 Jahren erfolgte der Wechsel zur Entwicklung von Menschen und Business. In den ersten Jahren im Vertrieb lernte ich die Sprache von Entscheidungen kennen und absolvierte den NLP-Master mit über 60 Ausbildungstagen. Seit 2020 begleite ich Unternehmen und Menschen in Unternehmensentwicklung, Coaching und Führung.</p>
+          <p>Mit 27 Jahren erfolgte der Wechsel zur Entwicklung von Menschen und Business. In den ersten Jahren im Vertrieb lernte ich die Sprache von Entscheidungen kennen und absolvierte den NLP-Master mit über 60 Ausbildungstagen. So entstand mein Ansatz, Logik mit Emotion zu verbinden und daraus messbare Entwicklung zu schaffen. Seit 2020 begleite ich Unternehmen und Menschen in Unternehmensentwicklung, Coaching und Führung, parallel mit starkem Praxisbezug im Vertrieb.</p>
 
           <div class="sp-xs"></div>
           <div class="callout">
@@ -451,7 +419,8 @@
       <div class="heute">
         <article class="card fade-in">
           <h3>Im Unternehmen</h3>
-          <p>Heute setze ich meine Erfahrung im Vertrieb, als Referent und in gezielten Ausbildungen ein, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Strategisches Denken trifft emotionale Intelligenz.</p>
+          <p>Heute setze ich meine Erfahrung im Vertrieb, als Referent und in gezielten Ausbildungen ein, um Unternehmen in ihrer Struktur-, Prozess- und Teamentwicklung aktiv mitzugestalten. Dabei verbindet sich strategisches Denken mit emotionaler Intelligenz für nachhaltige, lebendige Veränderungen.</p>
+          <p>Dies geschieht bei den Unternehmen MG Coaching (Personal- und Business-Coaching) und Evergrow (Wachstum und Vertrieb).</p>
 
           <div class="sp-md"></div>
           <div class="kpis">
@@ -470,23 +439,38 @@
 
         <article class="card subtle fade-in">
           <h3>Als Referent &amp; Impulsgeber</h3>
-          <p>Dieses Wissen und die nötigen Impulse gebe ich seit mehreren Jahren an Kunden und Partner aus verschiedensten Branchen weiter.</p>
+          <p>Dieses Wissen, diese Strukturen und die dafür nötigen emotionalen Impulse gebe ich seit <strong>mehreren Jahren</strong> an Kunden und Partnern aus verschiedensten Branchen weiter.</p>
 
           <div class="big-question" style="color:var(--yellow);font-family:'Poppins';font-weight:800;font-size:clamp(1.3rem,2.8vw,2rem);margin:12px 0 10px;">
             Warum funktioniert das in allen Bereichen der Wirtschaft?
           </div>
 
-          <p>Weil es nie allein um das Produkt geht – sondern um das <strong>WARUM</strong> dahinter: Sinn, der Menschen bewegt, und Haltung, die Erfolg ermöglicht.</p>
+          <p>Weil es nie allein um das Produkt oder die Dienstleistung geht – sondern um das <strong>WARUM</strong> dahinter: den Sinn, der Menschen bewegt, und die Haltung, die Erfolg möglich macht.</p>
+          <p class="muted" style="color:#d7e6f7">Zusammenarbeit u. a. mit SSM Partner (Broker), Allianz (Versicherung), Properti (Immobilien), ICM Bau (Personalvermittlung) und weiteren Unternehmen.</p>
+
+          <div class="sp-xs"></div>
+          <div class="kpis">
+            <div class="kpi fade-in" data-tone="blue" tabindex="0">
+              <div class="big counter" data-target="6">0</div>
+              <div class="label">Branchen</div>
+              <p>Finanzen, Personalvermittlung, Immobilien, Bildung, Vitalität, Vertrieb.</p>
+            </div>
+            <div class="kpi fade-in" data-tone="yellow" tabindex="0">
+              <div class="big counter" data-target="98" data-suffix="%">0</div>
+              <div class="label">Zufriedenheit</div>
+              <p>Durchschnittliche Bewertung der Teilnehmenden.</p>
+            </div>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ====== PARTNER & REFERENZEN ====== -->
+  <!-- ====== PARTNER ====== -->
   <section id="partner">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner &amp; Referenzen</h2></div>
-      <div class="logos fade-in" aria-label="Partner & Referenzen">
+      <div class="logos fade-in" aria-label="Ausgewählte Partner & Referenzen">
         <div class="logo"><img src="assets/logos/mg.png" alt="MG Coaching"></div>
         <div class="logo"><img src="assets/logos/evergrow.png" alt="Evergrow"></div>
         <div class="logo"><img src="assets/logos/ssm.png" alt="SSM Partner"></div>
@@ -527,14 +511,12 @@
           <div class="slide"><img src="assets/images/ref11.jpg" alt="Referat – Einblick 11"></div>
           <div class="slide"><img src="assets/images/ref12.jpg" alt="Referat – Einblick 12"></div>
         </div>
-
         <button class="nav-btn nav-prev" aria-label="Vorheriges Bild" id="prev">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <button class="nav-btn nav-next" aria-label="Nächstes Bild" id="next">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
         </button>
-
         <div class="dots" id="dots" aria-hidden="true"></div>
       </div>
     </div>
@@ -603,15 +585,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Hamburger Drawer
-    const hamb = document.getElementById('hamburger');
-    const drawer = document.getElementById('drawer');
-    hamb.addEventListener('click', ()=>{
-      const open = drawer.classList.toggle('open');
-      drawer.setAttribute('aria-hidden', String(!open));
-    });
-    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>drawer.classList.remove('open')));
-
     // Fade-in Observer + Slogan reveal
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
@@ -651,89 +624,42 @@
       });
     });
 
-    // ===== Hero Compare logic =====
-    const compare = document.getElementById('compare');
-    const handle = document.getElementById('handle');
-    const curl = document.getElementById('curl');
-    const divider = compare.querySelector('.divider');
-    const imgTop = compare.querySelector('.img-top');
+    /* ===== Split-Hero Interaktion ===== */
+    const split = document.getElementById('split');
+    const knob = document.getElementById('knob');
 
-    const logicWord = document.querySelector('.logicWord');
-    const emoWord = document.querySelector('.emoWord');
-    const growWord = document.querySelector('.growWord');
+    // Begrenzungen: mind. 65% Logik sichtbar, max. 95%
+    const MIN_LOGIC = 0.65;  // linker Anteil min
+    const MAX_LOGIC = 0.95;
 
-    let split = 0.90;          // Start 90/10
-    const minSplit = 0.15;     // 15/85
-    const maxSplit = 0.85;     // 85/15
-    const targetSplit = 0.60;  // 60/40 beim Aufziehen
-    let idleTimer;
+    function setPosFromClientX(x){
+      const rect = split.getBoundingClientRect();
+      let ratio = (x - rect.left) / rect.width;
+      ratio = Math.max(MIN_LOGIC, Math.min(MAX_LOGIC, ratio));
+      split.style.setProperty('--pos', (ratio*100).toFixed(2)+'%');
 
-    function applySplit(){
-      compare.style.setProperty('--split', split);
-      divider.style.left = (split*100)+'%';
-      handle.style.left = `calc(${split*100}% - 18px)`;
-      // Farbwechsel der Wörter je nach Anteil
-      const warmOn = split < 0.70; // sobald Emotion >= 30%
-      [emoWord,growWord,logicWord].forEach(el=>{
-        el.classList.toggle('warm', warmOn);
-        el.classList.toggle('blue', !warmOn);
-      });
-    }
-    applySplit();
-
-    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-    function setSplitFromClientX(clientX){
-      const rect = compare.getBoundingClientRect();
-      split = clamp((clientX - rect.left)/rect.width, minSplit, maxSplit);
-      applySplit();
-    }
-
-    function animateTo(val, ms=450){
-      const start = performance.now();
-      const from = split;
-      function tick(now){
-        const p = Math.min(1,(now-start)/ms);
-        const ease = 1 - Math.pow(1-p,3);
-        split = from + (val-from)*ease;
-        applySplit();
-        if(p<1) requestAnimationFrame(tick);
+      // dezenter Farbwechsel der Wörter, wenn stärker Richtung Emotion
+      if(ratio < 0.70){
+        document.body.classList.add('tone-emotion');
+      }else{
+        document.body.classList.remove('tone-emotion');
       }
-      requestAnimationFrame(tick);
     }
 
-    function startIdleTimer(){
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(()=>animateTo(0.90,500), 3000); // Snap zurück
-    }
+    let dragging = false;
+    function startDrag(e){ dragging = true; document.body.style.userSelect='none'; }
+    function endDrag(){ dragging = false; document.body.style.userSelect=''; }
+    knob.addEventListener('mousedown', startDrag);
+    knob.addEventListener('touchstart', (e)=>{ startDrag(); if(e.touches[0]) setPosFromClientX(e.touches[0].clientX); }, {passive:true});
+    window.addEventListener('mouseup', endDrag);
+    window.addEventListener('touchend', endDrag);
+    window.addEventListener('mousemove', (e)=>{ if(dragging) setPosFromClientX(e.clientX); });
+    window.addEventListener('touchmove', (e)=>{ if(dragging && e.touches[0]) setPosFromClientX(e.touches[0].clientX); }, {passive:true});
 
-    function beginReveal(){
-      // erster Tap auf die Curl => animiere auf 60/40
-      animateTo(targetSplit, 500);
-      startIdleTimer();
-    }
+    // Klick in die Bahn bewegt den Regler (mit Grenzen)
+    split.addEventListener('click', (e)=>{ setPosFromClientX(e.clientX); });
 
-    // Drag auf Handle oder Curl
-    function bindDrag(el){
-      let dragging = false;
-      function down(e){
-        dragging = true;
-        el.setPointerCapture?.(e.pointerId);
-        setSplitFromClientX(e.clientX);
-        startIdleTimer();
-      }
-      function move(e){ if(dragging){ setSplitFromClientX(e.clientX); } }
-      function up(){ dragging=false; startIdleTimer(); }
-      el.addEventListener('pointerdown', down);
-      window.addEventListener('pointermove', move);
-      window.addEventListener('pointerup', up);
-    }
-    bindDrag(handle);
-    bindDrag(curl);
-
-    // Einmaliger Klick/Tap auf die Curl
-    curl.addEventListener('click', beginReveal);
-
-    // ===== Slider "Einblicke" =====
+    /* ===== Slider ===== */
     const slides = document.getElementById('slides');
     const slideEls = Array.from(slides.children);
     const prev = document.getElementById('prev');
