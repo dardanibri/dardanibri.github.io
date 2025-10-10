@@ -12,14 +12,14 @@
   <style>
     :root{
       --royal:#1F4E79; --yellow:#F6C90E; --ink:#0F1822; --paper:#FFFFFF; --cloud:#F5F7FB; --muted:#6C7A89;
-      --warm:#C0A37A; /* warmer Ton für Emotion */
-      --accent-current: var(--royal); /* wird dynamisch auf --warm umgeschaltet */
       --h1:clamp(2.4rem,3.4vw,4.2rem); --h2:clamp(1.6rem,2.4vw,2.6rem); --h3:clamp(1.2rem,1.6vw,1.6rem);
       --lead:clamp(1.05rem,1.15vw,1.125rem); --body:clamp(1rem,1.05vw,1.0625rem);
       --radius-xl:22px; --radius-lg:16px; --radius:12px;
       --shadow-card:0 12px 30px rgba(7,18,33,.08); --shadow-soft:0 8px 20px rgba(7,18,33,.06);
       --glow-blue:0 0 20px rgba(31,78,121,.25); --glow-yellow:0 0 20px rgba(246,201,14,.3);
       --speed:300ms; --header-h:68px;
+      /* NEU: warme Farbe für Emotion */
+      --warm:#C8A96A;
     }
     *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%;scroll-behavior:smooth}
@@ -39,7 +39,10 @@
     h3{font-size:var(--h3);line-height:1.3}
     p{margin:0 0 1rem;font-size:var(--body)}
     .lead{font-size:var(--lead);opacity:.92}
-    .accent{color:var(--accent-current)} /* ersetzt .blue */
+    .accent-yellow{color:var(--yellow)}
+    .blue{color:var(--royal)}
+    /* NEU: warme Klasse für Umschaltung */
+    .warm{color:var(--warm)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
@@ -57,11 +60,23 @@
     .nav{height:100%; display:flex;align-items:center;justify-content:space-between;gap:1rem}
     .brand{display:flex;align-items:center;gap:.75rem;font-family:"Poppins";font-weight:700;letter-spacing:.3px;cursor:pointer}
     .brand-badge{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--royal);color:var(--paper);font-size:.95rem;box-shadow:var(--glow-blue)}
+
     .menu{display:flex;gap:1.1rem;align-items:center;font-weight:600;font-family:"Poppins";font-size:.95rem}
     .menu a{opacity:.78;padding:.4rem .6rem;border-radius:10px;transition:opacity .25s,background .25s,transform .25s}
     .menu a:hover{opacity:1;background:#eff4fb;transform:translateY(-1px)}
     .menu a.active{opacity:1;background:#eff4fb}
     .cta{background:var(--royal);color:var(--paper);padding:.52rem .8rem;border-radius:12px;box-shadow:var(--glow-blue);border:1px solid #163756}
+
+    /* NEU: Hamburger + Drawer (nur Mobile/Tablet sichtbar) */
+    .hamburger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid #d5e2f2;background:#fff;box-shadow:var(--shadow-soft);align-items:center;justify-content:center}
+    .hamburger span{display:block;width:20px;height:2px;background:#173653;position:relative}
+    .hamburger span::before,.hamburger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:#173653}
+    .hamburger span::before{top:-6px}.hamburger span::after{top:6px}
+    .drawer{position:fixed;inset:var(--header-h) 0 0 auto;width:min(280px,80vw);background:#fff;border-left:1px solid #e5eef8;box-shadow:-8px 0 22px rgba(15,24,34,.08);transform:translateX(100%);transition:transform .35s ease;z-index:999}
+    .drawer.open{transform:none}
+    .drawer nav{display:grid;padding:16px}
+    .drawer a{padding:10px 12px;border-radius:10px;font-family:"Poppins";font-weight:600}
+    .drawer a:hover{background:#eff4fb}
 
     /* ====== HERO ====== */
     .hero{padding:clamp(48px,9vw,110px) 0 clamp(24px,6vw,70px)}
@@ -75,27 +90,19 @@
     .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
     .btn:focus-visible{outline:3px solid rgba(246,201,14,.65);outline-offset:2px}
 
-    /* Karte + Split */
+    /* Karte + BEFORE/AFTER */
     .hero-card{background:linear-gradient(160deg,#0f2c48 0%,#1F4E79 65%,#244f7d 100%);border:1px solid #123b60;color:var(--paper);border-radius:var(--radius-xl);padding:14px;box-shadow:var(--glow-blue)}
-    .hero-card-inner{position:relative;overflow:hidden;border-radius:calc(var(--radius-xl) - 6px)}
-    .split{--pos:66%; /* Start 66/34 */ position:relative; width:100%; aspect-ratio:4/4.8; overflow:hidden;}
-    .split .frame{position:absolute; inset:0; }
-    .split img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
-    /* Logik-Bild leicht tiefer, damit oben ruhiger */
-    .split .img-logic{object-position:center 22%;}
-    .split .img-emotion{object-position:center 15%; filter:saturate(.9) contrast(1.02);}
-    /* Masken */
-    .split .mask-logic{clip-path:polygon(0 0, var(--pos) 0, var(--pos) 100%, 0 100%)}
-    .split .mask-emotion{clip-path:polygon(var(--pos) 0, 100% 0, 100% 100%, var(--pos) 100%)}
-    /* Divider */
-    .divider{position:absolute; top:0; bottom:0; left:var(--pos); transform:translateX(-50%); width:2px; background:rgba(255,255,255,.85); box-shadow:0 0 0 1px rgba(0,0,0,.15)}
-    .knob{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:#fff; border:1px solid #d9e4f2; display:grid; place-items:center; box-shadow:0 6px 14px rgba(0,0,0,.15); cursor:ew-resize}
-    .knob svg{pointer-events:none}
+    .hero-card-inner{position:relative;overflow:hidden;border-radius:calc(var(--radius-xl) - 6px);background:radial-gradient(900px 400px at 120% -10%, rgba(246,201,14,.12), transparent 60%)}
+
+    .ba{ --split:60; position:relative; aspect-ratio:4/4.8; overflow:hidden; }
+    .ba img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 15%; user-select:none; pointer-events:none; }
+    .ba .after{ clip-path: inset(0 0 0 calc(var(--split)*1%)); }
+    .ba .handle{ position:absolute; inset:0; }
+    .ba .line{ position:absolute; top:0; bottom:0; left:calc(var(--split)*1%); width:2px; background:rgba(255,255,255,.9); border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.08); }
+    .ba .knob{ position:absolute; left:calc(var(--split)*1%); top:50%; transform:translate(-50%,-50%); width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.08); display:grid; place-items:center; box-shadow:0 4px 10px rgba(0,0,0,.15); font:600 12px/1 "Poppins"; color:#0f2c48; }
+    .ba input[type="range"]{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; }
 
     .hero-name{position:absolute;left:14px;bottom:14px;padding:.6rem .9rem;border-radius:12px;backdrop-filter:blur(6px);background:color-mix(in srgb,#102e4b 55%, rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);font-family:"Poppins";font-weight:600;letter-spacing:.2px}
-
-    /* Dynamischer Farbwechsel für Wörter */
-    .tone-emotion{--accent-current: var(--warm);} /* sonst bleibt --accent-current = var(--royal) */
 
     /* ====== GENERIC ====== */
     .section-title{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
@@ -127,23 +134,22 @@
     .about .photo img{aspect-ratio:4/3;object-fit:cover}
     #about p strong{font-weight:600} #about p{font-weight:400}
 
-    /* Callout */
     .callout{background:#FFFBEA;border:1px solid #F3E9AA;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-soft);font-family:"Lato"}
     .callout p{margin:0} .callout p + p{margin-top:10px}
     .callout strong{font-weight:700}
 
-    /* Timeline */
+    /* ====== Timeline */
     .timeline{margin-top:18px}
     .tl-item{display:grid;grid-template-columns:110px 26px 1fr;gap:18px;align-items:start;padding:8px 0 14px}
     .tl-item .year{font-family:"Poppins";font-weight:700;color:#0F1822}
     .tl-item .node{width:12px;height:12px;border-radius:50%;margin-top:6px;background:var(--yellow);border:2px solid var(--royal);box-shadow:0 0 0 5px rgba(31,78,121,.12)}
     .tl-item .text{color:#283746}
 
-    /* Heute */
+    /* ====== Heute ====== */
     .heute{display:grid;grid-template-columns:1fr 1fr;gap:min(3.2vw,32px)}
     .subtle{background:#0f2c48;color:var(--paper);border:1px solid #123b60;box-shadow:var(--glow-blue)}
 
-    /* KPIs */
+    /* ====== KPIs ====== */
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:min(2.6vw,28px)}
     .kpi{position:relative;overflow:visible;background:var(--paper);border:1px solid #E6ECF5;border-radius:var(--radius-xl);padding:22px;box-shadow:0 8px 20px rgba(15,24,34,.06);transition:transform var(--speed),box-shadow var(--speed)}
     .kpi:hover{transform:translateY(-4px)}
@@ -159,18 +165,18 @@
     .subtle .kpi[data-tone="blue"]:hover{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 0 5px rgba(31,78,121,.25),0 16px 34px rgba(31,78,121,.28)}
     .subtle .kpi[data-tone="yellow"]:hover{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 0 5px rgba(246,201,14,.28),0 16px 34px rgba(246,201,14,.28)}
 
-    /* Partner-Logos */
-    .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:min(3vw,26px);justify-items:center;align-items:center;max-width:1000px;margin-inline:auto;}
-    .logos .logo{background:var(--paper);border:1px solid #E6ECF5;border-radius:14px;padding:12px;aspect-ratio:5/3;width:100%;max-width:320px;display:grid;place-items:center;box-shadow:var(--shadow-soft);transition:transform var(--speed),box-shadow var(--speed)}
+    /* ====== Logos */
+    .logos{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:min(3vw,26px); justify-items:center; align-items:center; max-width:1000px; margin-inline:auto; }
+    .logos .logo{ background:var(--paper); border:1px solid #E6ECF5; border-radius:14px; padding:12px; aspect-ratio:5/3; width:100%; max-width:320px; display:grid; place-items:center; box-shadow:var(--shadow-soft); transition:transform var(--speed),box-shadow var(--speed); }
     .logos .logo:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card) }
     :root{ --logo-h-desktop:140px; --logo-h-mobile:72px; }
-    .logos .logo img{width:auto;height:auto;max-height:min(var(--logo-h-desktop),90%);max-width:96%;object-fit:contain}
+    .logos .logo img{ width:auto; height:auto; max-height:min(var(--logo-h-desktop),90%); max-width:96%; object-fit:contain; }
     @media (max-width:560px){
       .logos{ grid-template-columns: repeat(2,1fr) }
-      .logos .logo img{max-height:min(var(--logo-h-mobile),78%);max-width:96%}
+      .logos .logo img{ max-height:min(var(--logo-h-mobile),78%); max-width:96%; }
     }
 
-    /* Slider „Einblicke“ (unverändert) */
+    /* ====== Slider (Einblicke) */
     .slider{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid #DDE7F5;background:#0b2641;box-shadow:var(--shadow-card)}
     .slides{display:flex;transition:transform 700ms ease;will-change:transform}
     .slide{min-width:100%}
@@ -182,7 +188,7 @@
     .dot{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);cursor:pointer}
     .dot.active{background:var(--yellow);box-shadow:var(--glow-yellow)}
 
-    /* Slogan */
+    /* ====== Slogan */
     .slogan{padding:clamp(60px,10vw,120px) 0;border-top:1px solid #E6ECF5;border-bottom:1px solid #E6ECF5;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#ffffff 35%)}
     .slogan .quote{font-family:"Poppins";font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.33}
     .quote .line{display:block;margin:.18em 0;opacity:0;transform:translateY(8px)}
@@ -193,19 +199,22 @@
     .slogan .accent-yellow{color:var(--yellow);background-image:linear-gradient(to right, rgba(246,201,14,.45), rgba(246,201,14,.45));background-size:0% .18em;background-position:0 92%;background-repeat:no-repeat;text-shadow:0 1px 0 #fff, 0 0 14px rgba(246,201,14,.20);transition:background-size .9s ease}
     .slogan.appear .accent-yellow{background-size:100% .18em}
 
-    /* Kontakt & Footer */
+    /* ====== Kontakt */
     .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:min(3.2vw,32px)}
     .contact .card{height:100%}
     .list{display:grid;gap:.6rem;margin-top:.6rem}
     .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1rem;border-radius:999px;background:#F2F7FF;border:1px solid #D9E6F7;font-family:"Poppins";font-weight:600;font-size:.95rem;line-height:1.25}
     .pill:hover{box-shadow:0 0 0 2px rgba(246,201,14,.25)}
+
     footer{border-top:1px solid #E6ECF5;padding:22px 0;color:#5c6a78;font-size:.95rem;background:var(--paper)}
 
-    /* Responsive */
+    /* Spacing + responsive */
     .sp-xxs{height:10px}.sp-xs{height:16px}.sp-sm{height:24px}.sp-md{height:36px}.sp-lg{height:54px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:min(3vw,28px)}
     .fade-in{opacity:0;transform:translateY(14px);transition:opacity 900ms ease,transform 900ms ease}
     .fade-in.appear{opacity:1;transform:none}
+
+    /* Mobile/Tablet: Menü ausblenden, Hamburger zeigen */
     @media (max-width:980px){
       .hero-grid,.about,.heute{grid-template-columns:1fr}
       .vm{grid-template-columns:1fr}
@@ -214,11 +223,12 @@
       .logos{grid-template-columns:repeat(3,1fr)}
       .slide img{height:46vh}
       .contact{grid-template-columns:1fr}
+      .menu{display:none}
+      .hamburger{display:flex}
     }
     @media (max-width:560px){
       .kpis{grid-template-columns:1fr}
       .logos{grid-template-columns:repeat(2,1fr)}
-      .menu{display:none}
     }
   </style>
 </head>
@@ -237,9 +247,22 @@
         <a href="#about">Über mich</a>
         <a href="#werte">Werte</a>
         <a href="#today">Heute</a>
-        <a href="#partner">Partner</a>
+        <a href="#partner">Partner &amp; Referenzen</a>
         <a href="#einblicke">Einblicke</a>
         <a href="#kontakt" class="cta">Kontakt</a>
+      </nav>
+      <!-- NEU: Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menü öffnen"><span></span></button>
+    </div>
+    <!-- NEU: Drawer -->
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <nav>
+        <a href="#about">Über mich</a>
+        <a href="#werte">Werte</a>
+        <a href="#today">Heute</a>
+        <a href="#partner">Partner &amp; Referenzen</a>
+        <a href="#einblicke">Einblicke</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </header>
@@ -252,9 +275,10 @@
         <div class="sp-xs"></div>
         <h1>
           <span class="line">Verbindung von</span>
-          <span class="line"><span class="accent">Logik</span> und <span class="accent">Emotion</span></span>
+          <!-- NEU: Klassen an den drei Wörtern, damit sie umgefärbt werden können -->
+          <span class="line"><span class="blue logicWord">Logik</span> und <span class="blue emoWord">Emotion</span></span>
           <span class="line">für messbares</span>
-          <span class="line"><span class="accent">Wachstum</span>.</span>
+          <span class="line"><span class="blue growWord">Wachstum</span>.</span>
         </h1>
         <p class="lead">Strukturen gestalten, Menschen stärken und Klarheit schaffen – damit Unternehmen lebendig, wirksam und skalierbar werden.</p>
         <div class="actions">
@@ -263,22 +287,20 @@
         </div>
       </div>
 
-      <!-- Neuer Split-Hero -->
       <div class="hero-card fade-in">
         <div class="hero-card-inner">
-          <div class="split" id="split">
-            <div class="frame mask-logic">
-              <img class="img-logic" src="assets/images/dardan-hero.jpg" alt="Dardan Ibri – Logik">
+          <!-- BEFORE/AFTER -->
+          <div class="ba" id="ba">
+            <img src="assets/images/dardan-hero.jpg" alt="Dardan Ibri – Logik (blau)">
+            <img class="after" src="assets/images/dardan-hero2.jpg" alt="Dardan Ibri – Emotion (warm)">
+            <div class="handle" aria-hidden="true">
+              <div class="line"></div>
+              <div class="knob">↔︎</div>
             </div>
-            <div class="frame mask-emotion">
-              <img class="img-emotion" src="assets/images/dardan-hero2.jpg" alt="Dardan Ibri – Emotion">
-            </div>
-            <div class="divider" id="divider">
-              <button class="knob" id="knob" aria-label="Bilder vergleichen">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-            </div>
+            <!-- NEU: Startwert 90 (=> 90% Logik / 10% Emotion) -->
+            <input id="baRange" type="range" min="0" max="100" value="90" aria-label="Logik/Emotion Schieber">
           </div>
+          <!-- /BEFORE/AFTER -->
           <div class="hero-name">Dardan Ibri</div>
         </div>
       </div>
@@ -368,26 +390,11 @@
           <div class="sp-sm"></div>
 
           <div class="timeline">
-            <div class="tl-item">
-              <div class="year">2007–2011</div><div class="node"></div>
-              <div class="text">Konstrukteur EFZ – Fundament: Technik und Präzision</div>
-            </div>
-            <div class="tl-item">
-              <div class="year">2011–2018</div><div class="node"></div>
-              <div class="text">HF Maschinenbau · Entwicklung in Ingenieurbüros, internationale Projektleitungen</div>
-            </div>
-            <div class="tl-item">
-              <div class="year">2019–2020</div><div class="node"></div>
-              <div class="text">NLP-Master · Verhalten, Kommunikation, Leadership-Kontext</div>
-            </div>
-            <div class="tl-item">
-              <div class="year">2019–heute</div><div class="node"></div>
-              <div class="text">Vertrieb · Aufbau, Steuerung und Skalierung von Sales-Prozessen</div>
-            </div>
-            <div class="tl-item">
-              <div class="year">2020–heute</div><div class="node"></div>
-              <div class="text">Unternehmensentwicklung & Coaching · Strukturen, Prozesse, Teams, Führung</div>
-            </div>
+            <div class="tl-item"><div class="year">2007–2011</div><div class="node"></div><div class="text">Konstrukteur EFZ – Fundament: Technik und Präzision</div></div>
+            <div class="tl-item"><div class="year">2011–2018</div><div class="node"></div><div class="text">HF Maschinenbau · Entwicklung in Ingenieurbüros, internationale Projektleitungen</div></div>
+            <div class="tl-item"><div class="year">2019–2020</div><div class="node"></div><div class="text">NLP-Master · Verhalten, Kommunikation, Leadership-Kontext</div></div>
+            <div class="tl-item"><div class="year">2019–heute</div><div class="node"></div><div class="text">Vertrieb · Aufbau, Steuerung und Skalierung von Sales-Prozessen</div></div>
+            <div class="tl-item"><div class="year">2020–heute</div><div class="node"></div><div class="text">Unternehmensentwicklung & Coaching · Strukturen, Prozesse, Teams, Führung</div></div>
           </div>
 
           <div class="sp-xs"></div>
@@ -470,7 +477,7 @@
   <section id="partner">
     <div class="wrap">
       <div class="section-title"><span class="dot"></span><h2>Partner &amp; Referenzen</h2></div>
-      <div class="logos fade-in" aria-label="Ausgewählte Partner & Referenzen">
+      <div class="logos fade-in" aria-label="Ausgewählte Partner und Referenzen">
         <div class="logo"><img src="assets/logos/mg.png" alt="MG Coaching"></div>
         <div class="logo"><img src="assets/logos/evergrow.png" alt="Evergrow"></div>
         <div class="logo"><img src="assets/logos/ssm.png" alt="SSM Partner"></div>
@@ -511,12 +518,14 @@
           <div class="slide"><img src="assets/images/ref11.jpg" alt="Referat – Einblick 11"></div>
           <div class="slide"><img src="assets/images/ref12.jpg" alt="Referat – Einblick 12"></div>
         </div>
+
         <button class="nav-btn nav-prev" aria-label="Vorheriges Bild" id="prev">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <button class="nav-btn nav-next" aria-label="Nächstes Bild" id="next">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f2c48" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
         </button>
+
         <div class="dots" id="dots" aria-hidden="true"></div>
       </div>
     </div>
@@ -585,6 +594,15 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // NEU: Hamburger-Drawer
+    const hamb = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    hamb?.addEventListener('click', ()=>{
+      const open = drawer.classList.toggle('open');
+      drawer.setAttribute('aria-hidden', String(!open));
+    });
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>drawer.classList.remove('open')));
+
     // Fade-in Observer + Slogan reveal
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
@@ -624,42 +642,51 @@
       });
     });
 
-    /* ===== Split-Hero Interaktion ===== */
-    const split = document.getElementById('split');
-    const knob = document.getElementById('knob');
+    // ===== BEFORE/AFTER – Start 90% Logik (links), 10% Emotion (rechts)
+    const ba = document.getElementById('ba');
+    const baRange = document.getElementById('baRange');
+    const setSplit = v => ba.style.setProperty('--split', v);
 
-    // Begrenzungen: mind. 65% Logik sichtbar, max. 95%
-    const MIN_LOGIC = 0.65;  // linker Anteil min
-    const MAX_LOGIC = 0.95;
-
-    function setPosFromClientX(x){
-      const rect = split.getBoundingClientRect();
-      let ratio = (x - rect.left) / rect.width;
-      ratio = Math.max(MIN_LOGIC, Math.min(MAX_LOGIC, ratio));
-      split.style.setProperty('--pos', (ratio*100).toFixed(2)+'%');
-
-      // dezenter Farbwechsel der Wörter, wenn stärker Richtung Emotion
-      if(ratio < 0.70){
-        document.body.classList.add('tone-emotion');
-      }else{
-        document.body.classList.remove('tone-emotion');
-      }
+    // Wortwechsel (NEU): ab Emotion > 60%  => split < 40
+    const logicWord = document.querySelector('.logicWord');
+    const emoWord = document.querySelector('.emoWord');
+    const growWord = document.querySelector('.growWord');
+    function updateWordColors(val){
+      const emotionShare = 100 - val; // 'after' liegt rechts
+      const warmOn = emotionShare > 60; // Schwellwert
+      [logicWord, emoWord, growWord].forEach(el=>{
+        el.classList.toggle('warm', warmOn);
+        el.classList.toggle('blue', !warmOn);
+      });
     }
 
-    let dragging = false;
-    function startDrag(e){ dragging = true; document.body.style.userSelect='none'; }
-    function endDrag(){ dragging = false; document.body.style.userSelect=''; }
-    knob.addEventListener('mousedown', startDrag);
-    knob.addEventListener('touchstart', (e)=>{ startDrag(); if(e.touches[0]) setPosFromClientX(e.touches[0].clientX); }, {passive:true});
-    window.addEventListener('mouseup', endDrag);
-    window.addEventListener('touchend', endDrag);
-    window.addEventListener('mousemove', (e)=>{ if(dragging) setPosFromClientX(e.clientX); });
-    window.addEventListener('touchmove', (e)=>{ if(dragging && e.touches[0]) setPosFromClientX(e.touches[0].clientX); }, {passive:true});
+    // Initial setzen
+    setSplit(baRange.value || 90);
+    updateWordColors(parseInt(baRange.value || '90',10));
 
-    // Klick in die Bahn bewegt den Regler (mit Grenzen)
-    split.addEventListener('click', (e)=>{ setPosFromClientX(e.clientX); });
+    // Range-Steuerung
+    baRange.addEventListener('input', e => {
+      const v = parseInt(e.target.value,10);
+      setSplit(v);
+      updateWordColors(v);
+    });
 
-    /* ===== Slider ===== */
+    // Maus/Touch-Drag direkt auf der Fläche
+    ba.addEventListener('pointerdown', e => {
+      const move = ev => {
+        const rect = ba.getBoundingClientRect();
+        const p = Math.min(100, Math.max(0, ((ev.clientX - rect.left) / rect.width) * 100));
+        baRange.value = p.toFixed(0);
+        setSplit(baRange.value);
+        updateWordColors(parseInt(baRange.value,10));
+      };
+      move(e);
+      const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+    });
+
+    // ===== Slider (Einblicke) =====
     const slides = document.getElementById('slides');
     const slideEls = Array.from(slides.children);
     const prev = document.getElementById('prev');
@@ -705,16 +732,12 @@
       }
       requestAnimationFrame(tick);
     }
-    const counters = document.querySelectorAll('.counter');
-    const counterIO = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          countUp(e.target);
-          counterIO.unobserve(e.target);
-        }
-      });
-    }, {threshold:.5});
-    counters.forEach(c => counterIO.observe(c));
+    document.querySelectorAll('.counter').forEach(el=>{
+      const io = new IntersectionObserver((ents,obs)=>{
+        ents.forEach(e=>{ if(e.isIntersecting){ countUp(el); obs.unobserve(el);} });
+      },{threshold:.5});
+      io.observe(el);
+    });
   </script>
 </body>
 </html>
